@@ -27,6 +27,9 @@ Card-only descriptions (no tiers, never ranked):
 - Language spoken most often at home (single responses), as shares of everyone in private households.
   Up to five languages are kept; the page shows three. People naming two or more languages equally
   (multiple responses) aren't split between them; their share is kept as langMulti for a note.
+- Ages (everyone): under 15, 15-24, 25-44, 45-64, 65 and over, as shares of the population.
+- Recent immigrants: people who immigrated to Canada from 2016 to 2021, as a share of everyone in
+  private households (the Census immigration table's total). Card only: never a lens, filter or fact.
 
 Caveats shown on the page: Census figures are from 2021; commuting was counted in May 2021,
 during the pandemic, when transit use was unusually low everywhere."""
@@ -84,6 +87,13 @@ LANG_MULTI = find('Multiple responses', LANG_T)
 indent = lambda i: len(label_raw[i]) - len(label_raw[i].lstrip(' '))
 # Leaf languages: rows between "Single responses" and "Multiple responses" with nothing nested under them.
 LANG_LEAVES = [i for i in range(LANG_SINGLE + 1, LANG_MULTI) if indent(i + 1) <= indent(i)]
+# Age mix (five bands) and recent immigrants (arrived in Canada 2016 to 2021), both shares of the population.
+AGE_T, AGE_R = section('Total - Age groups of the population - 25% sample data',
+    ['0 to 14 years', '15 to 19 years', '20 to 24 years', '25 to 29 years', '30 to 34 years', '35 to 39 years',
+     '40 to 44 years', '45 to 49 years', '50 to 54 years', '55 to 59 years', '60 to 64 years', '65 years and over'])
+AGE_GROUPS = [[0], [1, 2], [3, 4, 5, 6], [7, 8, 9, 10], [11]]   # under 15, 15-24, 25-44, 45-64, 65+
+IMM_T = find('Total - Immigrant status and period of immigration for the population in private households - 25% sample data')
+IMM_RECENT = find('2016 to 2021', IMM_T)
 LANG_NAME = {'Punjabi (Panjabi)': 'Punjabi', 'Tagalog (Pilipino, Filipino)': 'Tagalog (Filipino)', 'Yue (Cantonese)': 'Cantonese', 'Iranian Persian': 'Persian (Farsi)'}
 
 num = lambda v: v if isinstance(v, (int, float)) else None
@@ -111,6 +121,10 @@ for c in cols:
         langs = sorted(((LANG_NAME.get(label[i], label[i]), v(i)) for i in LANG_LEAVES if v(i)), key=lambda x: -x[1])[:5]
         d['lang'] = [[n, round(100 * k / tot)] for n, k in langs]
         d['langMulti'] = round(100 * v(LANG_MULTI) / tot)
+    tot = v(AGE_T)
+    d['ages'] = [round(100 * sum(v(AGE_R[j]) for j in grp) / tot) for grp in AGE_GROUPS] if tot else None
+    tot = v(IMM_T)
+    d['recent'] = round(100 * v(IMM_RECENT) / tot) if tot else None
 
 
 def pct_rank(key):
@@ -140,7 +154,7 @@ if os.path.exists(TU):
 json.dump(data, open(OUT, 'w'), separators=(',', ':'))
 from collections import Counter
 ex = data['71']
-print('example #71:', ex['name'], ex['homes'], ex['built'], ex['lang'], ex['langMulti'])
+print('example #71:', ex['name'], ex['homes'], ex['built'], ex['lang'], ex['langMulti'], ex['ages'], ex['recent'])
 print('languages ever in a top 3:', sorted({l[0] for d in data.values() for l in d['lang'][:3]}))
 print('profiles:', len(data), 'neighbourhoods;',
       dict(Counter(d['cost'] for d in data.values())), dict(Counter(d['commute'] for d in data.values())),

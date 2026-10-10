@@ -173,7 +173,9 @@
       "footer": "2021 Census and TTC/GO schedules, {name}. Tiers compare neighbourhoods across Toronto.",
       "homes": {"label": "Home types", "types": [["detached", "Detached"], ["attached", "Semi & row"], ["lowrise", "Low-rise"], ["tower", "Towers"]]},
       "built": {"label": "Built", "bands": ["1960 or before", "1961–80", "1981–2000", "2001–21"]},
-      "lang": {"label": "Language at home", "floor": 5, "note": "The language each person speaks most often at home.[ Another {multi}% name two or more equally.]"}
+      "lang": {"label": "Language at home", "floor": 5, "note": "The language each person speaks most often at home.[ Another {multi}% name two or more equally.]"},
+      "ages": {"label": "Ages", "bands": ["Under 15", "15–24", "25–44", "45–64", "65+"]},
+      "recent": {"label": "Recent immigrants", "text": "{pct}% arrived in Canada 2016–21", "caveat": "Share of residents who immigrated in the five years before the 2021 Census."}
     },
     "transit": {
       "file": "transit.json", "routes": "transit_routes", "title": "Transit nearby", "radius": 400,

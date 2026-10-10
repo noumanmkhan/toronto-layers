@@ -1031,6 +1031,8 @@ function livingHere(unit){
     mixRow(T.homes, d.homes, T.homes && T.homes.types.map(t => t[1])) +
     mixRow(T.built, d.built, T.built && T.built.bands) +
     langRow(T.lang, d) +
+    mixRow(T.ages, d.ages, T.ages && T.ages.bands) +
+    recentRow(T.recent, d) +
     '</dl><p>' + esc(fill(T.footer, {name: d.name})) + '</p></div>';
 }
 /* Description rows (no tiers, never ranked): how homes split by type or by when they were built, as a
@@ -1040,6 +1042,13 @@ function mixRow(cfg, shares, names){
   const bar = shares.map((v, i) => v > 0 ? '<i style="width:' + v + '%;background:var(--mix-' + (i + 1) + ')"></i>' : '').join('');
   const words = shares.map((v, i) => [names[i], v, i]).filter(x => x[1] >= 1).map(x => '<b class="dot" style="background:var(--mix-' + (x[2] + 1) + ')"></b>' + esc(x[0]) + ' ' + x[1] + '%').join(' · ');
   return '<dt>' + esc(cfg.label) + '</dt><dd><span class="mix" aria-hidden="true">' + bar + '</span><span>' + words + '</span>' +
+    (cfg.caveat ? '<span class="caveat">' + esc(cfg.caveat) + '</span>' : '') + '</dd>';
+}
+/* Recent immigrants: one share, in words, with the window it covers (each city's own: the 2021 Census
+   counts arrivals 2016-2021, the ACS the foreign-born who entered 2010 or later). Card only, never ranked. */
+function recentRow(cfg, d){
+  if (!cfg || d.recent == null) return '';
+  return '<dt>' + esc(cfg.label) + '</dt><dd>' + esc(fill(cfg.text, {pct: d.recent, since: d.recentSince || ''})) +
     (cfg.caveat ? '<span class="caveat">' + esc(cfg.caveat) + '</span>' : '') + '</dd>';
 }
 /* Home language: the top three, the first always shown and the next two only at 5% or more (the

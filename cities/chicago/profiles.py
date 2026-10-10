@@ -27,6 +27,9 @@ Card-only descriptions (no tiers, never ranked), from raw/acs_more.json (fetch_a
   at home besides English, so the shares add up to 100%. Tracts only get 12 broad groups (Polish shares a
   group with Russian and other Slavic languages; Hindi, Urdu, Italian and Greek are among "other
   Indo-European"). "Other and unspecified languages" is left out.
+- Ages (B01001, everyone): under 15, 15-24, 25-44, 45-64, 65 and over.
+- Recent immigrants (B05005, whose universe is people born outside the US): the foreign-born who entered the US in the table's latest period
+  (2010 or later), as a share of all residents (B01001's total); the period is kept as recentSince. Card only.
 """
 import json, os
 from collections import Counter
@@ -105,6 +108,18 @@ LANG_NAME = {'Speak only English': 'English only', 'French, Haitian, or Cajun': 
              'Other Indo-European languages': 'Other Indo-European (e.g. Hindi, Urdu)',
              'Other Asian and Pacific Island languages': 'Other Asian or Pacific Island',
              'Chinese (incl. Mandarin, Cantonese)': 'Chinese', 'Tagalog (incl. Filipino)': 'Tagalog (Filipino)'}
+# Ages: B01001's age brackets (men and women alike), by the first age in the label ("Under 5" is 0).
+def age0(lab):
+    w = lab.split()
+    return 0 if w[0] == 'Under' else int(w[0])
+AGE_BAND = lambda a: 0 if a < 15 else 1 if a < 25 else 2 if a < 45 else 3 if a < 65 else 4
+AGE_VARS = [(k, AGE_BAND(age0(leaf(k)))) for k in vars_where('B01001', lambda l: len(l) == 4)]
+# Recent immigrants: the foreign-born who entered the US in B05005's latest period ("Entered 2010 or later").
+ENTRY = {k: LAB[k][2].rstrip(':') for k in vars_where('B05005', lambda l: len(l) == 4 and l[2].startswith('Entered') and l[3].startswith('Foreign-born'))}
+first_year = lambda t: next((int(w) for w in t.split() if w.isdigit()), 0)   # 'Entered before 1990' -> 1990, earlier than 2010
+RECENT_PERIOD = max(ENTRY.values(), key=first_year) if ENTRY else None
+RECENT_VARS = [k for k, t in ENTRY.items() if t == RECENT_PERIOD]
+assert len(AGE_VARS) == 46 and RECENT_VARS, (len(AGE_VARS), ENTRY)
 assert len(UNIT_VARS) == 16 and len(BUILT_VARS) == 20 and len(LANG_VARS) >= 10, (len(UNIT_VARS), len(BUILT_VARS), len(LANG_VARS))
 
 
@@ -141,6 +156,10 @@ for n, name, _ in sorted(cas):
     if tot:
         names = [(LANG_NAME.get(leaf(k), leaf(k)), m[k]) for k in LANG_VARS if m[k] and not leaf(k).startswith('Other and unspecified')]
         d['lang'] = [[nm, round(100 * x / tot)] for nm, x in sorted(names, key=lambda a: -a[1])[:5]]
+    d['ages'] = shares(m, AGE_VARS, 5)
+    tot = v(m, 'B01001', 1)   # everyone (B05005's own total is only people born outside the US)
+    d['recent'] = round(100 * sum(m[k] for k in RECENT_VARS) / tot) if tot else None
+    d['recentSince'] = RECENT_PERIOD.replace('Entered ', '')   # "2010 or later"
 
 
 def pct_rank(key):
@@ -168,7 +187,7 @@ if os.path.exists(TL):
 
 json.dump(data, open(OUT, 'w'), separators=(',', ':'))
 for k in ('24', '31', '8'):
-    print('example', k, data[k]['name'], data[k]['homes'], data[k]['built'], data[k]['lang'])
+    print('example', k, data[k]['name'], data[k]['homes'], data[k]['built'], data[k]['lang'], data[k]['ages'], data[k]['recent'], data[k]['recentSince'])
 print('languages ever in a top 3:', sorted({l[0] for d in data.values() for l in d.get('lang', [])[:3]}))
 print('profiles:', len(data), 'community areas from', sum(placed.values()), 'tracts, ACS', acs['year'], ';',
       dict(Counter(d['cost'] for d in data.values())), dict(Counter(d['commute'] for d in data.values())),

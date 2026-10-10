@@ -363,6 +363,9 @@ Keyed by unit code as a string (`"71"`). Fields:
 | `built` | 4 shares (%) by period built, in the order of `card.living.built.bands`. |
 | `lang` | Up to 5 `[language, pct]`, largest first. Demographic: card only. |
 | `langMulti` | Toronto only: % naming two or more languages equally. |
+| `ages` | 5 shares (%) of residents by age, in the order of `card.living.ages.bands` (under 15, 15–24, 25–44, 45–64, 65+). Card only. |
+| `recent` | Recent immigrants, % of residents: Toronto, immigrated to Canada 2016–2021 (2021 Census, of everyone in private households); Chicago, born abroad and entered the US in the ACS's latest period (of everyone). Demographic: card only, never a lens, filter or fact. |
+| `recentSince` | Chicago only: that period in words ("2010 or later"). |
 | `homesTier` | Not stored; the website computes it. Apps don't need it. |
 | `facts` | Optional. Up to 3 ways the unit stands out among its peers, strongest first: `[{text, field, end, scope, rank, of, value}]`. `text` is a finished sentence fragment ("Highest rents in North York", "Among the most affordable homes on the South Side"); `value` is the figure behind it ("median $1,660/mo"). `field` is one of `value`, `rent`, `renterPct`, `transitPct`, `walkBikePct`, `carPct`, `detached`, `large`, `oldest`, `newest`, `hub`; `end` `high`/`low`; `scope` `city` or `peers` (the unit's former city, Old Toronto area or side); `rank` (1–3) of `of` units. Built by `engine/facts.py` from non-demographic fields only. Units that don't stand out have no `facts`. |
 
@@ -379,7 +382,10 @@ Rows, in order (labels from `card.living`):
 6. **Language at home**: the first language always; the 2nd and 3rd only at `floor`% or more
    (5). If only one shows, add "No other language above 5%". Then `note`, filled with
    `{multi}` = `langMulti` (the bracketed part drops when it's missing).
-7. Footer: `footer` filled with `{name}`.
+7. **Ages** (`ages`): the same stacked bar and words as Home types, five bands (`--mix-1` … `--mix-5`).
+8. **Recent immigrants** (`recent`): `text` filled with `{pct}` and `{since}` (= `recentSince`), then
+   `caveat`. Skipped when `recent` is missing.
+9. Footer: `footer` filled with `{name}`.
 
 Sources: Toronto 2021 Census (City of Toronto Neighbourhood Profiles); Chicago American Community
 Survey 2020–2024. Neither is current pricing; the caveat says so and must stay.

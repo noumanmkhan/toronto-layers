@@ -3,6 +3,13 @@
 ## Since 1.1
 
 ### Both cities
+- **Ages and recent immigrants** (October 11): two Living here rows. *Ages*: a stacked bar of five bands
+  (under 15, 15–24, 25–44, 45–64, 65+). *Recent immigrants*: Toronto, the share who immigrated to Canada
+  2016–21 (2021 Census Neighbourhood Profiles); Chicago, the share born abroad who entered the US 2010 or
+  later (ACS 2020–2024 B05005 over B01001's total; new tables in `fetch_acs_more.py`). Each with a caveat
+  naming its window; card only, never a lens, filter or fact. For the iOS app: profile fields `ages`,
+  `recent`, `recentSince`, config `card.living.ages` / `recent`, and a fifth mix colour `--mix-5`;
+  contract section 5. Additive, schema stays 1.
 - **Guided first visit** (October 11): a five-step tour of each city through the map. A first visit (no
   link in the address, not seen before in this browser) shows a small invitation; a Tour button in the
   panel footer starts it any time. Each step sets exactly its layers, the scope and the view (kept clear
