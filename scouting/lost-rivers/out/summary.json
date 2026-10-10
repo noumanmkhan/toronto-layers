@@ -1,0 +1,1204 @@
+{
+ "toronto": {
+  "(unnamed stream)": {
+   "ways": 638,
+   "km": 40.21,
+   "km_tunnel": 40.21,
+   "tags": {
+    "waterway=stream": 638,
+    "tunnel=yes": 241,
+    "tunnel=culvert": 393,
+    "intermittent=yes": 47,
+    "intermittent=no": 1,
+    "location=underground": 1,
+    "tunnel=flooded": 4
+   }
+  },
+  "Black Creek": {
+   "ways": 69,
+   "km": 27.81,
+   "km_tunnel": 1.29,
+   "tags": {
+    "waterway=river": 14,
+    "intermittent=no": 4,
+    "tunnel=culvert": 9,
+    "waterway=stream": 55,
+    "tunnel=yes": 15
+   }
+  },
+  "Mimico Creek": {
+   "ways": 40,
+   "km": 25.02,
+   "km_tunnel": 0.78,
+   "tags": {
+    "waterway=river": 23,
+    "tunnel=culvert": 7,
+    "intermittent=no": 2,
+    "waterway=stream": 17,
+    "tunnel=yes": 6
+   }
+  },
+  "(unnamed drain)": {
+   "ways": 68,
+   "km": 14.28,
+   "km_tunnel": 14.28,
+   "tags": {
+    "waterway=drain": 68,
+    "tunnel=yes": 60,
+    "tunnel=culvert": 6,
+    "tunnel=flooded": 1,
+    "intermittent=yes": 4,
+    "tunnel=covered": 1
+   }
+  },
+  "Highland Creek": {
+   "ways": 4,
+   "km": 13.12,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=river": 4,
+    "intermittent=no": 1
+   }
+  },
+  "Taylor-Massey Creek": {
+   "ways": 36,
+   "km": 9.75,
+   "km_tunnel": 1.17,
+   "tags": {
+    "waterway=stream": 36,
+    "intermittent=no": 1,
+    "tunnel=yes": 14,
+    "tunnel=culvert": 3
+   }
+  },
+  "West Highland Creek": {
+   "ways": 8,
+   "km": 7.92,
+   "km_tunnel": 0.04,
+   "tags": {
+    "waterway=river": 3,
+    "intermittent=no": 1,
+    "waterway=stream": 5,
+    "tunnel=culvert": 1
+   }
+  },
+  "Wilket Creek": {
+   "ways": 11,
+   "km": 5.98,
+   "km_tunnel": 0.23,
+   "tags": {
+    "waterway=stream": 11,
+    "intermittent=no": 1,
+    "tunnel=yes": 2
+   }
+  },
+  "Taylor Massey Creek": {
+   "ways": 9,
+   "km": 5.28,
+   "km_tunnel": 0.26,
+   "tags": {
+    "waterway=stream": 9,
+    "tunnel=yes": 4
+   }
+  },
+  "Burke Brook": {
+   "ways": 22,
+   "km": 4.82,
+   "km_tunnel": 1.47,
+   "tags": {
+    "waterway=stream": 22,
+    "tunnel=yes": 6,
+    "tunnel=culvert": 5
+   }
+  },
+  "Cawthra Creek": {
+   "ways": 2,
+   "km": 3.98,
+   "km_tunnel": 3.98,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 2
+   }
+  },
+  "Yellow Creek": {
+   "ways": 7,
+   "km": 3.1,
+   "km_tunnel": 1.1,
+   "tags": {
+    "waterway=stream": 7,
+    "tunnel=culvert": 3
+   }
+  },
+  "Mary Fix Creek": {
+   "ways": 10,
+   "km": 2.44,
+   "km_tunnel": 2.44,
+   "tags": {
+    "waterway=stream": 10,
+    "tunnel=yes": 10
+   }
+  },
+  "Mud Creek": {
+   "ways": 27,
+   "km": 2.21,
+   "km_tunnel": 0.71,
+   "tags": {
+    "waterway=stream": 27,
+    "tunnel=yes": 6,
+    "tunnel=culvert": 8
+   }
+  },
+  "(unnamed ditch)": {
+   "ways": 262,
+   "km": 2.03,
+   "km_tunnel": 2.03,
+   "tags": {
+    "waterway=ditch": 262,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 259,
+    "intermittent=yes": 253
+   }
+  },
+  "West Mimico Creek": {
+   "ways": 6,
+   "km": 2.0,
+   "km_tunnel": 0.07,
+   "tags": {
+    "waterway=stream": 6,
+    "tunnel=yes": 2
+   }
+  },
+  "Cooksville Creek East Branch": {
+   "ways": 6,
+   "km": 1.98,
+   "km_tunnel": 1.98,
+   "tags": {
+    "waterway=stream": 4,
+    "tunnel=yes": 6,
+    "waterway=drain": 2,
+    "intermittent=no": 1
+   }
+  },
+  "Applewood Creek": {
+   "ways": 8,
+   "km": 1.96,
+   "km_tunnel": 1.96,
+   "tags": {
+    "waterway=stream": 8,
+    "tunnel=yes": 7,
+    "tunnel=culvert": 1
+   }
+  },
+  "Westminster Creek": {
+   "ways": 17,
+   "km": 1.8,
+   "km_tunnel": 1.8,
+   "tags": {
+    "waterway=stream": 17,
+    "tunnel=yes": 9,
+    "tunnel=culvert": 8,
+    "intermittent=yes": 2
+   }
+  },
+  "Lavender Creek": {
+   "ways": 9,
+   "km": 1.72,
+   "km_tunnel": 0.39,
+   "tags": {
+    "waterway=stream": 9,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 1
+   }
+  },
+  "Spring Creek": {
+   "ways": 5,
+   "km": 1.5,
+   "km_tunnel": 0.04,
+   "tags": {
+    "waterway=stream": 5,
+    "tunnel=yes": 2
+   }
+  },
+  "Castle Frank Brook": {
+   "ways": 6,
+   "km": 1.33,
+   "km_tunnel": 0.01,
+   "tags": {
+    "waterway=stream": 6,
+    "intermittent=yes": 5,
+    "tunnel=yes": 1
+   }
+  },
+  "Dorset Creek": {
+   "ways": 10,
+   "km": 1.06,
+   "km_tunnel": 1.06,
+   "tags": {
+    "waterway=stream": 10,
+    "tunnel=yes": 10
+   }
+  },
+  "Cummer Creek": {
+   "ways": 8,
+   "km": 1.02,
+   "km_tunnel": 1.02,
+   "tags": {
+    "waterway=stream": 8,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 5
+   }
+  },
+  "Walmsley Brook": {
+   "ways": 3,
+   "km": 0.9,
+   "km_tunnel": 0.13,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=culvert": 1
+   }
+  },
+  "Cawthra Creek Diversion": {
+   "ways": 1,
+   "km": 0.88,
+   "km_tunnel": 0.88,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=yes": 1
+   }
+  },
+  "Adam's Creek": {
+   "ways": 8,
+   "km": 0.81,
+   "km_tunnel": 0.81,
+   "tags": {
+    "waterway=stream": 8,
+    "tunnel=yes": 5,
+    "tunnel=culvert": 3,
+    "intermittent=no": 2
+   }
+  },
+  "German Mills Creek": {
+   "ways": 10,
+   "km": 0.77,
+   "km_tunnel": 0.77,
+   "tags": {
+    "waterway=stream": 6,
+    "tunnel=yes": 5,
+    "tunnel=culvert": 5,
+    "waterway=river": 4
+   }
+  },
+  "Smalls Creek": {
+   "ways": 3,
+   "km": 0.7,
+   "km_tunnel": 0.07,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=culvert": 1
+   }
+  },
+  "Centennial Creek": {
+   "ways": 9,
+   "km": 0.68,
+   "km_tunnel": 0.68,
+   "tags": {
+    "waterway=stream": 9,
+    "tunnel=yes": 2,
+    "tunnel=culvert": 7
+   }
+  },
+  "Malvern Creek": {
+   "ways": 11,
+   "km": 0.6,
+   "km_tunnel": 0.6,
+   "tags": {
+    "waterway=stream": 11,
+    "tunnel=yes": 6,
+    "tunnel=culvert": 5
+   }
+  },
+  "Pomona Creek": {
+   "ways": 11,
+   "km": 0.54,
+   "km_tunnel": 0.54,
+   "tags": {
+    "waterway=stream": 11,
+    "tunnel=yes": 8,
+    "tunnel=culvert": 3
+   }
+  },
+  "Cudmore Creek": {
+   "ways": 5,
+   "km": 0.54,
+   "km_tunnel": 0.07,
+   "tags": {
+    "waterway=stream": 5,
+    "tunnel=yes": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "Wilson Brook": {
+   "ways": 8,
+   "km": 0.53,
+   "km_tunnel": 0.53,
+   "tags": {
+    "waterway=stream": 8,
+    "tunnel=yes": 5,
+    "tunnel=culvert": 3
+   }
+  },
+  "Cooksville Creek": {
+   "ways": 5,
+   "km": 0.51,
+   "km_tunnel": 0.51,
+   "tags": {
+    "waterway=stream": 5,
+    "tunnel=yes": 5
+   }
+  },
+  "East Robinson Creek": {
+   "ways": 6,
+   "km": 0.5,
+   "km_tunnel": 0.5,
+   "tags": {
+    "waterway=stream": 6,
+    "tunnel=culvert": 6
+   }
+  },
+  "Cedar Creek": {
+   "ways": 3,
+   "km": 0.48,
+   "km_tunnel": 0.48,
+   "tags": {
+    "waterway=drain": 1,
+    "tunnel=yes": 3,
+    "waterway=stream": 2
+   }
+  },
+  "Vyner Creek": {
+   "ways": 7,
+   "km": 0.44,
+   "km_tunnel": 0.44,
+   "tags": {
+    "waterway=stream": 7,
+    "tunnel=yes": 7
+   }
+  },
+  "Don River East Branch": {
+   "ways": 10,
+   "km": 0.42,
+   "km_tunnel": 0.42,
+   "tags": {
+    "waterway=river": 5,
+    "tunnel=culvert": 9,
+    "intermittent=no": 1,
+    "waterway=stream": 5,
+    "tunnel=yes": 1
+   }
+  },
+  "Morningside Creek": {
+   "ways": 11,
+   "km": 0.4,
+   "km_tunnel": 0.4,
+   "tags": {
+    "waterway=stream": 11,
+    "tunnel=culvert": 7,
+    "tunnel=yes": 4
+   }
+  },
+  "Serson Creek": {
+   "ways": 7,
+   "km": 0.34,
+   "km_tunnel": 0.34,
+   "tags": {
+    "waterway=stream": 7,
+    "tunnel=yes": 7
+   }
+  },
+  "Patterson Creek": {
+   "ways": 11,
+   "km": 0.33,
+   "km_tunnel": 0.33,
+   "tags": {
+    "waterway=stream": 11,
+    "tunnel=yes": 6,
+    "tunnel=culvert": 5
+   }
+  },
+  "Wendigo Creek": {
+   "ways": 1,
+   "km": 0.32,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=stream": 1
+   }
+  },
+  "Newtonbrook Creek": {
+   "ways": 3,
+   "km": 0.3,
+   "km_tunnel": 0.3,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=yes": 2,
+    "tunnel=culvert": 1
+   }
+  },
+  "Beaver Creek": {
+   "ways": 3,
+   "km": 0.3,
+   "km_tunnel": 0.3,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=yes": 3
+   }
+  },
+  "Petticoat Creek": {
+   "ways": 3,
+   "km": 0.3,
+   "km_tunnel": 0.3,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=yes": 2,
+    "tunnel=culvert": 1
+   }
+  },
+  "(unnamed river)": {
+   "ways": 5,
+   "km": 0.28,
+   "km_tunnel": 0.28,
+   "tags": {
+    "waterway=river": 5,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 2
+   }
+  },
+  "Rainbow Creek": {
+   "ways": 5,
+   "km": 0.28,
+   "km_tunnel": 0.28,
+   "tags": {
+    "waterway=stream": 5,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 2
+   }
+  },
+  "Albion Creek": {
+   "ways": 9,
+   "km": 0.27,
+   "km_tunnel": 0.27,
+   "tags": {
+    "waterway=stream": 9,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 6
+   }
+  },
+  "Little Etobicoke Creek": {
+   "ways": 5,
+   "km": 0.21,
+   "km_tunnel": 0.21,
+   "tags": {
+    "waterway=stream": 5,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 2
+   }
+  },
+  "Deerlick Creek": {
+   "ways": 4,
+   "km": 0.21,
+   "km_tunnel": 0.21,
+   "tags": {
+    "waterway=stream": 4,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 1
+   }
+  },
+  "Don River West Branch": {
+   "ways": 4,
+   "km": 0.19,
+   "km_tunnel": 0.19,
+   "tags": {
+    "waterway=river": 4,
+    "tunnel=yes": 1,
+    "intermittent=no": 1,
+    "tunnel=culvert": 3
+   }
+  },
+  "Elmcrest Creek": {
+   "ways": 6,
+   "km": 0.19,
+   "km_tunnel": 0.19,
+   "tags": {
+    "waterway=stream": 6,
+    "tunnel=yes": 2,
+    "tunnel=culvert": 4
+   }
+  },
+  "East Patterson Creek": {
+   "ways": 7,
+   "km": 0.17,
+   "km_tunnel": 0.17,
+   "tags": {
+    "waterway=stream": 7,
+    "tunnel=yes": 5,
+    "tunnel=culvert": 2
+   }
+  },
+  "Berry Creek": {
+   "ways": 6,
+   "km": 0.16,
+   "km_tunnel": 0.16,
+   "tags": {
+    "waterway=stream": 6,
+    "tunnel=yes": 6
+   }
+  },
+  "Apple Creek": {
+   "ways": 4,
+   "km": 0.16,
+   "km_tunnel": 0.16,
+   "tags": {
+    "waterway=stream": 4,
+    "tunnel=yes": 4
+   }
+  },
+  "Cassels Park Underground Ravine": {
+   "ways": 1,
+   "km": 0.15,
+   "km_tunnel": 0.15,
+   "tags": {
+    "waterway=drain": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "Curity Creek": {
+   "ways": 1,
+   "km": 0.14,
+   "km_tunnel": 0.14,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=yes": 1
+   }
+  },
+  "Silver Creek": {
+   "ways": 2,
+   "km": 0.13,
+   "km_tunnel": 0.13,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 2
+   }
+  },
+  "Daniel Brooke Building": {
+   "ways": 1,
+   "km": 0.12,
+   "km_tunnel": 0,
+   "tags": {
+    "historic=building": 1
+   }
+  },
+  "Somer Creek": {
+   "ways": 2,
+   "km": 0.12,
+   "km_tunnel": 0.12,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 2
+   }
+  },
+  "Blue Ridge Creek": {
+   "ways": 2,
+   "km": 0.11,
+   "km_tunnel": 0.11,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 2
+   }
+  },
+  "Cedar Brook": {
+   "ways": 3,
+   "km": 0.1,
+   "km_tunnel": 0.1,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=yes": 2,
+    "tunnel=culvert": 1
+   }
+  },
+  "Wolfedale Creek": {
+   "ways": 2,
+   "km": 0.09,
+   "km_tunnel": 0.09,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 2
+   }
+  },
+  "Ellesmere Creek": {
+   "ways": 2,
+   "km": 0.09,
+   "km_tunnel": 0.09,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=culvert": 2
+   }
+  },
+  "Carrville Creek": {
+   "ways": 2,
+   "km": 0.07,
+   "km_tunnel": 0.07,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "Curran Hall Creek": {
+   "ways": 1,
+   "km": 0.07,
+   "km_tunnel": 0.07,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=yes": 1
+   }
+  },
+  "Robinson Creek": {
+   "ways": 2,
+   "km": 0.07,
+   "km_tunnel": 0.07,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=culvert": 2
+   }
+  },
+  "Humber Creek": {
+   "ways": 2,
+   "km": 0.06,
+   "km_tunnel": 0.06,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "Plunkett Creek": {
+   "ways": 1,
+   "km": 0.04,
+   "km_tunnel": 0.04,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=yes": 1
+   }
+  },
+  "West Robinson Creek": {
+   "ways": 2,
+   "km": 0.04,
+   "km_tunnel": 0.04,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=culvert": 2
+   }
+  },
+  "Little Rouge Creek": {
+   "ways": 1,
+   "km": 0.04,
+   "km_tunnel": 0.04,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "(unnamed canal)": {
+   "ways": 1,
+   "km": 0.04,
+   "km_tunnel": 0.04,
+   "tags": {
+    "waterway=canal": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "Donnybrook Ruins": {
+   "ways": 1,
+   "km": 0.04,
+   "km_tunnel": 0,
+   "tags": {
+    "historic=ruins": 1
+   }
+  },
+  "Thornton Creek": {
+   "ways": 1,
+   "km": 0.03,
+   "km_tunnel": 0.03,
+   "tags": {
+    "waterway=drain": 1,
+    "tunnel=covered": 1,
+    "intermittent=no": 1
+   }
+  },
+  "Summerdale River": {
+   "ways": 1,
+   "km": 0.03,
+   "km_tunnel": 0.03,
+   "tags": {
+    "waterway=river": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "East Humber River": {
+   "ways": 1,
+   "km": 0.03,
+   "km_tunnel": 0.03,
+   "tags": {
+    "waterway=river": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "DeGrassi Creek": {
+   "ways": 1,
+   "km": 0.03,
+   "km_tunnel": 0.03,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "Etobicoke Creek": {
+   "ways": 1,
+   "km": 0.01,
+   "km_tunnel": 0.01,
+   "tags": {
+    "waterway=river": 1,
+    "tunnel=culvert": 1
+   }
+  }
+ },
+ "chicago": {
+  "North Branch Chicago River": {
+   "ways": 22,
+   "km": 31.53,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=river": 22,
+    "intermittent=no": 9
+   }
+  },
+  "(unnamed stream)": {
+   "ways": 422,
+   "km": 27.17,
+   "km_tunnel": 27.17,
+   "tags": {
+    "waterway=stream": 422,
+    "tunnel=yes": 52,
+    "tunnel=culvert": 370,
+    "intermittent=yes": 46
+   }
+  },
+  "Calumet River": {
+   "ways": 8,
+   "km": 21.67,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=river": 7,
+    "intermittent=no": 8,
+    "waterway=canal": 1
+   }
+  },
+  "(unnamed drain)": {
+   "ways": 122,
+   "km": 11.08,
+   "km_tunnel": 11.08,
+   "tags": {
+    "waterway=drain": 122,
+    "tunnel=yes": 15,
+    "tunnel=culvert": 107,
+    "intermittent=yes": 71,
+    "intermittent=no": 1
+   }
+  },
+  "Little Calumet River": {
+   "ways": 5,
+   "km": 7.98,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=river": 5
+   }
+  },
+  "South Branch Chicago River": {
+   "ways": 8,
+   "km": 7.57,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=river": 7,
+    "intermittent=no": 7,
+    "waterway=canal": 1
+   }
+  },
+  "Grand Calumet River": {
+   "ways": 5,
+   "km": 6.75,
+   "km_tunnel": 0.07,
+   "tags": {
+    "waterway=river": 5,
+    "intermittent=no": 1,
+    "tunnel=culvert": 2
+   }
+  },
+  "(unnamed ditch)": {
+   "ways": 64,
+   "km": 3.13,
+   "km_tunnel": 3.13,
+   "tags": {
+    "waterway=ditch": 64,
+    "tunnel=culvert": 63,
+    "intermittent=yes": 29,
+    "tunnel=yes": 1
+   }
+  },
+  "Chicago River": {
+   "ways": 4,
+   "km": 2.58,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=river": 4,
+    "intermittent=no": 3
+   }
+  },
+  "Willow Creek": {
+   "ways": 11,
+   "km": 2.41,
+   "km_tunnel": 2.41,
+   "tags": {
+    "waterway=canal": 2,
+    "tunnel=yes": 5,
+    "waterway=stream": 9,
+    "tunnel=culvert": 6,
+    "intermittent=no": 2
+   }
+  },
+  "South Fork South Branch Chicago River": {
+   "ways": 3,
+   "km": 2.36,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=river": 3
+   }
+  },
+  "Bensenville Ditch": {
+   "ways": 28,
+   "km": 2.17,
+   "km_tunnel": 2.17,
+   "tags": {
+    "waterway=drain": 11,
+    "tunnel=yes": 17,
+    "waterway=stream": 17,
+    "tunnel=culvert": 11
+   }
+  },
+  "Silver Creek": {
+   "ways": 8,
+   "km": 1.72,
+   "km_tunnel": 1.72,
+   "tags": {
+    "waterway=stream": 8,
+    "tunnel=yes": 3,
+    "tunnel=culvert": 5
+   }
+  },
+  "Crystal Creek": {
+   "ways": 10,
+   "km": 1.45,
+   "km_tunnel": 1.45,
+   "tags": {
+    "waterway=drain": 2,
+    "tunnel=yes": 4,
+    "intermittent=yes": 1,
+    "tunnel=culvert": 6,
+    "waterway=stream": 8
+   }
+  },
+  "Sawmill Creek": {
+   "ways": 11,
+   "km": 0.89,
+   "km_tunnel": 0.89,
+   "tags": {
+    "waterway=stream": 11,
+    "tunnel=culvert": 9,
+    "tunnel=yes": 2
+   }
+  },
+  "Stony Creek": {
+   "ways": 11,
+   "km": 0.79,
+   "km_tunnel": 0.79,
+   "tags": {
+    "waterway=stream": 11,
+    "tunnel=yes": 9,
+    "tunnel=culvert": 2
+   }
+  },
+  "Addison Creek": {
+   "ways": 22,
+   "km": 0.65,
+   "km_tunnel": 0.65,
+   "tags": {
+    "waterway=stream": 22,
+    "tunnel=yes": 10,
+    "tunnel=culvert": 12
+   }
+  },
+  "Ogden Slip": {
+   "ways": 1,
+   "km": 0.64,
+   "km_tunnel": 0,
+   "tags": {
+    "waterway=canal": 1,
+    "intermittent=no": 1
+   }
+  },
+  "Flag Creek": {
+   "ways": 3,
+   "km": 0.61,
+   "km_tunnel": 0.61,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=culvert": 3
+   }
+  },
+  "Silver Creek (Bensenville Ditch)": {
+   "ways": 3,
+   "km": 0.53,
+   "km_tunnel": 0.53,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=building_passage": 1,
+    "tunnel=culvert": 2
+   }
+  },
+  "Higgins Creek": {
+   "ways": 17,
+   "km": 0.48,
+   "km_tunnel": 0.48,
+   "tags": {
+    "waterway=drain": 1,
+    "tunnel=yes": 3,
+    "intermittent=no": 16,
+    "waterway=stream": 16,
+    "tunnel=covered": 1,
+    "tunnel=culvert": 13
+   }
+  },
+  "Lakeside Grant Manor Apartments": {
+   "ways": 1,
+   "km": 0.46,
+   "km_tunnel": 0,
+   "tags": {
+    "historic=heritage": 1
+   }
+  },
+  "Salt Creek Overflow": {
+   "ways": 1,
+   "km": 0.45,
+   "km_tunnel": 0.45,
+   "tags": {
+    "waterway=drain": 1,
+    "tunnel=yes": 1,
+    "intermittent=yes": 1
+   }
+  },
+  "Golf Corse Tributary": {
+   "ways": 3,
+   "km": 0.42,
+   "km_tunnel": 0.42,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=yes": 2,
+    "tunnel=culvert": 1
+   }
+  },
+  "Middle Fork": {
+   "ways": 1,
+   "km": 0.42,
+   "km_tunnel": 0.42,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "Natalie Creek": {
+   "ways": 11,
+   "km": 0.21,
+   "km_tunnel": 0.21,
+   "tags": {
+    "waterway=stream": 11,
+    "tunnel=culvert": 11
+   }
+  },
+  "Lucas Ditch": {
+   "ways": 9,
+   "km": 0.21,
+   "km_tunnel": 0.21,
+   "tags": {
+    "waterway=stream": 9,
+    "tunnel=culvert": 9
+   }
+  },
+  "Farmer's Creek": {
+   "ways": 4,
+   "km": 0.16,
+   "km_tunnel": 0.16,
+   "tags": {
+    "waterway=stream": 4,
+    "tunnel=yes": 2,
+    "tunnel=culvert": 2
+   }
+  },
+  "Hofmann Dam": {
+   "ways": 1,
+   "km": 0.16,
+   "km_tunnel": 0,
+   "tags": {}
+  },
+  "Crooked Creek": {
+   "ways": 5,
+   "km": 0.15,
+   "km_tunnel": 0.15,
+   "tags": {
+    "waterway=drain": 1,
+    "tunnel=yes": 1,
+    "waterway=stream": 4,
+    "tunnel=culvert": 4
+   }
+  },
+  "Midlothian Creek": {
+   "ways": 3,
+   "km": 0.13,
+   "km_tunnel": 0.13,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=culvert": 3
+   }
+  },
+  "Illinois and Michigan Canal": {
+   "ways": 4,
+   "km": 0.11,
+   "km_tunnel": 0.11,
+   "tags": {
+    "waterway=derelict_canal": 1,
+    "tunnel=culvert": 4,
+    "waterway=canal": 3
+   }
+  },
+  "Fairbanks Dam": {
+   "ways": 1,
+   "km": 0.11,
+   "km_tunnel": 0,
+   "tags": {}
+  },
+  "Long Run": {
+   "ways": 6,
+   "km": 0.1,
+   "km_tunnel": 0.1,
+   "tags": {
+    "waterway=stream": 6,
+    "tunnel=culvert": 6
+   }
+  },
+  "Armitage Dam": {
+   "ways": 1,
+   "km": 0.08,
+   "km_tunnel": 0,
+   "tags": {}
+  },
+  "Dam # 4": {
+   "ways": 1,
+   "km": 0.07,
+   "km_tunnel": 0,
+   "tags": {}
+  },
+  "Touhy Road Dam": {
+   "ways": 1,
+   "km": 0.07,
+   "km_tunnel": 0,
+   "tags": {}
+  },
+  "Dempster Avenue Dam": {
+   "ways": 1,
+   "km": 0.07,
+   "km_tunnel": 0,
+   "tags": {}
+  },
+  "Ginger Creek": {
+   "ways": 2,
+   "km": 0.06,
+   "km_tunnel": 0.06,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=culvert": 2
+   }
+  },
+  "Mill Creek": {
+   "ways": 3,
+   "km": 0.06,
+   "km_tunnel": 0.06,
+   "tags": {
+    "waterway=stream": 3,
+    "tunnel=culvert": 3
+   }
+  },
+  "Indian Creek": {
+   "ways": 2,
+   "km": 0.05,
+   "km_tunnel": 0.05,
+   "tags": {
+    "waterway=stream": 2,
+    "tunnel=yes": 2
+   }
+  },
+  "TARP": {
+   "ways": 1,
+   "km": 0.04,
+   "km_tunnel": 0.04,
+   "tags": {
+    "waterway=drain": 1,
+    "tunnel=entrance": 1,
+    "location=underground": 1
+   }
+  },
+  "I&M Canal": {
+   "ways": 1,
+   "km": 0.03,
+   "km_tunnel": 0.03,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "(unnamed river)": {
+   "ways": 1,
+   "km": 0.02,
+   "km_tunnel": 0.02,
+   "tags": {
+    "waterway=river": 1,
+    "tunnel=culvert": 1,
+    "intermittent=yes": 1
+   }
+  },
+  "South Fork": {
+   "ways": 1,
+   "km": 0.01,
+   "km_tunnel": 0.01,
+   "tags": {
+    "waterway=stream": 1,
+    "tunnel=culvert": 1
+   }
+  },
+  "(unnamed pressurised)": {
+   "ways": 1,
+   "km": 0.01,
+   "km_tunnel": 0.01,
+   "tags": {
+    "waterway=pressurised": 1,
+    "tunnel=flooded": 1
+   }
+  }
+ }
+}

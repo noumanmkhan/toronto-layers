@@ -1,0 +1,121 @@
+  retry 1 https://overpass-api.de/api/interpreter HTTP Error 504: Gateway Timeout
+  retry 2 https://overpass.kumi.systems/api/interpreter HTTP Error 500: Internal Server Error
+toronto 1516 ways
+  Black Creek                              ways   69 km   27.81 tunnel   1.29 {'waterway=river': 14, 'intermittent=no': 4, 'tunnel=culvert': 9, 'waterway=stream': 55, 'tunnel=yes': 15}
+  Mimico Creek                             ways   40 km   25.02 tunnel   0.78 {'waterway=river': 23, 'tunnel=culvert': 7, 'intermittent=no': 2, 'waterway=stream': 17, 'tunnel=yes': 6}
+  Highland Creek                           ways    4 km   13.12 tunnel      0 {'waterway=river': 4, 'intermittent=no': 1}
+  Taylor-Massey Creek                      ways   36 km    9.75 tunnel   1.17 {'waterway=stream': 36, 'intermittent=no': 1, 'tunnel=yes': 14, 'tunnel=culvert': 3}
+  West Highland Creek                      ways    8 km    7.92 tunnel   0.04 {'waterway=river': 3, 'intermittent=no': 1, 'waterway=stream': 5, 'tunnel=culvert': 1}
+  Wilket Creek                             ways   11 km    5.98 tunnel   0.23 {'waterway=stream': 11, 'intermittent=no': 1, 'tunnel=yes': 2}
+  Taylor Massey Creek                      ways    9 km    5.28 tunnel   0.26 {'waterway=stream': 9, 'tunnel=yes': 4}
+  Burke Brook                              ways   22 km    4.82 tunnel   1.47 {'waterway=stream': 22, 'tunnel=yes': 6, 'tunnel=culvert': 5}
+  Cawthra Creek                            ways    2 km    3.98 tunnel   3.98 {'waterway=stream': 2, 'tunnel=yes': 2}
+  Yellow Creek                             ways    7 km     3.1 tunnel    1.1 {'waterway=stream': 7, 'tunnel=culvert': 3}
+  Mary Fix Creek                           ways   10 km    2.44 tunnel   2.44 {'waterway=stream': 10, 'tunnel=yes': 10}
+  Mud Creek                                ways   27 km    2.21 tunnel   0.71 {'waterway=stream': 27, 'tunnel=yes': 6, 'tunnel=culvert': 8}
+  West Mimico Creek                        ways    6 km     2.0 tunnel   0.07 {'waterway=stream': 6, 'tunnel=yes': 2}
+  Cooksville Creek East Branch             ways    6 km    1.98 tunnel   1.98 {'waterway=stream': 4, 'tunnel=yes': 6, 'waterway=drain': 2, 'intermittent=no': 1}
+  Applewood Creek                          ways    8 km    1.96 tunnel   1.96 {'waterway=stream': 8, 'tunnel=yes': 7, 'tunnel=culvert': 1}
+  Westminster Creek                        ways   17 km     1.8 tunnel    1.8 {'waterway=stream': 17, 'tunnel=yes': 9, 'tunnel=culvert': 8, 'intermittent=yes': 2}
+  Lavender Creek                           ways    9 km    1.72 tunnel   0.39 {'waterway=stream': 9, 'tunnel=yes': 3, 'tunnel=culvert': 1}
+  Spring Creek                             ways    5 km     1.5 tunnel   0.04 {'waterway=stream': 5, 'tunnel=yes': 2}
+  Castle Frank Brook                       ways    6 km    1.33 tunnel   0.01 {'waterway=stream': 6, 'intermittent=yes': 5, 'tunnel=yes': 1}
+  Dorset Creek                             ways   10 km    1.06 tunnel   1.06 {'waterway=stream': 10, 'tunnel=yes': 10}
+  Cummer Creek                             ways    8 km    1.02 tunnel   1.02 {'waterway=stream': 8, 'tunnel=yes': 3, 'tunnel=culvert': 5}
+  Walmsley Brook                           ways    3 km     0.9 tunnel   0.13 {'waterway=stream': 3, 'tunnel=culvert': 1}
+  Cawthra Creek Diversion                  ways    1 km    0.88 tunnel   0.88 {'waterway=stream': 1, 'tunnel=yes': 1}
+  Adam's Creek                             ways    8 km    0.81 tunnel   0.81 {'waterway=stream': 8, 'tunnel=yes': 5, 'tunnel=culvert': 3, 'intermittent=no': 2}
+  German Mills Creek                       ways   10 km    0.77 tunnel   0.77 {'waterway=stream': 6, 'tunnel=yes': 5, 'tunnel=culvert': 5, 'waterway=river': 4}
+  Smalls Creek                             ways    3 km     0.7 tunnel   0.07 {'waterway=stream': 3, 'tunnel=culvert': 1}
+  Centennial Creek                         ways    9 km    0.68 tunnel   0.68 {'waterway=stream': 9, 'tunnel=yes': 2, 'tunnel=culvert': 7}
+  Malvern Creek                            ways   11 km     0.6 tunnel    0.6 {'waterway=stream': 11, 'tunnel=yes': 6, 'tunnel=culvert': 5}
+  Pomona Creek                             ways   11 km    0.54 tunnel   0.54 {'waterway=stream': 11, 'tunnel=yes': 8, 'tunnel=culvert': 3}
+  Cudmore Creek                            ways    5 km    0.54 tunnel   0.07 {'waterway=stream': 5, 'tunnel=yes': 1, 'tunnel=culvert': 1}
+  Wilson Brook                             ways    8 km    0.53 tunnel   0.53 {'waterway=stream': 8, 'tunnel=yes': 5, 'tunnel=culvert': 3}
+  Cooksville Creek                         ways    5 km    0.51 tunnel   0.51 {'waterway=stream': 5, 'tunnel=yes': 5}
+  East Robinson Creek                      ways    6 km     0.5 tunnel    0.5 {'waterway=stream': 6, 'tunnel=culvert': 6}
+  Cedar Creek                              ways    3 km    0.48 tunnel   0.48 {'waterway=drain': 1, 'tunnel=yes': 3, 'waterway=stream': 2}
+  Vyner Creek                              ways    7 km    0.44 tunnel   0.44 {'waterway=stream': 7, 'tunnel=yes': 7}
+  Don River East Branch                    ways   10 km    0.42 tunnel   0.42 {'waterway=river': 5, 'tunnel=culvert': 9, 'intermittent=no': 1, 'waterway=stream': 5, 'tunnel=yes': 1}
+  Morningside Creek                        ways   11 km     0.4 tunnel    0.4 {'waterway=stream': 11, 'tunnel=culvert': 7, 'tunnel=yes': 4}
+  Serson Creek                             ways    7 km    0.34 tunnel   0.34 {'waterway=stream': 7, 'tunnel=yes': 7}
+  Patterson Creek                          ways   11 km    0.33 tunnel   0.33 {'waterway=stream': 11, 'tunnel=yes': 6, 'tunnel=culvert': 5}
+  Wendigo Creek                            ways    1 km    0.32 tunnel      0 {'waterway=stream': 1}
+  Newtonbrook Creek                        ways    3 km     0.3 tunnel    0.3 {'waterway=stream': 3, 'tunnel=yes': 2, 'tunnel=culvert': 1}
+  Beaver Creek                             ways    3 km     0.3 tunnel    0.3 {'waterway=stream': 3, 'tunnel=yes': 3}
+  Petticoat Creek                          ways    3 km     0.3 tunnel    0.3 {'waterway=stream': 3, 'tunnel=yes': 2, 'tunnel=culvert': 1}
+  Rainbow Creek                            ways    5 km    0.28 tunnel   0.28 {'waterway=stream': 5, 'tunnel=yes': 3, 'tunnel=culvert': 2}
+  Albion Creek                             ways    9 km    0.27 tunnel   0.27 {'waterway=stream': 9, 'tunnel=yes': 3, 'tunnel=culvert': 6}
+  Little Etobicoke Creek                   ways    5 km    0.21 tunnel   0.21 {'waterway=stream': 5, 'tunnel=yes': 3, 'tunnel=culvert': 2}
+  Deerlick Creek                           ways    4 km    0.21 tunnel   0.21 {'waterway=stream': 4, 'tunnel=yes': 3, 'tunnel=culvert': 1}
+  Don River West Branch                    ways    4 km    0.19 tunnel   0.19 {'waterway=river': 4, 'tunnel=yes': 1, 'intermittent=no': 1, 'tunnel=culvert': 3}
+  Elmcrest Creek                           ways    6 km    0.19 tunnel   0.19 {'waterway=stream': 6, 'tunnel=yes': 2, 'tunnel=culvert': 4}
+  East Patterson Creek                     ways    7 km    0.17 tunnel   0.17 {'waterway=stream': 7, 'tunnel=yes': 5, 'tunnel=culvert': 2}
+  Berry Creek                              ways    6 km    0.16 tunnel   0.16 {'waterway=stream': 6, 'tunnel=yes': 6}
+  Apple Creek                              ways    4 km    0.16 tunnel   0.16 {'waterway=stream': 4, 'tunnel=yes': 4}
+  Cassels Park Underground Ravine          ways    1 km    0.15 tunnel   0.15 {'waterway=drain': 1, 'tunnel=culvert': 1}
+  Curity Creek                             ways    1 km    0.14 tunnel   0.14 {'waterway=stream': 1, 'tunnel=yes': 1}
+  Silver Creek                             ways    2 km    0.13 tunnel   0.13 {'waterway=stream': 2, 'tunnel=yes': 2}
+  Daniel Brooke Building                   ways    1 km    0.12 tunnel      0 {'historic=building': 1}
+  Somer Creek                              ways    2 km    0.12 tunnel   0.12 {'waterway=stream': 2, 'tunnel=yes': 2}
+  Blue Ridge Creek                         ways    2 km    0.11 tunnel   0.11 {'waterway=stream': 2, 'tunnel=yes': 2}
+  Cedar Brook                              ways    3 km     0.1 tunnel    0.1 {'waterway=stream': 3, 'tunnel=yes': 2, 'tunnel=culvert': 1}
+  Wolfedale Creek                          ways    2 km    0.09 tunnel   0.09 {'waterway=stream': 2, 'tunnel=yes': 2}
+  Ellesmere Creek                          ways    2 km    0.09 tunnel   0.09 {'waterway=stream': 2, 'tunnel=culvert': 2}
+  Carrville Creek                          ways    2 km    0.07 tunnel   0.07 {'waterway=stream': 2, 'tunnel=yes': 1, 'tunnel=culvert': 1}
+  Curran Hall Creek                        ways    1 km    0.07 tunnel   0.07 {'waterway=stream': 1, 'tunnel=yes': 1}
+  Robinson Creek                           ways    2 km    0.07 tunnel   0.07 {'waterway=stream': 2, 'tunnel=culvert': 2}
+  Humber Creek                             ways    2 km    0.06 tunnel   0.06 {'waterway=stream': 2, 'tunnel=yes': 1, 'tunnel=culvert': 1}
+  Plunkett Creek                           ways    1 km    0.04 tunnel   0.04 {'waterway=stream': 1, 'tunnel=yes': 1}
+  West Robinson Creek                      ways    2 km    0.04 tunnel   0.04 {'waterway=stream': 2, 'tunnel=culvert': 2}
+  Little Rouge Creek                       ways    1 km    0.04 tunnel   0.04 {'waterway=stream': 1, 'tunnel=culvert': 1}
+  Donnybrook Ruins                         ways    1 km    0.04 tunnel      0 {'historic=ruins': 1}
+  Thornton Creek                           ways    1 km    0.03 tunnel   0.03 {'waterway=drain': 1, 'tunnel=covered': 1, 'intermittent=no': 1}
+  Summerdale River                         ways    1 km    0.03 tunnel   0.03 {'waterway=river': 1, 'tunnel=culvert': 1}
+  East Humber River                        ways    1 km    0.03 tunnel   0.03 {'waterway=river': 1, 'tunnel=culvert': 1}
+  DeGrassi Creek                           ways    1 km    0.03 tunnel   0.03 {'waterway=stream': 1, 'tunnel=culvert': 1}
+  Etobicoke Creek                          ways    1 km    0.01 tunnel   0.01 {'waterway=river': 1, 'tunnel=culvert': 1}
+  unnamed: {'(unnamed stream)': (638, 40.21, 40.21), '(unnamed drain)': (68, 14.28, 14.28), '(unnamed ditch)': (262, 2.03, 2.03), '(unnamed river)': (5, 0.28, 0.28), '(unnamed canal)': (1, 0.04, 0.04)}
+chicago 854 ways
+  North Branch Chicago River               ways   22 km   31.53 tunnel      0 {'waterway=river': 22, 'intermittent=no': 9}
+  Calumet River                            ways    8 km   21.67 tunnel      0 {'waterway=river': 7, 'intermittent=no': 8, 'waterway=canal': 1}
+  Little Calumet River                     ways    5 km    7.98 tunnel      0 {'waterway=river': 5}
+  South Branch Chicago River               ways    8 km    7.57 tunnel      0 {'waterway=river': 7, 'intermittent=no': 7, 'waterway=canal': 1}
+  Grand Calumet River                      ways    5 km    6.75 tunnel   0.07 {'waterway=river': 5, 'intermittent=no': 1, 'tunnel=culvert': 2}
+  Chicago River                            ways    4 km    2.58 tunnel      0 {'waterway=river': 4, 'intermittent=no': 3}
+  Willow Creek                             ways   11 km    2.41 tunnel   2.41 {'waterway=canal': 2, 'tunnel=yes': 5, 'waterway=stream': 9, 'tunnel=culvert': 6, 'intermittent=no': 2}
+  South Fork South Branch Chicago River    ways    3 km    2.36 tunnel      0 {'waterway=river': 3}
+  Bensenville Ditch                        ways   28 km    2.17 tunnel   2.17 {'waterway=drain': 11, 'tunnel=yes': 17, 'waterway=stream': 17, 'tunnel=culvert': 11}
+  Silver Creek                             ways    8 km    1.72 tunnel   1.72 {'waterway=stream': 8, 'tunnel=yes': 3, 'tunnel=culvert': 5}
+  Crystal Creek                            ways   10 km    1.45 tunnel   1.45 {'waterway=drain': 2, 'tunnel=yes': 4, 'intermittent=yes': 1, 'tunnel=culvert': 6, 'waterway=stream': 8}
+  Sawmill Creek                            ways   11 km    0.89 tunnel   0.89 {'waterway=stream': 11, 'tunnel=culvert': 9, 'tunnel=yes': 2}
+  Stony Creek                              ways   11 km    0.79 tunnel   0.79 {'waterway=stream': 11, 'tunnel=yes': 9, 'tunnel=culvert': 2}
+  Addison Creek                            ways   22 km    0.65 tunnel   0.65 {'waterway=stream': 22, 'tunnel=yes': 10, 'tunnel=culvert': 12}
+  Ogden Slip                               ways    1 km    0.64 tunnel      0 {'waterway=canal': 1, 'intermittent=no': 1}
+  Flag Creek                               ways    3 km    0.61 tunnel   0.61 {'waterway=stream': 3, 'tunnel=culvert': 3}
+  Silver Creek (Bensenville Ditch)         ways    3 km    0.53 tunnel   0.53 {'waterway=stream': 3, 'tunnel=building_passage': 1, 'tunnel=culvert': 2}
+  Higgins Creek                            ways   17 km    0.48 tunnel   0.48 {'waterway=drain': 1, 'tunnel=yes': 3, 'intermittent=no': 16, 'waterway=stream': 16, 'tunnel=covered': 1, 'tunnel=culvert': 13}
+  Lakeside Grant Manor Apartments          ways    1 km    0.46 tunnel      0 {'historic=heritage': 1}
+  Salt Creek Overflow                      ways    1 km    0.45 tunnel   0.45 {'waterway=drain': 1, 'tunnel=yes': 1, 'intermittent=yes': 1}
+  Golf Corse Tributary                     ways    3 km    0.42 tunnel   0.42 {'waterway=stream': 3, 'tunnel=yes': 2, 'tunnel=culvert': 1}
+  Middle Fork                              ways    1 km    0.42 tunnel   0.42 {'waterway=stream': 1, 'tunnel=culvert': 1}
+  Natalie Creek                            ways   11 km    0.21 tunnel   0.21 {'waterway=stream': 11, 'tunnel=culvert': 11}
+  Lucas Ditch                              ways    9 km    0.21 tunnel   0.21 {'waterway=stream': 9, 'tunnel=culvert': 9}
+  Farmer's Creek                           ways    4 km    0.16 tunnel   0.16 {'waterway=stream': 4, 'tunnel=yes': 2, 'tunnel=culvert': 2}
+  Hofmann Dam                              ways    1 km    0.16 tunnel      0 {}
+  Crooked Creek                            ways    5 km    0.15 tunnel   0.15 {'waterway=drain': 1, 'tunnel=yes': 1, 'waterway=stream': 4, 'tunnel=culvert': 4}
+  Midlothian Creek                         ways    3 km    0.13 tunnel   0.13 {'waterway=stream': 3, 'tunnel=culvert': 3}
+  Illinois and Michigan Canal              ways    4 km    0.11 tunnel   0.11 {'waterway=derelict_canal': 1, 'tunnel=culvert': 4, 'waterway=canal': 3}
+  Fairbanks Dam                            ways    1 km    0.11 tunnel      0 {}
+  Long Run                                 ways    6 km     0.1 tunnel    0.1 {'waterway=stream': 6, 'tunnel=culvert': 6}
+  Armitage Dam                             ways    1 km    0.08 tunnel      0 {}
+  Dam # 4                                  ways    1 km    0.07 tunnel      0 {}
+  Touhy Road Dam                           ways    1 km    0.07 tunnel      0 {}
+  Dempster Avenue Dam                      ways    1 km    0.07 tunnel      0 {}
+  Ginger Creek                             ways    2 km    0.06 tunnel   0.06 {'waterway=stream': 2, 'tunnel=culvert': 2}
+  Mill Creek                               ways    3 km    0.06 tunnel   0.06 {'waterway=stream': 3, 'tunnel=culvert': 3}
+  Indian Creek                             ways    2 km    0.05 tunnel   0.05 {'waterway=stream': 2, 'tunnel=yes': 2}
+  TARP                                     ways    1 km    0.04 tunnel   0.04 {'waterway=drain': 1, 'tunnel=entrance': 1, 'location=underground': 1}
+  I&M Canal                                ways    1 km    0.03 tunnel   0.03 {'waterway=stream': 1, 'tunnel=culvert': 1}
+  South Fork                               ways    1 km    0.01 tunnel   0.01 {'waterway=stream': 1, 'tunnel=culvert': 1}
+  unnamed: {'(unnamed stream)': (422, 27.17, 27.17), '(unnamed drain)': (122, 11.08, 11.08), '(unnamed ditch)': (64, 3.13, 3.13), '(unnamed river)': (1, 0.02, 0.02), '(unnamed pressurised)': (1, 0.01, 0.01)}
