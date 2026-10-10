@@ -1028,6 +1028,8 @@ function livingHere(unit){
     (hub && d[hub.minutes] != null ? '<dt>' + esc(T.hub) + '</dt><dd>' + tier(hub.key, d[hub.key]) + '<span>' + esc(fill(T.hubText, {minutes: d[hub.minutes]})) + '</span></dd>' : '') +
     '<dt>Getting to work</dt><dd>' + tier('commute', d.commute) + '<span>' + d.carPct + '% drive · ' + d.transitPct + '% transit · ' + d.walkBikePct + '% walk or bike</span></dd>' +
     '<dt>Households</dt><dd>' + tier('tenure', d.tenure) + '<span>' + d.renterPct + '% rent</span></dd>' +
+    (T.canopy && d.canopy != null ? '<dt>' + esc(T.canopy.label) + '</dt><dd>' + (TIER_LABEL['canopyBand:' + d.canopyBand] ? tier('canopyBand', d.canopyBand) : '') +
+      '<span>' + esc(fill(T.canopy.text, {pct: d.canopy})) + '</span>' + (T.canopy.caveat ? '<span class="caveat">' + esc(T.canopy.caveat) + '</span>' : '') + '</dd>' : '') +
     mixRow(T.homes, d.homes, T.homes && T.homes.types.map(t => t[1])) +
     mixRow(T.built, d.built, T.built && T.built.bands) +
     langRow(T.lang, d) +

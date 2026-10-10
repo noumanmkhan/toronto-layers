@@ -21,7 +21,7 @@
     {"name": "Lake Michigan", "at": [41.97, -87.57], "cls": "lake-near"},
     {"name": "Lake Michigan", "at": [42.40, -87.55], "cls": "lake-far"}
   ],
-  "attribution": "Boundaries, SSAs & the ‘L’: City of Chicago Data Portal · Districts & municipalities: U.S. Census Bureau TIGER · Metra: Metra GTFS · Buses: CTA GTFS · Streets, expressways & address search: © OpenStreetMap contributors via Nominatim · Skyscrapers: Wikipedia (CC BY-SA)",
+  "attribution": "Boundaries, SSAs & the ‘L’: City of Chicago Data Portal · Districts & municipalities: U.S. Census Bureau TIGER · Metra: Metra GTFS · Buses: CTA GTFS · Streets, expressways & address search: © OpenStreetMap contributors via Nominatim · Skyscrapers: Wikipedia (CC BY-SA) · Tree cover: ESA WorldCover 2021 (CC BY 4.0)",
   "example": {"at": [41.8763, -87.6282], "name": "Harold Washington Library (example)"},
 
   "search": {
@@ -106,6 +106,10 @@
       {"id": "tenure", "short": "Renters & owners", "key": "tenure",
        "tiers": [["owners", "Mostly owners", "--ten-1"], ["mix", "A mix", "--ten-2"], ["renters", "Mostly renters", "--ten-3"]],
        "note": "Share of households that rent: under 35%, 35–60%, over 60%."},
+      {"id": "canopy", "short": "Tree canopy", "key": "canopyBand", "optional": true,
+       "tiers": [["c1", "Under 8%", "--can-1"], ["c2", "8–15%", "--can-2"], ["c3", "15–25%", "--can-3"], ["c4", "25% or more", "--can-4"]],
+       "note": "Share of the land under tree cover, water left out, from ESA WorldCover 2021, a 10 m satellite land-cover map. Citywide 16%, as the Chicago Region Trees Initiative's 2020 census found.",
+       "source": "ESA WorldCover 2021 (CC BY 4.0)."},
       {"id": "homes", "short": "Housing type", "key": "homesTier", "field": "homes", "pick": [["detached", "Detached", "detached houses"], ["attached", "Attached", "attached houses (rowhouses and townhouses)"], ["flats", "2–19 units", "in buildings of 2 to 19 units, from two-flats to courtyard buildings"], ["large", "20+ units", "in buildings of 20 or more units"]], "cuts": [10, 30, 60], "tiers": [["t1", "Under 10%", "--hty-1"], ["t2", "10–30%", "--hty-2"], ["t3", "30–60%", "--hty-3"], ["t4", "60% or more", "--hty-4"]], "note": "Share of each community area's occupied homes that are {type}."}
     ],
     "filters": [
@@ -162,6 +166,7 @@
       "homes": {"label": "Home types", "types": [["detached", "Detached"], ["attached", "Attached"], ["flats", "2–19 units"], ["large", "20+ units"]]},
       "built": {"label": "Built", "bands": ["1939 or earlier", "1940–79", "1980–99", "2000 or later"]},
       "lang": {"label": "Language at home", "floor": 5, "note": "English only, or the language besides English that each person 5 or older speaks at home. For small areas the Census groups some languages: Polish shares a group with Russian and other Slavic languages."},
+      "canopy": {"label": "Tree canopy", "text": "{pct}% of the land is under trees", "caveat": "Satellite land cover, 2021 (ESA WorldCover, 10 m)."},
       "ages": {"label": "Ages", "bands": ["Under 15", "15–24", "25–44", "45–64", "65+"]},
       "recent": {"label": "Recent immigrants", "text": "{pct}% born abroad, came to the US {since}", "caveat": "Share of residents, from the 2020–2024 survey. Toronto counts a shorter window (2016–21), so the two cities don't compare directly."}
     },

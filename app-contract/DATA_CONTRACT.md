@@ -363,11 +363,12 @@ Keyed by unit code as a string (`"71"`). Fields:
 | `built` | 4 shares (%) by period built, in the order of `card.living.built.bands`. |
 | `lang` | Up to 5 `[language, pct]`, largest first. Demographic: card only. |
 | `langMulti` | Toronto only: % naming two or more languages equally. |
+| `canopy`, `canopyBand` | Tree canopy: % of the unit's land under tree cover (water left out), from ESA WorldCover 2021 (10 m), and its band `c1`–`c4` (cuts in `cities/<city>/canopy.json`; tier labels in the `canopy` lens). Missing when not fetched. |
 | `ages` | 5 shares (%) of residents by age, in the order of `card.living.ages.bands` (under 15, 15–24, 25–44, 45–64, 65+). Card only. |
 | `recent` | Recent immigrants, % of residents: Toronto, immigrated to Canada 2016–2021 (2021 Census, of everyone in private households); Chicago, born abroad and entered the US in the ACS's latest period (of everyone). Demographic: card only, never a lens, filter or fact. |
 | `recentSince` | Chicago only: that period in words ("2010 or later"). |
 | `homesTier` | Not stored; the website computes it. Apps don't need it. |
-| `facts` | Optional. Up to 3 ways the unit stands out among its peers, strongest first: `[{text, field, end, scope, rank, of, value}]`. `text` is a finished sentence fragment ("Highest rents in North York", "Among the most affordable homes on the South Side"); `value` is the figure behind it ("median $1,660/mo"). `field` is one of `value`, `rent`, `renterPct`, `transitPct`, `walkBikePct`, `carPct`, `detached`, `large`, `oldest`, `newest`, `hub`; `end` `high`/`low`; `scope` `city` or `peers` (the unit's former city, Old Toronto area or side); `rank` (1–3) of `of` units. Built by `engine/facts.py` from non-demographic fields only. Units that don't stand out have no `facts`. |
+| `facts` | Optional. Up to 3 ways the unit stands out among its peers, strongest first: `[{text, field, end, scope, rank, of, value}]`. `text` is a finished sentence fragment ("Highest rents in North York", "Among the most affordable homes on the South Side"); `value` is the figure behind it ("median $1,660/mo"). `field` is one of `value`, `rent`, `renterPct`, `transitPct`, `walkBikePct`, `carPct`, `canopy` (high end only: "Among the leafiest…"), `detached`, `large`, `oldest`, `newest`, `hub`; `end` `high`/`low`; `scope` `city` or `peers` (the unit's former city, Old Toronto area or side); `rank` (1–3) of `of` units. Built by `engine/facts.py` from non-demographic fields only. Units that don't stand out have no `facts`. |
 
 Rows, in order (labels from `card.living`):
 
@@ -377,6 +378,8 @@ Rows, in order (labels from `card.living`):
    `loop` in Chicago); its `key` names the tier field.
 3. **Getting to work**: commute tier label · "72% drive · 24% transit · 3% walk or bike".
 4. **Households**: tenure tier label · "35% rent".
+   **Tree canopy** (`card.living.canopy`, when `canopy` is present): the `canopy` lens tier label for
+   `canopyBand` · `text` with `{pct}` · `caveat`.
 5. **Home types** and **Built**: a small stacked bar, then each share of 1% or more in words
    ("Detached 37% · Semi & row 16% · …").
 6. **Language at home**: the first language always; the 2nd and 3rd only at `floor`% or more

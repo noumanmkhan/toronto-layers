@@ -1,8 +1,14 @@
 {
-  "_about": "Tree canopy per neighbourhood (engine/fetch_canopy.py, fetch-canopy.yml). The City's 2018 Tree Canopy Study land cover is used; ESA WorldCover 2021 (10 m) is computed alongside as a cross-check.",
+  "_about": "Tree canopy per neighbourhood (engine/fetch_canopy.py in fetch-canopy.yml, then engine/canopy.py in run.sh), from ESA WorldCover 2021 (10 m, CC BY 4.0): tree cells over land cells, water left out. Its citywide 30.5% sits inside the City's 2018 Tree Canopy Study range (28-31%), so the open satellite map is used for both cities alike. 'cuts' split the lens into four bands.",
   "units": "neighbourhoods",
   "sources": [
-    {"type": "toronto2018", "ckan": "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=forest-and-land-cover"},
-    {"type": "worldcover"}
+    {
+      "type": "worldcover"
+    }
+  ],
+  "cuts": [
+    15,
+    30,
+    45
   ]
 }

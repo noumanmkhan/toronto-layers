@@ -3,6 +3,14 @@
 ## Since 1.1
 
 ### Both cities
+- **Tree canopy** (October 11): a new lens (*Tree canopy*: four bands per city, Toronto under 15 / 15–30 /
+  30–45 / 45%+, Chicago under 8 / 8–15 / 15–25 / 25%+), a Living here row ("67% of the land is under
+  trees") and a high-end fact ("Among the leafiest in Etobicoke"; facts now cover 121 Toronto and 64
+  Chicago units). Share of land under tree cover, water left out, from ESA WorldCover 2021 (10 m, CC BY
+  4.0), computed in Actions by `engine/fetch_canopy.py` (fetch-canopy.yml) and added to the profiles by
+  `engine/canopy.py` (run.sh). Citywide 30.5% (Toronto's 2018 study: 28–31%) and 15.5% (Chicago's 2020
+  tree census: 16%). For the iOS app: profile fields `canopy`, `canopyBand`, the `canopy` lens,
+  `card.living.canopy`, facts field `canopy`, colours `--can-1`…`--can-4`; contract section 5. Additive.
 - **Ages and recent immigrants** (October 11): two Living here rows. *Ages*: a stacked bar of five bands
   (under 15, 15–24, 25–44, 45–64, 65+). *Recent immigrants*: Toronto, the share who immigrated to Canada
   2016–21 (2021 Census Neighbourhood Profiles); Chicago, the share born abroad who entered the US 2010 or

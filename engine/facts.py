@@ -9,7 +9,7 @@ sides). Areas with fewer than MIN_PEERS units aren't used as a peer group.
 
 Rules (see app-contract/DATA_CONTRACT.md, "Describe, don't rank"):
 - Only non-demographic figures: housing cost, tenure, getting to work, home types, age of homes,
-  transit time downtown. Language and anything like it never feed facts.
+  transit time downtown, tree canopy (high end only). Language and anything like it never feed facts.
 - Money facts are worded softly at the low end ("Among the most affordable rents"), never
   "cheapest" or "lowest value".
 - A fact needs a top-3 (or bottom-3) place. Strength is place / group size, so third of 158 beats
@@ -56,6 +56,8 @@ FIELDS = [
      None, None, lambda v: f'{v}% of commuters'),
     ('carPct', lambda d: d.get('carPct'), 'Most likely to drive to work {where}', 'Among the likeliest to drive to work {where}',
      None, None, lambda v: f'{v}% of commuters'),
+    ('canopy', lambda d: d.get('canopy'), 'Leafiest {where}', 'Among the leafiest {where}',
+     None, None, lambda v: f'{v}% tree canopy'),
     ('detached', lambda d: (d.get('homes') or [None])[0], 'Most detached houses {where}', 'Among the most detached houses {where}',
      None, None, lambda v: f'{v}% of homes'),
     ('large', lambda d: (d.get('homes') or [None] * 4)[3], 'Most homes in large apartment buildings {where}', 'Among the most homes in large apartment buildings {where}',

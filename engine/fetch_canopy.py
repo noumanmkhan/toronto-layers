@@ -3,27 +3,27 @@ Runs in GitHub Actions (fetch-canopy.yml): the sources are large downloads the s
 
 Sources, set per city in cities/<city>/canopy.json ("sources", in order of preference; the first that
 works is the one the map uses, the others are kept for comparison):
-  - "toronto2018": the City of Toronto's 2018 Tree Canopy Study land cover (Open Data "Forest and Land
-    Cover", Open Government Licence - Toronto), a high-resolution raster in a file geodatabase. Its classes
-    are read from the raster attribute table (the class whose name mentions trees, and the one for water).
   - "worldcover": ESA WorldCover 2021 v200, 10 m (CC BY 4.0), classes 10 (tree cover) and 80 (water).
     Satellite land cover at 10 m misses some street trees, so it reads lower than city studies.
 
-Canopy share = tree cells / land cells (water left out of the denominator) inside each unit. The raster is
-resampled to a working grid first (2 m for the city study, by majority; WorldCover at its own 10 m).
+Canopy share = tree cells / land cells (water left out of the denominator) inside each unit, at WorldCover's
+own 10 m. (Toronto's 2018 Tree Canopy Study land cover was tried first, October 11, 2026: its file
+geodatabase raster wouldn't open with Ubuntu's GDAL 3.8. WorldCover's citywide 30.5% sits inside that
+study's 28-31%, and Chicago's 15.5% matches the 16% of the 2020 Chicago Region Tree Census, so the one
+open source serves both cities alike.)
 
 Writes cities/<city>/raw/canopy/canopy.json: {used, sources: {name: {year, licence, cell, units: {code:
 pct}, city: pct, note}}}, and prints what it found (classes, sizes, citywide share) to the log.
 
 Usage: python3 engine/fetch_canopy.py <city>
 """
-import json, os, subprocess, sys, time, urllib.request, zipfile, glob
+import json, os, subprocess, sys, time, urllib.request
 import numpy as np
 import rasterio
 from rasterio.features import geometry_mask
 from rasterio.windows import from_bounds
 from shapely.geometry import shape, mapping
-from shapely.ops import transform as stransform
+import shapely
 from pyproj import Transformer
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
@@ -70,7 +70,7 @@ def zonal(tif, tree_vals, water_vals, nodata_vals):
     with rasterio.open(tif) as src:
         to = Transformer.from_crs('EPSG:4326', src.crs, always_xy=True).transform
         for code, g in UNITS:
-            gg = stransform(to, g)
+            gg = shapely.transform(g, lambda c: np.column_stack(to(c[:, 0], c[:, 1])))
             win = from_bounds(*gg.bounds, transform=src.transform).round_offsets().round_lengths()
             a = src.read(1, window=win, boundless=True, fill_value=nodata_vals[0] if nodata_vals else 0)
             inside = ~geometry_mask([mapping(gg)], out_shape=a.shape, transform=src.window_transform(win))
@@ -80,46 +80,6 @@ def zonal(tif, tree_vals, water_vals, nodata_vals):
             out[code] = round(100 * nt / nl) if nl else None
             T += nt; Lnd += nl
     return out, (round(100 * T / Lnd, 1) if Lnd else None)
-
-
-def toronto2018(spec):
-    pkg = json.load(urllib.request.urlopen(urllib.request.Request(spec['ckan'], headers=UA), timeout=120))['result']
-    url = next(r['url'] for r in pkg['resources'] if '2018' in r['name'] and (r.get('format') or '').upper() == 'ZIP')
-    z = download(url, os.path.join(WORK, 'landcover2018.zip'))
-    d = os.path.join(WORK, 'gdb')
-    if not os.path.exists(d):
-        zipfile.ZipFile(z).extractall(d)
-    gdbs = glob.glob(os.path.join(d, '**', '*.gdb'), recursive=True)
-    print('  geodatabases:', gdbs)
-    info = sh('gdalinfo', gdbs[0])
-    subs = [l.split('=', 1)[1] for l in info.splitlines() if 'SUBDATASET_' in l and '_NAME=' in l]
-    print('  subdatasets:', subs)
-    src = subs[0] if subs else gdbs[0]
-    rinfo = json.loads(sh('gdalinfo', '-json', '-nomd', src))
-    band = rinfo['bands'][0]
-    rat = rinfo.get('rat') or band.get('rat') or {}
-    print('  size', rinfo['size'], 'pixel', rinfo['geoTransform'][1], 'crs', rinfo['coordinateSystem']['wkt'][:80], 'nodata', band.get('noDataValue'))
-    print('  rat:', json.dumps(rat)[:3000])
-    # Class names from the attribute table: value column, then the first text column that names classes.
-    tree, water = set(), set()
-    if rat:
-        cols = [c['name'] for c in rat['fieldDefn']]
-        vi = next((i for i, c in enumerate(rat['fieldDefn']) if c['name'].lower() in ('value', 'gridcode')), 0)
-        for row in rat['row']:
-            vals = row['f']; txt = ' '.join(str(v) for v in vals if isinstance(v, str)).lower()
-            if 'tree' in txt or 'canopy' in txt: tree.add(int(vals[vi]))
-            if 'water' in txt: water.add(int(vals[vi]))
-        print('  rat columns', cols)
-    if not tree:
-        tree = set(spec.get('tree', [1])); water = set(spec.get('water', []))
-        print('  no class names found; using the config values', tree, water)
-    print('  tree classes', tree, 'water classes', water)
-    tif = os.path.join(WORK, 'toronto2018_2m.tif')
-    sh('gdalwarp', '-overwrite', '-r', 'mode', '-tr', '2', '2', '-co', 'COMPRESS=DEFLATE', '-co', 'TILED=YES', src, tif)
-    nd = band.get('noDataValue')
-    units, whole = zonal(tif, tree, water, [int(nd)] if nd is not None else [])
-    return {'year': 2018, 'licence': 'Open Government Licence - Toronto', 'cell': '0.5 m study, read at 2 m', 'units': units, 'city': whole,
-            'classes': {'tree': sorted(tree), 'water': sorted(water)}, 'source': url}
 
 
 def worldcover(spec):
@@ -135,7 +95,7 @@ def worldcover(spec):
     return {'year': 2021, 'licence': 'CC BY 4.0 (ESA WorldCover 2021 v200)', 'cell': '10 m', 'units': units, 'city': whole, 'source': 'https://esa-worldcover.org'}
 
 
-FN = {'toronto2018': toronto2018, 'worldcover': worldcover}
+FN = {'worldcover': worldcover}
 res, used = {}, None
 for spec in CFG['sources']:
     try:

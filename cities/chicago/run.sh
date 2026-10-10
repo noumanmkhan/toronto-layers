@@ -8,6 +8,7 @@ mkdir -p tmp ../../docs/chicago/data
 python3 build.py
 python3 landmarks.py
 python3 profiles.py
+[ -f raw/canopy/canopy.json ] && python3 ../../engine/canopy.py chicago   # after profiles: tree canopy per unit (fetch-canopy.yml)
 python3 ../../engine/facts.py chicago   # after profiles: what makes each unit stand out
 python3 ../../engine/skyscrapers.py chicago   # towers 150 m+ from raw/skyscrapers/wiki.json (fetch-skyscrapers.yml)
 python3 heritage.py

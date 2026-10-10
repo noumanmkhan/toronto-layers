@@ -12,6 +12,7 @@ python3 streets.py
 python3 landmarks.py
 python3 go.py
 python3 profiles.py
+[ -f raw/canopy/canopy.json ] && python3 ../../engine/canopy.py toronto   # after profiles: tree canopy per unit (fetch-canopy.yml)
 python3 ../../engine/facts.py toronto   # after profiles: what makes each unit stand out
 python3 ../../engine/skyscrapers.py toronto   # towers 150 m+ from raw/skyscrapers/wiki.json (fetch-skyscrapers.yml)
 python3 heritage.py

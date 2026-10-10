@@ -20,7 +20,7 @@
     {"name": "Lake Ontario", "at": [43.585, -79.40], "cls": "lake-near"},
     {"name": "Lake Ontario", "at": [43.45, -78.75], "cls": "lake-far"}
   ],
-  "attribution": "Boundaries & streets: City of Toronto Open Data · Ridings: Elections Canada / Elections Ontario via Open North · Transit: TTC GTFS · GO Transit: Metrolinx Open Data · Neighbouring municipalities & address search: © OpenStreetMap contributors via Nominatim · Skyscrapers: Wikipedia (CC BY-SA)",
+  "attribution": "Boundaries & streets: City of Toronto Open Data · Ridings: Elections Canada / Elections Ontario via Open North · Transit: TTC GTFS · GO Transit: Metrolinx Open Data · Neighbouring municipalities & address search: © OpenStreetMap contributors via Nominatim · Skyscrapers: Wikipedia (CC BY-SA) · Tree cover: ESA WorldCover 2021 (CC BY 4.0)",
   "example": {"at": [43.67194, -79.38667], "name": "Toronto Reference Library (example)"},
 
   "search": {
@@ -114,6 +114,10 @@
       {"id": "tenure", "short": "Renters & owners", "key": "tenure",
        "tiers": [["owners", "Mostly owners", "--ten-1"], ["mix", "A mix", "--ten-2"], ["renters", "Mostly renters", "--ten-3"]],
        "note": "Share of households that rent: under 35%, 35–60%, over 60%."},
+      {"id": "canopy", "short": "Tree canopy", "key": "canopyBand", "optional": true,
+       "tiers": [["c1", "Under 15%", "--can-1"], ["c2", "15–30%", "--can-2"], ["c3", "30–45%", "--can-3"], ["c4", "45% or more", "--can-4"]],
+       "note": "Share of the land under tree cover, water left out, from ESA WorldCover 2021, a 10 m satellite land-cover map. Citywide 30%, in line with the City's 2018 Tree Canopy Study (28–31%).",
+       "source": "ESA WorldCover 2021 (CC BY 4.0)."},
       {"id": "union", "short": "To Union", "key": "unionBand", "minutes": "union", "optional": true,
        "tiers": [["under30", "Under 30 min", "--uni-1"], ["30to45", "30–45 min", "--uni-2"], ["45to60", "45–60 min", "--uni-3"], ["over60", "Over an hour", "--uni-4"]],
        "note": "Typical transit trip to Union Station leaving 8–9 am on a weekday, walking to the stop included (TTC, GO and UP Express schedules). Median across each neighbourhood.",
@@ -174,6 +178,7 @@
       "homes": {"label": "Home types", "types": [["detached", "Detached"], ["attached", "Semi & row"], ["lowrise", "Low-rise"], ["tower", "Towers"]]},
       "built": {"label": "Built", "bands": ["1960 or before", "1961–80", "1981–2000", "2001–21"]},
       "lang": {"label": "Language at home", "floor": 5, "note": "The language each person speaks most often at home.[ Another {multi}% name two or more equally.]"},
+      "canopy": {"label": "Tree canopy", "text": "{pct}% of the land is under trees", "caveat": "Satellite land cover, 2021 (ESA WorldCover, 10 m)."},
       "ages": {"label": "Ages", "bands": ["Under 15", "15–24", "25–44", "45–64", "65+"]},
       "recent": {"label": "Recent immigrants", "text": "{pct}% arrived in Canada 2016–21", "caveat": "Share of residents who immigrated in the five years before the 2021 Census."}
     },
