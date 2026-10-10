@@ -2,6 +2,18 @@
 
 ## Since 1.1
 
+### Toronto
+- **GO buses** (October 11): a new toggle under GO Transit trains draws GO's regional bus routes, in a
+  dark GO green, numbered "GO 41" so they never mix with TTC route 41. The regional view shows the whole
+  network (Hamilton, Niagara, Guelph, Peterborough…); the city view shows only the routes that stop in
+  Toronto, numbered where they run inside it, with the rest fading under the region. Stops from zoom 12.
+  The What's here card's Transit nearby gains a GO buses row, search finds "GO 41", and any GO route can
+  be picked or tapped to see it alone, like a TTC route. Read weekly from Metrolinx's GO GTFS alongside
+  the TTC's (a second feed in `surface.json`; `engine/fetch_surface.py toronto go`).
+  For the iOS app: `transit.json` routes with `m: "go"` (prefixed `r`, `f: []`, `in`), top-level
+  `feeds`, the `regional` layer kind, a third Transit nearby row; contract sections 3, 4, 5. Additive,
+  schema stays 1.
+
 ### Both cities
 - **Use my location** (October 11): on phones, a button in the search bar finds the phone, pins it (in blue,
   with an accuracy ring when it's rough) and opens the What's here card there. All lookups run in the

@@ -13,6 +13,11 @@ Families, all described from the schedule, never ranked (thresholds in cities/<c
   - night: at least one trip each way in every hour from 2 to 4 am on a weekday night;
   - reg: every other route with daytime service (neither frequent nor express), e.g. community and branch routes.
 
+Other agencies listed under "feeds" in surface.json (fetched into raw/surface/<feed>/, e.g. Toronto's GO
+buses) join the same files with their own mode (e.g. "go") and no families: the families describe the city's
+own network. Their routes carry "in": true when one of their stops is inside the city (the footprint layer), so
+the city view can show only those.
+
 Usage: python3 engine/surface.py <city>
 """
 import json, os, re, sys
@@ -104,6 +109,38 @@ idx = {e['r']: i for i, e in enumerate(routes)}
 stops = [[s[2], s[3], s[1], [idx[x] for x in s[4] if x in idx]] for s in S['stops']]
 stops = [s for s in stops if s[3]]
 
+# Other agencies (surface.json "feeds"): same shapes and midday waits, no families.
+city_cfg = json.load(open(os.path.join(ROOT, 'cities', city, 'city.json')))
+foot = None
+fp = os.path.join(OUT, city_cfg.get('footprint', '') + '.geojson')
+if os.path.exists(fp):
+    from shapely.geometry import shape, Point
+    from shapely.prepared import prep
+    foot = prep(unary_union([shape(f['geometry']).buffer(0) for f in json.load(open(fp))['features']]))
+feeds = {}
+for key, fc in CFG.get('feeds', {}).items():
+    d = os.path.join(RAW, key)
+    if not os.path.exists(os.path.join(d, 'routes.json')): print(f'  feed {key}: not fetched yet'); continue
+    FR, FS = json.load(open(os.path.join(d, 'routes.json'))), json.load(open(os.path.join(d, 'stops.json')))
+    start = len(routes)
+    for r in FR['routes']:
+        g = geometry(r); minx, miny, maxx, maxy = g.bounds
+        entry = {'r': r['short'], 'n': r['long'], 'm': r['mode'], 'f': [], 'day': daytime(r), 'h': midday(r),
+                 'b': [round(minx, 4), round(miny, 4), round(maxx, 4), round(maxy, 4)]}
+        routes.append(entry)
+        feats.append({'type': 'Feature', 'properties': {k: entry[k] for k in ('r', 'n', 'm', 'f', 'day', 'h')}, 'geometry': mapping(g)})
+    idx = {e['r']: i for i, e in enumerate(routes)}
+    inside = set()
+    for s in FS['stops']:
+        ri = [idx[x] for x in s[4] if x in idx and idx[x] >= start]
+        if not ri: continue
+        stops.append([s[2], s[3], s[1], ri])
+        if foot and foot.contains(Point(s[2], s[3])): inside.update(ri)
+    for i in range(start, len(routes)):
+        if i in inside: routes[i]['in'] = True; feats[i]['properties']['in'] = True
+    feeds[key] = {'asof': FR['fetched'], 'week': FR['week'], 'routes': len(routes) - start, 'in': len(inside)}
+    print(f'  feed {key}: {len(routes) - start} routes, {len(inside)} with a stop in the city · week of {FR["week"]}')
+
 
 def dump(name, fc):
     path = os.path.join(OUT, name)
@@ -111,7 +148,7 @@ def dump(name, fc):
     print(f'  {name}: {len(fc.get("features", fc.get("routes", [])))} · {os.path.getsize(path) // 1024} KB')
 
 
-meta = {'asof': R['fetched'], 'week': R['week']}
+meta = dict({'asof': R['fetched'], 'week': R['week']}, **({'feeds': feeds} if feeds else {}))
 dump('transit_routes.geojson', dict(meta, type='FeatureCollection', features=feats))
 if cars: dump('streetcars.geojson', dict(meta, type='FeatureCollection', features=cars))
 dump('transit.json', dict(meta, routes=routes, stops=stops))

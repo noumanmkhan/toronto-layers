@@ -20,7 +20,7 @@
     {"name": "Lake Ontario", "at": [43.585, -79.40], "cls": "lake-near"},
     {"name": "Lake Ontario", "at": [43.45, -78.75], "cls": "lake-far"}
   ],
-  "attribution": "Boundaries & streets: City of Toronto Open Data · Ridings: Elections Canada / Elections Ontario via Open North · Transit: TTC GTFS · Neighbouring municipalities & address search: © OpenStreetMap contributors via Nominatim · Skyscrapers: Wikipedia (CC BY-SA)",
+  "attribution": "Boundaries & streets: City of Toronto Open Data · Ridings: Elections Canada / Elections Ontario via Open North · Transit: TTC GTFS · GO Transit: Metrolinx Open Data · Neighbouring municipalities & address search: © OpenStreetMap contributors via Nominatim · Skyscrapers: Wikipedia (CC BY-SA)",
   "example": {"at": [43.67194, -79.38667], "name": "Toronto Reference Library (example)"},
 
   "search": {
@@ -83,6 +83,8 @@
        "repeat": {"401": [0.15, 0.5, 0.85]}, "tollShield": "407 ETR"},
       {"id": "go", "kind": "rail", "files": ["go_lines", "go_stations", "go_lines_416"], "name": "GO Transit trains", "note": "7 GO lines and UP Express to Pearson", "on": true,
        "hover": "{name} line · Union – {to}", "lineHover": {"UP": "{name} (Union – Pearson)"}},
+      {"id": "gobus", "kind": "regional", "mode": "go", "under": "go", "file": "transit_routes", "lazy": true, "stopZoom": 12, "name": "GO buses",
+       "note": "Regional routes across the GTA and beyond; in the city view, the ones that stop in Toronto. Stops from zoom 12"},
       {"id": "subway", "kind": "metro", "files": ["subway_lines", "subway_stations"], "name": "Subway & LRT", "note": "Lines 1, 2, 4, 5 and 6", "on": true,
        "stationHover": "{name} · Line {lines}", "sub": {"id": "stnNames", "label": "Show station names", "on": true}},
       {"id": "tram", "kind": "streetcars", "file": "streetcars", "name": "Streetcars", "note": "11 routes, numbered along the line; stops from zoom 15"},
@@ -156,11 +158,11 @@
     "transit": {
       "file": "transit.json", "routes": "transit_routes", "title": "Transit nearby", "radius": 400,
       "station": "Nearest station", "stationSub": "Line {lines} · {dist} away",
-      "rows": [["tram", "Streetcars", true], ["bus", "Buses", false]],
+      "rows": [["tram", "Streetcars", true], ["bus", "Buses", false], ["go", "GO buses", false]],
       "night": "Overnight", "stop": "Nearest stop", "none": "No stop within 400 m",
       "every": "about every {h} min on weekday middays", "nightOnly": "overnight only",
-      "kinds": {"tram": "Streetcar route", "bus": "Bus route"},
-      "note": "Routes with a stop within 400 m, about a 5-minute walk. Filled numbers come every 10 minutes or better on weekdays. Tap a number to draw the route. TTC schedules, week of {week}."
+      "kinds": {"tram": "Streetcar route", "bus": "Bus route", "go": "GO bus route"},
+      "note": "Routes with a stop within 400 m, about a 5-minute walk. Filled numbers come every 10 minutes or better on weekdays. Tap a number to draw the route. TTC and GO schedules, week of {week}."
     },
     "nearby": {
       "file": "nearby.json", "radius": 1000,

@@ -14,19 +14,29 @@ Per stop: id, name, position and the route numbers that serve it during that wee
 
 When the downloaded feed is the one already fetched (same checksum), nothing is written.
 
-Usage: python3 engine/fetch_surface.py <city>
+A city can list more agencies under "feeds" in surface.json (e.g. Toronto's GO buses). Each is fetched on its
+own into cities/<city>/raw/surface/<feed>/, with its own options: "types" (which of tram/bus to keep), "mode"
+(the mode written for every route, e.g. "go"), "prefix" (put before each route number, so GO 41 doesn't
+collide with TTC 41) and "simplify" (shape tolerance in degrees; long regional routes can take more).
+
+Usage: python3 engine/fetch_surface.py <city> [feed]
 """
 import collections, csv, datetime as dt, hashlib, io, json, os, sys, time, urllib.request, zipfile
 from shapely.geometry import LineString
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 city = sys.argv[1]
+FEED = sys.argv[2] if len(sys.argv) > 2 else None
 CFG = json.load(open(os.path.join(ROOT, 'cities', city, 'surface.json')))
-OUT = os.path.join(ROOT, 'cities', city, 'raw', 'surface')
-WORK = os.path.join(ROOT, 'cities', city, 'tmp', 'surface')
+if FEED: CFG = CFG['feeds'][FEED]
+OUT = os.path.join(ROOT, 'cities', city, 'raw', 'surface', *([FEED] if FEED else []))
+WORK = os.path.join(ROOT, 'cities', city, 'tmp', 'surface', *([FEED] if FEED else []))
 os.makedirs(OUT, exist_ok=True); os.makedirs(WORK, exist_ok=True)
 UA = {'User-Agent': 'city-layers-pipeline (github.com/noumanmkhan/city-layers)'}
 SKIP = set(CFG.get('skip', []))
+TYPES = set(CFG.get('types', ['tram', 'bus']))
+PREFIX = CFG.get('prefix', '')
+TOL = CFG.get('simplify', 0.00005)
 
 
 def download(url, path, tries=4):
@@ -91,8 +101,8 @@ routes = {}
 for r in rows('routes.txt'):
     m = mode(r.get('route_type'))
     short = r.get('route_short_name') or r['route_id']
-    if not m or short in SKIP: continue
-    routes[r['route_id']] = {'id': r['route_id'], 'short': short, 'long': r.get('route_long_name', ''), 'mode': m,
+    if not m or m not in TYPES or short in SKIP: continue
+    routes[r['route_id']] = {'id': r['route_id'], 'short': PREFIX + short, 'long': r.get('route_long_name', ''), 'mode': CFG.get('mode', m),
                              'color': r.get('route_color', ''), 'text': r.get('route_text_color', '')}
 print('routes kept:', len(routes))
 
@@ -163,7 +173,7 @@ for r in rows('shapes.txt'):
 def line(sh):
     p = [(x, y) for _, x, y in sorted(pts.get(sh, []))]
     if len(p) < 2: return None
-    s = LineString(p).simplify(0.00005)
+    s = LineString(p).simplify(TOL)
     return [[round(x, 5), round(y, 5)] for x, y in s.coords]
 
 out_routes = []

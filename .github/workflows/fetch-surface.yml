@@ -1,5 +1,6 @@
 name: Fetch streetcar and bus routes
-# Downloads each city's agency GTFS (cities/<city>/surface.json). When the feed has changed since the
+# Downloads each city's agency GTFS (cities/<city>/surface.json), and any other agencies it lists under
+# "feeds" (Toronto: GO buses). When the feed has changed since the
 # last run, rewrites cities/<city>/raw/surface/ (routes, stops, trips-per-hour counts), rebuilds the
 # published transit files with engine/surface.py (docs/<city>/data/transit.json, transit_routes.geojson,
 # streetcars.geojson) and commits both to main, so the site picks up new schedules without a manual
@@ -26,19 +27,19 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install shapely
-      - name: Fetch, and rebuild where the feed changed
+      - name: Fetch, and rebuild where a feed changed
         run: |
           for c in toronto chicago; do
-            mkdir -p cities/$c/raw/surface
-            python3 -u engine/fetch_surface.py $c 2>&1 | tee /tmp/fetch-$c.log || true
-            # A new feed: keep its log and rebuild. Otherwise rebuild only on a push or a run by hand (the
-            # build script may have changed); the log of the last real fetch stays.
-            if ! git diff --quiet -- cities/$c/raw/surface/routes.json; then
-              cp /tmp/fetch-$c.log cities/$c/raw/surface/fetch.log
-              python3 -u engine/surface.py $c
-            elif [ "${{ github.event_name }}" != "schedule" ]; then
-              python3 -u engine/surface.py $c
-            fi
+            changed=
+            # The city's own agency, then any others listed under "feeds" in its surface.json (e.g. GO buses).
+            for f in "" $(python3 -c "import json; print(' '.join(json.load(open('cities/$c/surface.json')).get('feeds', {})))"); do
+              d=cities/$c/raw/surface${f:+/$f}; mkdir -p $d
+              python3 -u engine/fetch_surface.py $c $f 2>&1 | tee /tmp/fetch-$c-$f.log || true
+              # A new feed (changed or first fetched): keep its log.
+              if [ -n "$(git status --porcelain -- $d/routes.json)" ]; then cp /tmp/fetch-$c-$f.log $d/fetch.log; changed=1; fi
+            done
+            # Rebuild when a feed changed; otherwise only on a push or a run by hand (the build may have changed).
+            if [ -n "$changed" ] || [ "${{ github.event_name }}" != "schedule" ]; then python3 -u engine/surface.py $c; fi
           done
       - run: |
           git config user.name "github-actions[bot]"

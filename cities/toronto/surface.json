@@ -1,5 +1,14 @@
 {
-  "_about": "Streetcars and buses (engine/fetch_surface.py, engine/surface.py). 'gtfs' says where the agency's schedule comes from: a CKAN package (ckan) or a direct zip (url). 'skip' lists route numbers already drawn by another layer (Subway & LRT).",
+  "_about": "Streetcars and buses (engine/fetch_surface.py, engine/surface.py). 'gtfs' says where the agency's schedule comes from: a CKAN package (ckan) or a direct zip (url). 'skip' lists route numbers already drawn by another layer (Subway & LRT). 'feeds' adds other agencies, each fetched into raw/surface/<feed>/: GO buses keep their own mode ('go') and a 'GO ' prefix so GO 41 never collides with TTC 41; they get no families (frequent, express...), which describe the TTC network.",
   "gtfs": {"ckan": "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=ttc-routes-and-schedules"},
-  "skip": ["1", "2", "3", "4", "5", "6"]
+  "skip": ["1", "2", "3", "4", "5", "6"],
+  "feeds": {
+    "go": {
+      "gtfs": {"url": "https://assets.metrolinx.com/raw/upload/Documents/Metrolinx/Open%20Data/GO-GTFS.zip"},
+      "types": ["bus"],
+      "mode": "go",
+      "prefix": "GO ",
+      "simplify": 0.00012
+    }
+  }
 }
