@@ -1,0 +1,169 @@
+chicago 77 units, bounds -87.94 41.645 -87.524 42.023
+  got https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N39W090_Map.tif 71 MB
+  got https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N42W090_Map.tif 88 MB
+  $ gdalbuildvrt -overwrite /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/wc.vrt /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/ESA_WorldCover_10m_2021_v200_N39W090_Map.tif /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/ESA_WorldCover_10m_2
+0...10...20...30...40...50...60...70...80...90...100 - done.
+
+  $ gdalwarp -overwrite -te -87.95011000000001 41.63454 -87.51446999999999 42.03304 -r near -co COMPRESS=DEFLATE /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/wc.vrt /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/worldcover_clip.tif
+Copying color table from /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/wc.vrt to new file.
+Creating output file that is 5228P x 4782L.
+Processing /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/wc.vrt [1/1] : 0Using internal nodata values (e.g. 0) for image /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/wc.vrt.
+Copying nodata values from source /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/wc.vrt to destination /home/runner/work/city-layers/city-layers/cities/chicago/tmp/canopy/worldcover_clip.tif.
+...10...20...30...40...50...60...70...80...90...100 - done.
+
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+/home/runner/work/city-layers/city-layers/engine/fetch_canopy.py:73: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  gg = stransform(to, g)
+worldcover citywide canopy 15.5 % · units with a value 77
+using worldcover
