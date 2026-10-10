@@ -131,7 +131,8 @@ How the website's search does it, for an app that wants to match:
 - A `buses` layer (id `bus`, file `transit_routes`, `lazy: true`: load it only when needed) draws the
   routes in the families picked: `families` lists `[id, short, note]` (`freq`, `exp`, `reg`, `night`), the
   first being the default. Any mix may be on except the ids in `solo` (`["night"]`), which show alone.
-  `allText` labels a chip that turns every non-solo family on (`allNote` is the note then); tapping one
+  `allText` labels a chip that turns every non-solo family on (`allNote` is the note then); `default`
+  (`"all"` or a family id) is what the layer starts with, both cities `"all"`; tapping one
   family while all are on narrows to that one. When a
   city has a `streetcars` layer, daytime streetcar routes (`m: "tram"`, `day: true`) are left to that
   layer; streetcars that run only overnight show in `night`. Routes are drawn in their mode's colour

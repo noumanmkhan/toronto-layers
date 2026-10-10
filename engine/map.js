@@ -537,12 +537,16 @@ const picked = new Set();
 /* Bus families on show: any mix of the combinable ones (frequent, express), or one listed in the layer's
    "solo" (overnight) on its own. Daytime streetcars stay on the Streetcars layer, so turning that off
    clears them; streetcars that run only overnight show in the overnight family. */
-const BUS_DEFAULT = BUSES ? [BUSES.families[0][0]] : [];
-const busFams = new Set(BUS_DEFAULT);
-let routeGeo = null, routeGeoP = null;
-const busShows = r => [...busFams].some(k => r.f.includes(k)) && (!TRAMS || r.m !== 'tram' || r.day === false);
 // The families that can be combined (all but the solo ones); "All" means every one of them is on.
 const COMBO = BUSES ? BUSES.families.map(f => f[0]).filter(k => !(BUSES.solo || []).includes(k)) : [];
+// What the layer starts with: "all" (every combinable family) or a family id; the first family otherwise.
+const BUS_DEFAULT = !BUSES ? [] : BUSES.default === 'all' ? COMBO.slice() : [BUSES.default || BUSES.families[0][0]];
+const busFams = new Set(BUS_DEFAULT);
+let routeGeo = null, routeGeoP = null;
+// "reg" is worked out here too (daytime, neither frequent nor express), so a browser still holding route
+// data cached from before the family existed shows the right routes.
+const inFam = (r, k) => r.f.includes(k) || (k === 'reg' && r.day !== false && !r.f.includes('freq') && !r.f.includes('exp'));
+const busShows = r => [...busFams].some(k => inFam(r, k)) && (!TRAMS || r.m !== 'tram' || r.day === false);
 const allOn = () => COMBO.length > 1 && COMBO.every(k => busFams.has(k));
 const busKey = () => !BUSES ? '' : allOn() ? 'all' : BUSES.families.map(f => f[0]).filter(k => busFams.has(k)).join('+');
 function ensureRoutes(){
@@ -1553,7 +1557,7 @@ function linkState(){
   if (fit.length) parts.push(['fit', fit.join(',')]);
   const brd = BOARDS.filter(it => state[it.id] && boardPick[it.id] !== it.boards[0][0]).map(it => it.id + ':' + boardPick[it.id]);
   if (brd.length) parts.push(['board', brd.join(',')]);
-  if (BUSES && state[BUSES.id] && busKey() !== BUS_DEFAULT.join('+')) parts.push(['bus', busKey()]);
+  if (BUSES && state[BUSES.id] && busKey() !== (BUSES.default === 'all' ? 'all' : BUS_DEFAULT.join('+'))) parts.push(['bus', busKey()]);
   if (picked.size) parts.push(['routes', [...picked].join(',')]);
   return parts.map(([k, v]) => k + '=' + enc(v)).join('&');
 }
