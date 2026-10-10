@@ -78,6 +78,7 @@
     ["Getting around", [
       {"id": "streets", "kind": "streets", "file": "streets", "name": "Main streets", "note": "Arterials like King, Queen, Eglinton, Don Mills", "on": true},
       {"id": "coll", "kind": "streets", "file": "collectors", "under": "streets", "labelZoom": 15, "yieldLabels": true, "name": "Collector streets", "note": "Collector roads like Dovercourt, Greenwood, Davisville; from zoom 13"},
+      {"id": "addr", "kind": "addresses", "under": "streets", "file": "addresses", "name": "Yonge: East and West", "note": "Yonge splits the streets that cross it into East and West, numbered up from Yonge", "eastText": "East", "westText": "West"},
       {"id": "hwy", "kind": "highways", "files": ["highways", "gta_highways", "gta_shields"], "name": "Highways", "note": "400-series, QEW, 407 ETR across the GTA; DVP, Gardiner, Allen", "on": true,
        "shields": {"401": "401", "400": "400", "404": "404", "409": "409", "427": "427", "QEW": "QEW", "2A": "2A", "DVP": "DVP", "Gardiner": "Gardiner", "Allen": "Allen Rd"},
        "repeat": {"401": [0.15, 0.5, 0.85]}, "tollShield": "407 ETR"},
@@ -134,11 +135,13 @@
       {"layer": "bia", "text": "{name} BIA", "color": "--bia"},
       {"layer": "fed", "text": "Votes in {name}", "color": "--fed"}
     ],
+    "address": {"label": "Address", "east": "East of Yonge", "west": "West of Yonge", "example": {"e": "Queen St E", "w": "Queen St W"}, "sub": "Streets that cross Yonge take E or W ({street}) and count up away from Yonge; north–south streets count up from their south end."},
     "facts": [
       {"label": "Former city", "layer": "boroughs", "text": "{name}"},
       {"label": "Area", "layer": "areas", "text": "{name}", "empty": "Outside Old Toronto", "emptyWithin": {"boroughs": "Old Toronto"}},
       {"label": "Neighbourhood", "layer": "nbhd", "text": "{name} (#{code})"},
       {"label": "Known as", "knownas": true},
+      {"label": "Address", "address": true},
       {"label": "Heritage district", "layer": "heritage", "text": "{name}[ (designated {since})]", "onlyInside": true},
       {"label": "BIA", "layer": "bia", "text": "{name}[ (since {since})]", "empty": "None"},
       {"label": "City ward", "layer": "wards", "text": "Ward {num} · {name}"},

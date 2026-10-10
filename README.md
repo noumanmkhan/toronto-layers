@@ -36,6 +36,7 @@ Toronto's geography is described in several overlapping ways at once. A single a
 | Neighbourhood lens | 158 | Housing cost, time to Union,<br>getting to work, renters and owners,<br>housing type |
 | Main streets | 321 streets | Major and minor arterials<br>(King, Queen, Eglinton…), named along the line |
 | Collector streets | 989 streets | The tier below (Dovercourt, Greenwood…),<br>from zoom 13; most non-arterial bus streets |
+| Yonge: East and West | 43 streets | Yonge and the streets it splits<br>into East and West |
 | Highways | 10 in Toronto,<br>14 across the GTA | 400-series, QEW, 407 ETR,<br>DVP, Gardiner, Allen Rd |
 | Subway & LRT | 5 lines | Lines 1, 2, 4, 5, 6 with station names |
 | Streetcars | 11 routes | Numbered along the line;<br>stops when zoomed in |
@@ -82,6 +83,8 @@ Toronto's geography is described in several overlapping ways at once. A single a
 **Use my location:** on a phone, the target button beside Find pins where you are and opens the card for that spot. Everything is worked out in the browser, so your position never leaves the phone, and it's kept out of shared links.
 
 **Images for sharing:** the Image button saves the map as a picture in four shapes: wide 4K, or square, portrait and story sizes for Instagram. Focused on a neighbourhood, the picture frames it and carries its name as a title, which makes a ready-made post.
+
+**How addresses work:** a toggle under Main streets explains each city's addresses. In Chicago (*Address grid*) State and Madison are drawn as the zero lines and every mile line is dashed and numbered (800 N, 1600 N, 2400 N…; Halsted 800 W, Ashland 1600 W…), and the What's here card reads a spot's numbers off the grid ("About 2400 N · 1200 W"). Toronto has no grid: *Yonge: East and West* draws Yonge and tints the streets it splits, East in teal and West in orange, and the card says which side a spot is on with a nearby example ("East of Yonge… Wellesley St E"), plus how numbers run.
 
 **Compare two places:** *Compare with another place* on the What's here card, then tap the map or search, and the card widens into one table: every row of the card (boundaries, Living here, schools, transit nearby, Nearby, representatives) with its label above the two places' values, A on the left and B on the right, pinned on the map in purple and orange. It works across the city limits too (Cabbagetown against Square One). Nothing is marked better or worse; it only lines the descriptions up. Tap elsewhere to swap the second place, × to drop either one, and a shared link keeps both.
 
@@ -140,6 +143,7 @@ The second city runs on the same engine with its own data and config (`cities/ch
 | Skyscrapers | 139 | Every building 150 m (about 490 ft)<br>and taller; 7 supertall, 1 under construction |
 | Expressways | 11 in Chicago | Kennedy, Dan Ryan, Eisenhower,<br>Stevenson, Lake Shore Drive |
 | Collector streets | 272 streets | OpenStreetMap tertiary roads,<br>from zoom 13 |
+| Address grid | 2 baselines,<br>36 mile lines | State & Madison = 0;<br>800 numbers a mile |
 | Metra | 11 lines | From four downtown terminals |
 | The 'L' | 8 lines, 144 stations | CTA rapid transit |
 | Bus routes | 124 routes,<br>by family | All, frequent, express, regular<br>or overnight; any route on demand |

@@ -1,0 +1,20 @@
+{
+  "_about": "How addresses work (engine/addresses.py): Chicago's grid. State St and Madison St are 0; 'ns' lists east-west streets on each mile line north and south of Madison, 'ew' the north-south streets on each mile line east and west of State, with the address number each one carries. Most miles are 800 numbers; the first mile south of Madison is 1,200 (Roosevelt Rd is 1200 S).",
+  "type": "grid",
+  "origin": {"ns": "Madison St", "ew": "State St"},
+  "ns": [
+    ["Chicago Ave", 800, "N"], ["North Ave", 1600, "N"], ["Fullerton Ave", 2400, "N"], ["Belmont Ave", 3200, "N"],
+    ["Irving Park Rd", 4000, "N"], ["Lawrence Ave", 4800, "N"], ["Bryn Mawr Ave", 5600, "N"], ["Devon Ave", 6400, "N"],
+    ["Touhy Ave", 7200, "N"],
+    ["Roosevelt Rd", 1200, "S"], ["Cermak Rd", 2200, "S"], ["31st St", 3100, "S"], ["Pershing Rd", 3900, "S"],
+    ["47th St", 4700, "S"], ["55th St", 5500, "S"], ["63rd St", 6300, "S"], ["71st St", 7100, "S"], ["79th St", 7900, "S"],
+    ["87th St", 8700, "S"], ["95th St", 9500, "S"], ["103rd St", 10300, "S"], ["111th St", 11100, "S"], ["119th St", 11900, "S"],
+    ["127th St", 12700, "S"]
+  ],
+  "ew": [
+    ["Halsted St", 800, "W"], ["Ashland Ave", 1600, "W"], ["Western Ave", 2400, "W"], ["Kedzie Ave", 3200, "W"],
+    ["Pulaski Rd", 4000, "W"], ["Cicero Ave", 4800, "W"], ["Central Ave", 5600, "W"], ["Narragansett Ave", 6400, "W"],
+    ["Harlem Ave", 7200, "W"],
+    ["Cottage Grove Ave", 800, "E"], ["Stony Island Ave", 1600, "E"], ["Yates Blvd", 2400, "E"]
+  ]
+}

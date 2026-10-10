@@ -3,6 +3,14 @@
 ## Since 1.1
 
 ### Both cities
+- **How addresses work** (October 11): a toggle under Main streets. Chicago's *Address grid* draws State
+  and Madison as the zero lines and every mile line (800 N … 7200 N, 1200 S … 12700 S, 800 W … 7200 W,
+  800 E … 2400 E), each numbered; Toronto's *Yonge: East and West* draws Yonge and tints the 43 drawn streets
+  it splits (East teal, West orange). The What's here card gains an Address row: Chicago reads the spot's
+  numbers off the grid ("About 1500 N · 2100 W"), Toronto says which side of Yonge and names a nearby E/W
+  street. Built by `engine/addresses.py` from each city's street files and `cities/<city>/addresses.json`
+  (in run.sh). For the iOS app: new file `addresses.geojson`, layer kind `addresses`, `card.address` and
+  the `address` fact row; contract sections 3, 4, 5. Additive, schema stays 1.
 - **Compare two places** (October 11): *Compare with another place* on the What's here card, then tap the
   map or search for a second spot. The card widens (on desktop) into one table: each of the card's rows,
   its label above the two places' values (A left, B right), section by section, with a dash where one

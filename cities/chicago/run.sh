@@ -31,5 +31,6 @@ python3 ../../engine/regions.py chicago   # outlines for Focus on a county / reg
 [ -f raw/construction/osm.json ] && python3 ../../engine/construction.py chicago   # after streets: lines being built (fetch-construction.yml)
 [ -f raw/closures/permits.json ] && python3 ../../engine/closures.py chicago       # after construction: closures from that work (fetch-closures.yml, daily)
 [ -f raw/surface/routes.json ] && python3 ../../engine/surface.py chicago       # streetcars and buses from the agency GTFS (fetch-surface.yml)
+python3 ../../engine/addresses.py chicago   # after streets and collectors: how addresses work (cities/chicago/addresses.json)
 python3 ../../engine/assemble.py chicago
 echo "Done. Preview: cd docs && python3 -m http.server 8000"

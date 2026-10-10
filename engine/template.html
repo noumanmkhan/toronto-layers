@@ -19,7 +19,7 @@
   --nbhd:#3D4148; --nbhd-fill:#3D4148; --ward:#7A3EC8; --prov:#B0306A; --fed:#1F6FB8; --bia:#E0791A; --hd:#7B5B3A; --sbw:#0E7F6E; --cult:#23262B; --cult-enclave:#B0306A;
   /* transport */
   --st:#FFFFFF; --st-case:#BDB9AE; --hwy:#F7C548; --hwy-case:#3B3F45; --hwy-city:#B6B9BF; --shield:#F7C548; --shield-ink:#1E2126; --shield-city:#2E6B3A;
-  --station:#FFFFFF; --cl-closed:#D3263A; --cl-narrow:#E08A00; --tram:#D7261E; --cmp-b:#D9731A; --bus:#2F5FC4;
+  --station:#FFFFFF; --cl-closed:#D3263A; --cl-narrow:#E08A00; --tram:#D7261E; --cmp-b:#D9731A; --ag:#A8406A; --ag-e:#16807F; --ag-w:#C2681A; --bus:#2F5FC4;
   --pill-bg:#F1EFE8;
   --cost-1:#F3E3B3; --cost-2:#E2A64B; --cost-3:#A85A1E; --hty-1:#E6EEF4; --hty-2:#A9C6DE; --hty-3:#5B90BE; --hty-4:#24588A; --mix-1:#C9D9E8; --mix-2:#8AB0D2; --mix-3:#4F82B4; --mix-4:#24588A;
   --com-1:#2E9C8F; --com-2:#C9CDD3; --com-3:#D9894A;
@@ -33,7 +33,7 @@
   --shadow:0 1px 2px rgba(20,22,26,.08),0 8px 24px rgba(20,22,26,.10);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --tram:#F0574D; --cmp-b:#F29A4A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
+  --tram:#F0574D; --cmp-b:#F29A4A; --ag:#F08AAE; --ag-e:#5CC9C9; --ag-w:#F2A65A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
   --water:#13283A; --land-out:#24272D; --land-out-line:#3E434B; --land-far:#1A1C20; --city:#2A2D33; --city-line:#C9CCD2; --muni-label:#7E838B;
   --nbhd:#D7DADF; --nbhd-fill:#D7DADF; --ward:#B892F0; --prov:#F07AAE; --fed:#6CB2FF; --bia:#F39A45; --hd:#D2A877; --sbw:#4CC4AE; --in-university:#5FA8F5; --in-college:#E0A040; --in-hospital:#F06262; --cult:#ECEDEF; --cult-enclave:#F07AAE;
   --tw-res:#3CC2B0; --tw-com:#86A3EE; --tw-mix:#C08BE6; --tw-sup:#E8C547;
@@ -43,7 +43,7 @@
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --tram:#F0574D; --cmp-b:#F29A4A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
+  --tram:#F0574D; --cmp-b:#F29A4A; --ag:#F08AAE; --ag-e:#5CC9C9; --ag-w:#F2A65A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
   --water:#13283A; --land-out:#24272D; --land-out-line:#3E434B; --land-far:#1A1C20; --city:#2A2D33; --city-line:#C9CCD2; --muni-label:#7E838B;
   --nbhd:#D7DADF; --nbhd-fill:#D7DADF; --ward:#B892F0; --prov:#F07AAE; --fed:#6CB2FF; --bia:#F39A45; --hd:#D2A877; --sbw:#4CC4AE; --in-university:#5FA8F5; --in-college:#E0A040; --in-hospital:#F06262; --cult:#ECEDEF; --cult-enclave:#F07AAE;
   --tw-res:#3CC2B0; --tw-com:#86A3EE; --tw-mix:#C08BE6; --tw-sup:#E8C547;
@@ -532,6 +532,19 @@ dl.facts dd{margin:0;font-weight:500;min-width:0}
   .sec dl.facts,.live{padding-left:12px;padding-right:12px}
   .leaflet-top.leaflet-left{display:none}
 }
+/* ---------- How addresses work ---------- */
+.ag-line{fill:none;stroke:var(--ag);stroke-width:1.4;stroke-dasharray:5 5;opacity:.9}
+.ag-line.base{stroke-width:3.2;stroke-dasharray:none;opacity:1}
+.ag-divide{fill:none;stroke:var(--ag);stroke-width:4.5;stroke-linecap:round}
+.ag-e,.ag-w{fill:none;stroke-width:3;stroke-linecap:round;opacity:.9}
+.ag-e{stroke:var(--ag-e)} .ag-w{stroke:var(--ag-w)}
+#map.z14 .ag-e,#map.z14 .ag-w{stroke-width:4.5}
+.lbl-ag{font-size:10.5px;font-weight:700;color:var(--ag)!important;letter-spacing:.02em}
+.lbl-ag.base{font-size:11.5px}
+.lbl-ag.div{display:flex;align-items:center;gap:8px;font-size:11px}
+.lbl-ag.div i{font-style:normal;color:var(--ag-w)} .lbl-ag.div i:last-child{color:var(--ag-e)} .lbl-ag.div b{color:var(--ag)}
+.sw.k-addresses{background:var(--city) repeating-linear-gradient(90deg,var(--ag) 0 4px,transparent 4px 7px) 0 50%/100% 2px no-repeat}
+dl.facts dd span.ag-sub{display:block;font-weight:400;color:var(--ink-2);font-size:11.5px;margin-top:1px;line-height:1.4}
 /* ---------- Compare two places ---------- */
 .cmp-go{display:block;margin:0 16px 12px;font:inherit;font-size:12px;font-weight:600;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;background:none;color:var(--accent);cursor:pointer}
 .cmp-go:hover{border-color:var(--accent)}

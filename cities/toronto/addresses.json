@@ -1,0 +1,6 @@
+{
+  "_about": "How addresses work (engine/addresses.py): Toronto has no grid. Yonge St splits the streets that cross it into East and West (Bloor St E, Bloor St W), and their numbers count up going away from Yonge. North-south streets count up from their south end, often near the lake. The build marks Yonge and every drawn street named ... E or ... W.",
+  "type": "divide",
+  "street": "Yonge St",
+  "skip": ["Queen's Park Cres E", "Queen's Park Cres W"]
+}

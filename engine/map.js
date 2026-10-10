@@ -455,6 +455,43 @@ const KINDS = {
     g.on('add', () => ensureRoutes().then(() => { g._draw(); drawBusBox(); }));
     return g;
   },
+  // How addresses work (engine/addresses.py). A grid city: its baselines (0) bold and every mile line
+  // dashed, each labelled with its number (westmost or northmost end). A city split by one street: that
+  // street bold, and the streets it splits tinted East and West, with "West · East" marks along it.
+  addresses: (it, fc) => {
+    const g = L.layerGroup();
+    if (fc.kind === 'grid'){
+      const longest = {};
+      fc.features.forEach(f => {
+        const p = f.properties, c = f.geometry.coordinates;
+        const pl = L.polyline(c.map(ll), {pane:'civic', className: 'ag-line' + (p.role === 'base' ? ' base' : '')});
+        hoverTip(pl, esc(p.street) + ' · ' + esc(p.label));
+        pl.on('click', e => inspect(e.latlng));
+        g.addLayer(pl);
+        const k = p.axis + p.label, len = span(c);
+        if (!longest[k] || len > longest[k][1]) longest[k] = [f, len];
+      });
+      Object.values(longest).forEach(([f]) => {
+        const p = f.properties, c = f.geometry.coordinates;
+        const end = p.axis === 'ns' ? c.reduce((a, b) => b[0] < a[0] ? b : a) : c.reduce((a, b) => b[1] > a[1] ? b : a);
+        g.addLayer(L.tooltip({permanent:true, direction: p.axis === 'ns' ? 'right' : 'bottom', offset: p.axis === 'ns' ? [4, 0] : [0, 4], interactive:false,
+          className:'lbl lbl-ag' + (p.role === 'base' ? ' base' : '')}).setLatLng(ll(end)).setContent(esc(p.role === 'base' ? p.street + ' · 0' : p.label)));
+      });
+    } else {
+      fc.features.forEach(f => {
+        const p = f.properties;
+        const pl = L.polyline(f.geometry.coordinates.map(ll), {pane:'civic', className: 'ag-' + p.role});
+        hoverTip(pl, esc(p.street) + (p.role === 'divide' ? '' : ' · ' + esc(p.role === 'e' ? it.eastText : it.westText)));
+        pl.on('click', e => inspect(e.latlng));
+        g.addLayer(pl);
+      });
+      // "West · East" marks along the dividing street, at a few points spread along it.
+      const div = fc.features.filter(f => f.properties.role === 'divide').map(f => f.geometry.coordinates).reduce((a, b) => span(b) > span(a) ? b : a, []);
+      if (div.length > 1) [.12, .45, .8].forEach(t => g.addLayer(L.tooltip({permanent:true, direction:'center', interactive:false, className:'lbl lbl-ag div'})
+        .setLatLng(ll(along(div, t))).setContent('<i>' + esc(it.westText) + '</i><b>' + esc(fc.street) + '</b><i>' + esc(it.eastText) + '</i>')));
+    }
+    return g;
+  },
   // Another agency's buses (it.mode, e.g. GO): every route in the regional view; in the city view only the
   // routes with a stop in the city, numbered where they run inside it. Lines sit in the rail pane, under the
   // mask, so a route's stretch outside the city fades with the rest of the region. Shapes load on first use.
@@ -762,7 +799,7 @@ function transitHere(x, y){
   return '<div class="live transit"><dl>' + rows + '</dl><p>' + esc(fill(TR.note, {week: niceDate(T.week)})) + '</p></div>';
 }
 // Drawing order: the order layers join the map decides which sits on top within a pane.
-const RANK = it => ({fill: it.size === 'major' ? 0 : 1, lens: 2, suburbs: 2, patches: 3, districts: 3, units: 4, boards: 4.5, outline: {national: 5, state: 6, city: 7}[it.level], knownas: 8, streets: it.under ? 8.9 : 9, highways: 10, rail: 11, regional: 11.2, buses: 11.5, streetcars: 11.6, metro: 12, construction: 12.3, closures: 12.6, landmarks: 13, places: 14, towers: 14.5})[it.kind];
+const RANK = it => ({fill: it.size === 'major' ? 0 : 1, lens: 2, suburbs: 2, patches: 3, districts: 3, units: 4, boards: 4.5, outline: {national: 5, state: 6, city: 7}[it.level], knownas: 8, streets: it.under ? 8.9 : 9, highways: 10, addresses: 9.5, rail: 11, regional: 11.2, buses: 11.5, streetcars: 11.6, metro: 12, construction: 12.3, closures: 12.6, landmarks: 13, places: 14, towers: 14.5})[it.kind];
 const ORDER = LAYERS.map(it => it).sort((a, b) => RANK(a) - RANK(b));
 
 /* ---------- panel ---------- */
@@ -1192,6 +1229,7 @@ function cardOf(latlng, title, muniName){
     if (h) pills.push(['var(' + p.color + ')', fill(p.text, h.properties)]);
   });
   const facts = CITY.card.facts.filter(r => !r.onlyInside || hits[r.layer]).map(r => {
+    if (r.address) return addressRow(x, y);
     if (r.knownas) return [r.label, near.length ? near.map(a => a[0].properties.name).join(', ') : '—'];
     if (r.boards){ const it = LAYERS.find(l => l.id === r.boards), bh = hits[r.boards] || {};
       const t = it.boards.filter(([b]) => bh[b]).map(([b]) => fill(r.text, boardCtx(it, bh[b]))).join(' · ');
@@ -1210,12 +1248,51 @@ function cardOf(latlng, title, muniName){
   return {outside: false, x, y, hits, heading,
     pills: pills.map(p => '<span class="pill"><i style="background:' + p[0] + '"></i>' + esc(p[1]) + '</span>').join(''),
     focus: focusChips(hits), tower: towerCard(towerAt(x, y, title)), standout: standout(unit, heading),
-    sections: [['bounds', 'Boundaries', '<dl class="facts">' + facts.map(f => '<dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd>').join('') + '</dl>'],
+    sections: [['bounds', 'Boundaries', '<dl class="facts">' + facts.filter(Boolean).map(f => '<dt>' + f[0] + '</dt><dd>' + (f[2] ? f[1] : esc(f[1])) + '</dd>').join('') + '</dl>'],
                ['live', 'Living here', livingHere(unit)],
                ['schools', (CITY.card.schools && CITY.card.schools.title) || 'Schools', schools(x, y)],
                ['transit', (TR && TR.title) || 'Transit', transitHere(x, y)],
                ['near', 'Nearby', nearby(x, y)],
                ['reps', 'Representatives', representatives(hits)]]};
+}
+/* The card's address row (card.address in city.json; data from the addresses layer's file). A grid city:
+   the spot's address numbers, read off the mile lines ("About 2400 N · 1200 W"). A divided city: which
+   side of the dividing street the spot is on, with a nearby street that carries that side's E or W.
+   [label, html, true] (html), or null when there's nothing to say. */
+const ADDR = byKind('addresses');
+function addressRow(x, y){
+  const A = CITY.card.address, D = ADDR && loaded[ADDR.file];
+  if (!A || !D) return null;
+  if (D.kind === 'grid'){
+    // Piecewise-linear between the mile lines; past the last one, the last stretch's pace carries on.
+    const at = (pts, v) => {
+      let i = 1; while (i < pts.length - 1 && pts[i][0] < v) i++;
+      const [a, b] = [pts[i - 1], pts[i]];
+      return a[1] + (b[1] - a[1]) * (v - a[0]) / ((b[0] - a[0]) || 1);
+    };
+    const word = (n, pos, neg) => { const r = Math.round(n / 100) * 100; return r === 0 ? '0' : Math.abs(r) + ' ' + (r > 0 ? pos : neg); };
+    const ns = word(at(D.axes.ns, y), 'N', 'S'), ew = word(at(D.axes.ew, x), 'E', 'W');
+    return [A.label, esc(fill(A.grid, {ns, ew})) + (A.sub ? '<span class="ag-sub">' + esc(A.sub) + '</span>' : ''), true];
+  }
+  // Which side: the dividing street's longitude at this latitude (its nearest stretch if none spans it).
+  let best = null;
+  D.features.filter(f => f.properties.role === 'divide').forEach(f => {
+    const c = f.geometry.coordinates;
+    for (let i = 1; i < c.length; i++){
+      const [p, q] = [c[i - 1], c[i]];
+      const lo = Math.min(p[1], q[1]), hi = Math.max(p[1], q[1]);
+      const yx = lo <= y && y <= hi && hi > lo ? p[0] + (q[0] - p[0]) * (y - p[1]) / (q[1] - p[1]) : null;
+      const d = yx != null ? 0 : Math.min(Math.abs(y - p[1]), Math.abs(y - q[1]));
+      if (!best || d < best[1] || (d === best[1] && yx != null && Math.abs(x - yx) < Math.abs(x - best[0]))) best = [yx != null ? yx : (Math.abs(y - p[1]) < Math.abs(y - q[1]) ? p[0] : q[0]), d];
+    }
+  });
+  if (!best) return null;
+  const side = x >= best[0] ? 'e' : 'w';
+  // An example street on this side, nearest first (within about 1.5 km), else the config's.
+  let ex = null, ed = 1500;
+  D.features.filter(f => f.properties.role === side).forEach(f => f.geometry.coordinates.forEach(c => { const d = metres([x, y], c); if (d < ed){ ed = d; ex = f.properties.street; } }));
+  ex = ex || (A.example || {})[side] || '';
+  return [A.label, esc(side === 'e' ? A.east : A.west) + (A.sub ? '<span class="ag-sub">' + esc(fill(A.sub, {street: ex})) + '</span>' : ''), true];
 }
 const cardHead = (small, heading, extra) => '<div class="hh"><div><small>' + esc(small) + '</small><strong>' + esc(heading) + '</strong></div><div class="hb">' + (extra || '') +
   '<button type="button" class="share" aria-label="Share this spot" title="Share a link to this spot">' + SHARE_ICON + '</button><button type="button" aria-label="Close" id="hereX">×</button></div></div>';

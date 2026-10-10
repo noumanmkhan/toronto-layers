@@ -70,6 +70,7 @@
     ["Getting around", [
       {"id": "streets", "kind": "streets", "file": "streets", "name": "Main streets", "note": "The mile grid and the diagonals: Ashland, Western, Milwaukee…", "on": true},
       {"id": "coll", "kind": "streets", "file": "collectors", "under": "streets", "labelZoom": 15, "yieldLabels": true, "name": "Collector streets", "note": "Collector streets between the main ones; from zoom 13"},
+      {"id": "addr", "kind": "addresses", "under": "streets", "file": "addresses", "name": "Address grid", "note": "State and Madison are 0; every mile line is labelled, 800 numbers apart"},
       {"id": "hwy", "kind": "highways", "files": ["highways", "region_highways", "region_shields"], "name": "Expressways", "note": "Kennedy, Dan Ryan, Eisenhower, Stevenson, Lake Shore Drive", "on": true,
        "shields": {"LSD": "Lake Shore Dr"}, "tollShield": "Toll"},
       {"id": "metra", "kind": "rail", "files": ["metra_lines", "metra_stations", "metra_lines_inner"], "name": "Metra trains", "note": "11 commuter lines from four downtown stations", "on": true,
@@ -122,10 +123,12 @@
       {"layer": "ssa", "text": "SSA: {name}", "color": "--bia"},
       {"layer": "congress", "text": "Congress: IL-{num}", "color": "--fed"}
     ],
+    "address": {"label": "Address grid", "grid": "About {ns} · {ew}", "sub": "State and Madison are 0; a mile is 800 numbers (1,200 for the first mile south of Madison)."},
     "facts": [
       {"label": "Side", "layer": "sides", "text": "{name}"},
       {"label": "Community area", "layer": "ca", "text": "{name} (#{code})"},
       {"label": "Known as", "knownas": true},
+      {"label": "Address grid", "address": true},
       {"label": "Landmark district", "layer": "heritage", "text": "{name}[ (designated {since})]", "onlyInside": true},
       {"label": "SSA", "layer": "ssa", "text": "{name}[ (#{num})]", "empty": "None"},
       {"label": "City ward", "layer": "wards", "text": "Ward {num}"},
