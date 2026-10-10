@@ -1,6 +1,78 @@
 B25036 tracts so far 1332 · columns 23
 B25032 tracts so far 1332 · columns 23
 C16001 tracts so far 1332 · columns 38
+B01001 tracts so far 1332 · columns 49
+B05005 tracts so far 1332 · columns 21
+  B01001_E001 Estimate!!Total:
+  B01001_E002 Estimate!!Total:!!Male:
+  B01001_E003 Estimate!!Total:!!Male:!!Under 5 years
+  B01001_E004 Estimate!!Total:!!Male:!!5 to 9 years
+  B01001_E005 Estimate!!Total:!!Male:!!10 to 14 years
+  B01001_E006 Estimate!!Total:!!Male:!!15 to 17 years
+  B01001_E007 Estimate!!Total:!!Male:!!18 and 19 years
+  B01001_E008 Estimate!!Total:!!Male:!!20 years
+  B01001_E009 Estimate!!Total:!!Male:!!21 years
+  B01001_E010 Estimate!!Total:!!Male:!!22 to 24 years
+  B01001_E011 Estimate!!Total:!!Male:!!25 to 29 years
+  B01001_E012 Estimate!!Total:!!Male:!!30 to 34 years
+  B01001_E013 Estimate!!Total:!!Male:!!35 to 39 years
+  B01001_E014 Estimate!!Total:!!Male:!!40 to 44 years
+  B01001_E015 Estimate!!Total:!!Male:!!45 to 49 years
+  B01001_E016 Estimate!!Total:!!Male:!!50 to 54 years
+  B01001_E017 Estimate!!Total:!!Male:!!55 to 59 years
+  B01001_E018 Estimate!!Total:!!Male:!!60 and 61 years
+  B01001_E019 Estimate!!Total:!!Male:!!62 to 64 years
+  B01001_E020 Estimate!!Total:!!Male:!!65 and 66 years
+  B01001_E021 Estimate!!Total:!!Male:!!67 to 69 years
+  B01001_E022 Estimate!!Total:!!Male:!!70 to 74 years
+  B01001_E023 Estimate!!Total:!!Male:!!75 to 79 years
+  B01001_E024 Estimate!!Total:!!Male:!!80 to 84 years
+  B01001_E025 Estimate!!Total:!!Male:!!85 years and over
+  B01001_E026 Estimate!!Total:!!Female:
+  B01001_E027 Estimate!!Total:!!Female:!!Under 5 years
+  B01001_E028 Estimate!!Total:!!Female:!!5 to 9 years
+  B01001_E029 Estimate!!Total:!!Female:!!10 to 14 years
+  B01001_E030 Estimate!!Total:!!Female:!!15 to 17 years
+  B01001_E031 Estimate!!Total:!!Female:!!18 and 19 years
+  B01001_E032 Estimate!!Total:!!Female:!!20 years
+  B01001_E033 Estimate!!Total:!!Female:!!21 years
+  B01001_E034 Estimate!!Total:!!Female:!!22 to 24 years
+  B01001_E035 Estimate!!Total:!!Female:!!25 to 29 years
+  B01001_E036 Estimate!!Total:!!Female:!!30 to 34 years
+  B01001_E037 Estimate!!Total:!!Female:!!35 to 39 years
+  B01001_E038 Estimate!!Total:!!Female:!!40 to 44 years
+  B01001_E039 Estimate!!Total:!!Female:!!45 to 49 years
+  B01001_E040 Estimate!!Total:!!Female:!!50 to 54 years
+  B01001_E041 Estimate!!Total:!!Female:!!55 to 59 years
+  B01001_E042 Estimate!!Total:!!Female:!!60 and 61 years
+  B01001_E043 Estimate!!Total:!!Female:!!62 to 64 years
+  B01001_E044 Estimate!!Total:!!Female:!!65 and 66 years
+  B01001_E045 Estimate!!Total:!!Female:!!67 to 69 years
+  B01001_E046 Estimate!!Total:!!Female:!!70 to 74 years
+  B01001_E047 Estimate!!Total:!!Female:!!75 to 79 years
+  B01001_E048 Estimate!!Total:!!Female:!!80 to 84 years
+  B01001_E049 Estimate!!Total:!!Female:!!85 years and over
+  B05005_E001 Estimate!!Total:
+  B05005_E002 Estimate!!Total:!!Entered 2010 or later:
+  B05005_E003 Estimate!!Total:!!Entered 2010 or later:!!Native
+  B05005_E004 Estimate!!Total:!!Entered 2010 or later:!!Foreign-born:
+  B05005_E005 Estimate!!Total:!!Entered 2010 or later:!!Foreign-born:!!Naturalized U.S. citizen
+  B05005_E006 Estimate!!Total:!!Entered 2010 or later:!!Foreign-born:!!Not a U.S. citizen
+  B05005_E007 Estimate!!Total:!!Entered 2000 to 2009:
+  B05005_E008 Estimate!!Total:!!Entered 2000 to 2009:!!Native
+  B05005_E009 Estimate!!Total:!!Entered 2000 to 2009:!!Foreign-born:
+  B05005_E010 Estimate!!Total:!!Entered 2000 to 2009:!!Foreign-born:!!Naturalized U.S. citizen
+  B05005_E011 Estimate!!Total:!!Entered 2000 to 2009:!!Foreign-born:!!Not a U.S. citizen
+  B05005_E012 Estimate!!Total:!!Entered 1990 to 1999:
+  B05005_E013 Estimate!!Total:!!Entered 1990 to 1999:!!Native
+  B05005_E014 Estimate!!Total:!!Entered 1990 to 1999:!!Foreign-born:
+  B05005_E015 Estimate!!Total:!!Entered 1990 to 1999:!!Foreign-born:!!Naturalized U.S. citizen
+  B05005_E016 Estimate!!Total:!!Entered 1990 to 1999:!!Foreign-born:!!Not a U.S. citizen
+  B05005_E017 Estimate!!Total:!!Entered before 1990:
+  B05005_E018 Estimate!!Total:!!Entered before 1990:!!Native
+  B05005_E019 Estimate!!Total:!!Entered before 1990:!!Foreign-born:
+  B05005_E020 Estimate!!Total:!!Entered before 1990:!!Foreign-born:!!Naturalized U.S. citizen
+  B05005_E021 Estimate!!Total:!!Entered before 1990:!!Foreign-born:!!Not a U.S. citizen
   B25032_E001 Estimate!!Total:
   B25032_E002 Estimate!!Total:!!Owner-occupied housing units:
   B25032_E003 Estimate!!Total:!!Owner-occupied housing units:!!1, detached
