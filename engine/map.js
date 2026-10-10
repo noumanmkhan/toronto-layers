@@ -684,10 +684,13 @@ function drawStops(){
     if (!(onPick || (tram && isTram) || onBus || onReg)) return;
     // In the city view, another agency's stops outside the city stay hidden with the rest of the region.
     if (!onPick && !onBus && !(tram && isTram) && scope === 'inner' && data.footprint && !hit(data.footprint, s[0], s[1])) return;
-    const m = L.circleMarker([s[1], s[0]], {pane:'pts', radius: z >= 16 ? 4 : 3, className:'stop ' + (onPick ? 'pick' : isTram ? 'tram' : onBus ? 'bus' : onReg.m), bubblingMouseEvents:false, stopOf: s[3]});
+    // Another agency's stops are few (terminals, highway stops), so they're a size up and named from zoom 14.
+    const regOnly = !onPick && !onBus && !(tram && isTram);
+    const m = L.circleMarker([s[1], s[0]], {pane:'pts', radius: (z >= 16 ? 4 : 3) + (regOnly ? 1.5 : 0), className:'stop ' + (onPick ? 'pick' : isTram ? 'tram' : onBus ? 'bus' : onReg.m), bubblingMouseEvents:false, stopOf: s[3]});
     hoverTip(m, esc(s[2]) + ' · ' + esc(rs.map(r => r.r).join(', ')));
     m.on('click', () => inspect(L.latLng(s[1], s[0]), s[2]));
     stopLayer.addLayer(m);
+    if (regOnly && z >= 14) stopLayer.addLayer(L.tooltip({permanent:true, direction:'right', offset:[7, 0], className:'lbl lbl-go', interactive:false}).setLatLng([s[1], s[0]]).setContent(esc(s[2])));
   });
 }
 map.on('moveend', drawStops);

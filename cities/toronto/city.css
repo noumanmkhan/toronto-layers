@@ -33,4 +33,6 @@
 /* GO buses (mode "go" in transit.json): lines, number badges, stops, card chips and the panel swatch */
 .rt.go{stroke:var(--gobus)} .rt-b.go{background:var(--gobus);color:var(--gobus-ink)} .stop.go{stroke:var(--gobus)}
 .rt-chip.go{border-color:var(--gobus)}
+#map:not(.z12) .rt.go{stroke-width:2.6px} #map:not(.z12) .rt-case.go{stroke-width:4.6px}
+.stop.go{stroke-width:2}
 .sw.gobus{background:var(--city) linear-gradient(var(--gobus),var(--gobus)) 0 50%/100% 3px no-repeat}
