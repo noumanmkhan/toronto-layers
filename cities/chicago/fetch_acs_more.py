@@ -5,6 +5,9 @@ Runs in GitHub Actions (.github/workflows/fetch-chicago.yml); the sandbox can't 
 - B25032 Tenure by units in structure (occupied homes)
 - C16001 Language spoken at home by ability to speak English (population 5 years and over). The detailed
   table (B16001, which separates Polish, Hindi, Urdu...) isn't published for tracts, only these 12 broad groups
+- B01001 Sex by age (everyone), for the card's age mix
+- B05005 Period of entry by nativity and citizenship status (everyone), for recent immigrants: the
+  foreign-born who entered the US in the latest period the table has (2010 or later in the 2020-2024 ACS)
 
 Writes raw/acs_more.json: {year, source, labels: {var: label}, tracts: {GEOID: {var: count}}}. Labels come
 from the Census API's variable list (no key needed for metadata); the build reads bracket and language
@@ -14,7 +17,7 @@ import json, os, time, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, 'raw')
 UA = {'User-Agent': 'city-layers/1.0 (https://maps.noumankhan.ca)'}
-GROUPS = ['B25036', 'B25032', 'C16001']
+GROUPS = ['B25036', 'B25032', 'C16001', 'B01001', 'B05005']
 SF = 'https://www2.census.gov/programs-surveys/acs/summary_file/{y}/table-based-SF/'
 
 
