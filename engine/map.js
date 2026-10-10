@@ -1461,6 +1461,78 @@ function closeHere(){
   if (pin){ map.removeLayer(pin); pin = null; pinIsMe = false; queueHash(); }
 }
 
+/* ---------- Guided first visit ----------
+   A short tour of the city through the map (CITY.tour): each step sets the layers (exactly the listed ones),
+   the scope and the view, may open a card, and outlines the step's layers in the panel so people learn where
+   they are. The map as it was before the tour is kept as a link (linkState) and put back when it ends, by
+   Done or by closing it. A first visit (no link in the address, not seen before in this browser) gets a
+   small invitation; the Tour button in the panel footer starts it any time. */
+const TOUR = CITY.tour && CITY.tour.steps && CITY.tour.steps.length ? CITY.tour : null;
+const tourBox = document.getElementById('tour'), tourInv = document.getElementById('tourInv');
+let tourI = -1, tourSnap = null;
+const TOUR_KEY = 'tourSeen-' + CITY.id;
+function tourSeen(){ try { localStorage.setItem(TOUR_KEY, '1'); } catch (e) {} tourInv.hidden = true; }
+function startTour(){
+  if (!TOUR) return;
+  tourSeen();
+  tourSnap = linkState();
+  if (placeF) setPlaceFocus(null, null, false);
+  if (focusKey) setFocus(null, false);
+  unfocus();
+  showStep(0);
+}
+function showStep(i){
+  const st = TOUR.steps[i], last = i === TOUR.steps.length - 1;
+  tourI = i;
+  const want = new Set(st.layers || []);
+  LAYERS.forEach(it => { const cb = document.getElementById('lyr-' + it.id); if (!cb) return; const w = want.has(it.id); if (cb.checked !== w){ cb.checked = w; setLayer(it.id, w); } });
+  if ((st.scope || 'inner') !== scope) setScope(st.scope || 'inner', false);
+  if (st.pin) inspect(L.latLng(st.pin.at || CITY.example.at), st.pin.name || CITY.example.name); else closeHere();
+  // Outline the step's layers in the panel (on a phone the panel is folded away to clear the map).
+  document.querySelectorAll('#layers .row.tour-hi').forEach(r => r.classList.remove('tour-hi'));
+  const rows = (st.hi || []).map(id => document.querySelector('label[for="lyr-' + id + '"]')).filter(Boolean);
+  rows.forEach(r => r.classList.add('tour-hi'));
+  if (wide()){ if (rows[0]) rows[0].scrollIntoView({block: 'nearest', behavior: 'smooth'}); }
+  else panel.classList.add('collapsed');
+  const dots = TOUR.steps.map((_, k) => '<i' + (k === i ? ' class="on"' : '') + '></i>').join('');
+  tourBox.innerHTML = '<div class="tr-h"><small>' + esc(fill(TOUR.stepText || '{n} of {of}', {n: i + 1, of: TOUR.steps.length})) + '</small>' +
+    '<button type="button" class="tr-x" aria-label="' + esc(TOUR.closeText || 'Close the tour') + '">×</button></div>' +
+    '<strong>' + esc(st.title) + '</strong><p>' + esc(st.text) + '</p>' +
+    '<div class="tr-b"><button type="button" class="tr-back"' + (i ? '' : ' hidden') + '>' + esc(TOUR.back || 'Back') + '</button><span class="tr-dots" aria-hidden="true">' + dots + '</span>' +
+    '<button type="button" class="tr-next">' + esc(last ? (TOUR.done || 'Done') : (TOUR.next || 'Next')) + '</button></div>';
+  tourBox.hidden = false;
+  tourBox.querySelector('.tr-x').onclick = endTour;
+  tourBox.querySelector('.tr-back').onclick = () => showStep(i - 1);
+  tourBox.querySelector('.tr-next').onclick = () => last ? endTour() : showStep(i + 1);
+  tourBox.querySelector('.tr-next').focus({preventScroll: true});
+  frame(st.view === 'region' ? REGION_VIEW : Array.isArray(st.view) ? L.latLngBounds(st.view) : CITY_BOUNDS);
+}
+function endTour(){
+  if (tourI < 0) return;
+  tourI = -1; tourBox.hidden = true;
+  document.querySelectorAll('#layers .row.tour-hi').forEach(r => r.classList.remove('tour-hi'));
+  if (tourSnap != null){ applyHash('#' + tourSnap); queueHash(); }
+  tourSnap = null;
+}
+function tourInvite(){
+  if (!TOUR) return;
+  document.getElementById('tourBtn').hidden = false;
+  let seen = false; try { seen = !!localStorage.getItem(TOUR_KEY); } catch (e) {}
+  if (seen || location.hash) return;   // someone opening a shared link came for that view
+  tourInv.innerHTML = '<span>' + esc(TOUR.invite) + '</span><button type="button" class="tr-go">' + esc(TOUR.start || 'Take the tour') + '</button>' +
+    '<button type="button" class="tr-x" aria-label="' + esc(TOUR.dismissText || 'No thanks') + '">×</button>';
+  tourInv.hidden = false;
+  tourInv.querySelector('.tr-go').onclick = startTour;
+  tourInv.querySelector('.tr-x').onclick = tourSeen;
+}
+document.getElementById('tourBtn').addEventListener('click', startTour);
+document.addEventListener('keydown', e => {
+  if (tourI < 0 || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+  if (e.key === 'Escape') endTour();
+  else if (e.key === 'ArrowRight' && tourI < TOUR.steps.length - 1) showStep(tourI + 1);
+  else if (e.key === 'ArrowLeft' && tourI > 0) showStep(tourI - 1);
+});
+
 /* ---------- Theme: Auto (device setting), Light or Dark; remembered in this browser ---------- */
 function applyTheme(choice){
   if (choice === 'light' || choice === 'dark') document.documentElement.dataset.theme = choice;
@@ -1672,7 +1744,9 @@ results.addEventListener('keydown', e => {
 /* ---------- Scope: the wider region ("outer") or the city alone ("inner") ---------- */
 let mask = null, scope = 'outer';
 function frame(bounds){
-  const opts = wide() ? {paddingTopLeft:[330,20], paddingBottomRight:[350,20]} : {paddingTopLeft:[0,150], paddingBottomRight:[0,90]};
+  // The tour's box sits at the bottom of the map: keep what it's showing above it.
+  const tb = tourBox && !tourBox.hidden ? tourBox.offsetHeight + 24 : 0;
+  const opts = wide() ? {paddingTopLeft:[330,20], paddingBottomRight:[350,Math.max(20, tb)]} : {paddingTopLeft:[0,150], paddingBottomRight:[0,Math.max(90, tb)]};
   const size = map.getSize(), calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (calm || !size.x || !size.y) map.fitBounds(bounds, Object.assign({animate:false}, opts));
   else map.flyToBounds(bounds, Object.assign({duration:.8}, opts));
@@ -2312,6 +2386,7 @@ Promise.all(files.map(f => get(f).catch(e => { if (OPTIONAL.has(f)) return {type
   }
   lastHash = location.hash;
   if (location.hash) linkReady = true; else armLink();
+  tourInvite();
   window.cityMapReady = true;
   // Stops and the route list: fetched after the map is up, then stops are drawn and the open card redrawn.
   if (TR) get(TR.file).then(d => {

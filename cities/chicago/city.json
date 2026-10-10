@@ -116,6 +116,23 @@
     ]
   },
 
+  "tour": {
+    "invite": "New to Chicago? Take a one-minute tour.",
+    "start": "Take the tour",
+    "stepText": "Tour · {n} of {of}",
+    "next": "Next",
+    "back": "Back",
+    "done": "Done",
+    "closeText": "Close the tour",
+    "dismissText": "No thanks",
+    "steps": [
+      {"title": "Nine sides", "layers": ["sides", "hwy"], "hi": ["sides"], "view": "city", "text": "Chicagoans place a neighbourhood by its side of town: the North Side, the South Side, the West Side and six more, with Central around the Loop. Ask someone where they live and the side often comes first."},
+      {"title": "77 community areas", "layers": ["ca", "knownas", "streets"], "hi": ["ca", "knownas"], "view": [[41.83, -87.76], [41.97, -87.6]], "text": "Within the sides are 77 official community areas, first drawn in the 1920s and still used for city statistics. The names in italics are the neighbourhoods people actually say, like Wicker Park, Pilsen or Wrigleyville."},
+      {"title": "The address grid", "layers": ["addr", "streets"], "hi": ["addr"], "view": "city", "text": "Chicago's addresses are a grid. State and Madison, in the Loop, are 0, and numbers count out from there, 800 to a mile: 2400 N is three miles north, and 1600 W is Ashland. Tap any spot and the card gives its numbers."},
+      {"title": "Getting around", "layers": ["cta", "metra", "hwy"], "hi": ["cta", "metra"], "scope": "outer", "view": [[41.6, -88.2], [42.15, -87.5]], "text": "The 'L' is named for its elevated tracks, and its lines meet around the Loop, the ring of track downtown. Metra commuter trains run from downtown stations out to the suburbs."},
+      {"title": "Tap anywhere", "layers": ["sides", "ca", "knownas", "streets", "hwy", "metra", "cta"], "pin": {}, "view": "city", "text": "Tap any spot or search an address, and the card shows the boundaries it falls in, what living there is like, transit nearby and who represents it. Compare puts two places side by side. Switch layers on and off in the panel to explore."}
+    ]
+  },
   "card": {
     "pills": [
       {"layer": "sides", "else": "sides"},

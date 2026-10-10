@@ -128,6 +128,23 @@
     ]
   },
 
+  "tour": {
+    "invite": "New to Toronto? Take a one-minute tour.",
+    "start": "Take the tour",
+    "stepText": "Tour · {n} of {of}",
+    "next": "Next",
+    "back": "Back",
+    "done": "Done",
+    "closeText": "Close the tour",
+    "dismissText": "No thanks",
+    "steps": [
+      {"title": "Six cities in one", "layers": ["boroughs", "hwy"], "hi": ["boroughs"], "view": "city", "text": "Until 1998, Toronto was six cities: Old Toronto, York, East York, North York, Etobicoke and Scarborough. They merged into one, but people still say they live in Scarborough or North York, so the old lines help you place a neighbourhood."},
+      {"title": "Downtown and its neighbours", "layers": ["areas", "nbhd", "cultural", "streets"], "hi": ["areas", "nbhd", "cultural"], "view": [[43.635, -79.475], [43.725, -79.29]], "text": "Within Old Toronto, people talk about Downtown, Midtown, Uptown, the West End and the East End. The City counts 158 official neighbourhoods; the names in italics are the ones locals use, like Little Italy or the Junction."},
+      {"title": "East or West of Yonge", "layers": ["addr", "streets", "subway"], "hi": ["addr"], "view": [[43.64, -79.47], [43.73, -79.32]], "text": "Yonge Street splits the streets that cross it into East and West: Bloor St W and Bloor St E are one street, and numbers count up going away from Yonge. Tap any spot and the card says which side it's on."},
+      {"title": "Getting around", "layers": ["subway", "go", "tram", "streets"], "hi": ["subway", "go", "tram"], "view": "city", "text": "Line 1 (yellow) makes a U through downtown, up Yonge and up University and Spadina; Line 2 (green) runs east to west along Bloor and Danforth. GO trains fan out from Union Station across the region, and streetcars (red) cover the older neighbourhoods. Buses are a toggle away."},
+      {"title": "Tap anywhere", "layers": ["boroughs", "areas", "nbhd", "cultural", "streets", "hwy", "go", "subway"], "pin": {}, "view": "city", "text": "Tap any spot or search an address, and the card shows the boundaries it falls in, what living there is like, transit nearby and who represents it. Compare puts two places side by side. Switch layers on and off in the panel to explore."}
+    ]
+  },
   "card": {
     "pills": [
       {"layer": "areas", "else": "boroughs"},

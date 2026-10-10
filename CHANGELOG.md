@@ -3,6 +3,13 @@
 ## Since 1.1
 
 ### Both cities
+- **Guided first visit** (October 11): a five-step tour of each city through the map. A first visit (no
+  link in the address, not seen before in this browser) shows a small invitation; a Tour button in the
+  panel footer starts it any time. Each step sets exactly its layers, the scope and the view (kept clear
+  of the tour box), may open the card, and outlines its layers in the panel; Back/Next, dots, arrow keys,
+  Escape. The map before the tour is kept as a link and restored when it ends. Text in `city.json`
+  `tour` (invite, buttons, steps with `title`, `text`, `layers`, `hi`, `scope`, `view`, `pin`). For the
+  iOS app: a new optional `tour` key in `city.json` it can ignore or use for its own onboarding.
 - **How addresses work** (October 11): a toggle under Main streets. Chicago's *Address grid* draws State
   and Madison as the zero lines and every mile line (800 N … 7200 N, 1200 S … 12700 S, 800 W … 7200 W,
   800 E … 2400 E), each numbered; Toronto's *Yonge: East and West* draws Yonge and tints the 43 drawn streets

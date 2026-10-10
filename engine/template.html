@@ -532,6 +532,24 @@ dl.facts dd{margin:0;font-weight:500;min-width:0}
   .sec dl.facts,.live{padding-left:12px;padding-right:12px}
   .leaflet-top.leaflet-left{display:none}
 }
+/* ---------- Guided first visit ---------- */
+.tourbox{position:absolute;z-index:1100;left:50%;bottom:24px;transform:translateX(-50%);width:min(390px,calc(100% - 24px));box-sizing:border-box;background:var(--panel);color:var(--ink);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px 12px;font-size:13px}
+.tourbox.inv{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 14px;width:auto;max-width:calc(100% - 24px);font-weight:600}
+.tourbox.inv span{flex:1}
+.tourbox[hidden]{display:none}
+.tr-go{flex:none;font:inherit;font-size:12.5px;font-weight:700;border:none;border-radius:8px;padding:7px 12px;background:var(--accent);color:#fff;cursor:pointer}
+.tr-x{flex:none;font:inherit;font-size:18px;line-height:1;width:28px;height:28px;border-radius:7px;border:none;background:var(--pill-bg);color:var(--ink-2);cursor:pointer}
+.tr-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tr-h small{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.tourbox strong{display:block;font-size:16px;margin:4px 0 4px}
+.tourbox p{margin:0 0 12px;line-height:1.5;color:var(--ink-2)}
+.tr-b{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tr-b button{font:inherit;font-size:12.5px;font-weight:700;border-radius:8px;padding:7px 14px;cursor:pointer;border:1px solid var(--rule);background:none;color:var(--ink)}
+.tr-b .tr-next{background:var(--accent);border-color:var(--accent);color:#fff;margin-left:auto}
+.tr-b button[hidden]{display:none}
+.tr-dots{display:flex;gap:5px} .tr-dots i{width:6px;height:6px;border-radius:50%;background:var(--rule)} .tr-dots i.on{background:var(--accent)}
+#layers .row.tour-hi{border-radius:10px;box-shadow:inset 0 0 0 2px var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+@media (max-width:760px){.tourbox{bottom:calc(var(--panel-h,0px) + 10px)} .tourbox p{font-size:12.5px}}
 /* ---------- How addresses work ---------- */
 .ag-line{fill:none;stroke:var(--ag);stroke-width:1.4;stroke-dasharray:5 5;opacity:.9}
 .ag-line.base{stroke-width:3.2;stroke-dasharray:none;opacity:1}
@@ -604,7 +622,7 @@ dl.facts dd span.ag-sub{display:block;font-weight:400;color:var(--ink-2);font-si
     </div>
     <div id="layers"></div>
     <div class="pf">
-      <div class="pfb"><button type="button" id="reset" title="Back to the starting view">Reset</button><button type="button" id="allOff">Hide all</button><button type="button" id="shareView" title="Copy a link to this view">Share</button><button type="button" id="saveImg" aria-haspopup="true" aria-expanded="false" title="Save the map as a 4K image">Image</button></div>
+      <div class="pfb"><button type="button" id="reset" title="Back to the starting view">Reset</button><button type="button" id="allOff">Hide all</button><button type="button" id="shareView" title="Copy a link to this view">Share</button><button type="button" id="saveImg" aria-haspopup="true" aria-expanded="false" title="Save the map as a 4K image">Image</button><button type="button" id="tourBtn" hidden title="A one-minute tour of the city">Tour</button></div>
       <div class="imgmenu" id="imgMenu" hidden><b>Save the map as an image</b><div class="shape" role="radiogroup" aria-label="Image shape"><button type="button" role="radio" data-shape="wide"><i class="sh-wide"></i>Wide</button><button type="button" role="radio" data-shape="square"><i class="sh-square"></i>Square</button><button type="button" role="radio" data-shape="portrait"><i class="sh-portrait"></i>Portrait</button><button type="button" role="radio" data-shape="story"><i class="sh-story"></i>Story</button></div><span id="imgSize">Just the map, without the panels.</span><div><button type="button" data-img="labels">With labels</button><button type="button" data-img="plain">Without labels</button></div></div>
       <div class="seg" role="radiogroup" aria-label="Colour theme">
         <button type="button" role="radio" data-theme-choice="auto" title="Match your device">Auto</button>
@@ -616,6 +634,9 @@ dl.facts dd span.ag-sub{display:block;font-weight:400;color:var(--ink-2);font-si
 
   <button type="button" id="unfold" hidden aria-label="Show the layer panel"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Layers</button>
   <div id="busy" hidden role="status"><span></span></div>
+
+  <div id="tourInv" class="tourbox inv" role="note" hidden></div>
+  <div id="tour" class="tourbox" role="dialog" aria-label="Tour" hidden></div>
 
   <div id="side">
     <div id="search" role="search">

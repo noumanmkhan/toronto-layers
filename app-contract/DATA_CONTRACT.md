@@ -327,6 +327,8 @@ Living here footer the profile's. The live page,
 `https://maps.noumankhan.ca/toronto/#pin=43.66810,-79.36690`, shows the same card; if they ever
 disagree, the live page is right.
 
+**Tour** (`tour` in `city.json`, optional): `invite`, `start`, `stepText` (`{n}`, `{of}`), `next`, `back`, `done`, `closeText`, `dismissText`, and `steps`: `[{title, text, layers, hi, scope, view, pin}]`. `layers` is the exact set of layer ids on for the step, `hi` the ones to point out, `scope` `inner` (default) or `outer`, `view` `"city"`, `"region"` or bounds `[[south, west], [north, east]]`, `pin` (present: open the card at the city's `example`, or `{at, name}`). The website restores the map as it was when the tour ends. Apps may ignore it.
+
 **Address row** (`card.address`; a Boundaries row placed by `{"label", "address": true}` in `card.facts`): grid cities show `grid` filled with `{ns}` and `{ew}`, the spot's numbers read off `axes` and rounded to the nearest 100 ("About 2400 N · 1200 W"; 0 shows as "0"), then `sub`. Divided cities show `east` or `west` (which side of the `divide` street the spot is: its longitude at the spot's latitude, or at its nearest stretch), then `sub` with `{street}`: the nearest `e`/`w` street on that side within about 1.5 km, or `example[side]`.
 
 **Compare two places** (website, since 1.1): the same card for two spots, merged row by row. Each
