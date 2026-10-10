@@ -1,6 +1,6 @@
 name: Scout lost rivers
 # One-off check of buried and lost waterways mapped in OpenStreetMap (Toronto, Chicago). Writes
-# scouting/lost-rivers/out/ and commits it to main. Doesn.t touch the site.
+# scouting/lost-rivers/out/ and commits it to main. Doesn't touch the site.
 on:
   workflow_dispatch:
   push:
