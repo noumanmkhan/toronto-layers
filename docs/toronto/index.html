@@ -779,6 +779,11 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font
 .imgmenu b{color:var(--ink);font-size:12.5px}
 .imgmenu div{display:flex;gap:6px;margin-top:6px}
 .pf .imgmenu button{flex:1;padding:6px 8px;font-weight:600;color:var(--ink)}
+.imgmenu .shape{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px}
+.pf .imgmenu .shape button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 2px 6px;font-size:11px;font-weight:500;color:var(--ink-2)}
+.pf .imgmenu .shape button[aria-checked="true"]{background:var(--pill-bg);color:var(--ink);font-weight:700;border-color:var(--ink-3)}
+.shape i{display:block;border:1.6px solid currentColor;border-radius:2px;height:20px}
+.shape .sh-wide{width:30px;height:17px;margin:1.5px 0}.shape .sh-square{width:20px}.shape .sh-portrait{width:16px}.shape .sh-story{width:11px}
 /* Desktop: the layer panel folds away to a small "Layers" button, leaving the whole map. */
 .ph{position:relative}
 .fold{position:absolute;top:12px;right:12px;width:28px;height:28px;display:grid;place-items:center;border:none;border-radius:7px;background:none;color:var(--ink-3);cursor:pointer}
@@ -1115,6 +1120,12 @@ circle.cl{stroke-width:3;fill:var(--city)}
 #q{flex:1;min-width:0;font:500 14px/1.2 var(--font);color:var(--ink);background:none;border:none;outline:none;padding:8px 0}
 #q::placeholder{color:var(--ink-3)}
 #search:focus-within{box-shadow:var(--shadow),0 0 0 2px var(--focus)}
+#locate{flex:none;display:grid;place-items:center;width:34px;height:32px;border:1px solid var(--rule);border-radius:9px;background:none;color:var(--accent);cursor:pointer;padding:0}
+#search #locate svg{width:18px;height:18px;color:var(--accent)}
+#locate.busy svg{animation:locpulse 1s ease-in-out infinite}
+@keyframes locpulse{50%{opacity:.3}}
+.pin.me{background:#2F7FD8;box-shadow:0 0 0 7px rgba(47,127,216,.28),0 2px 8px rgba(0,0,0,.4)}
+.me-ring{fill:#2F7FD8;fill-opacity:.1;stroke:#2F7FD8;stroke-opacity:.5;stroke-width:1.5}
 #go{flex:none;font:600 12.5px/1 var(--font);color:#fff;background:var(--accent);border:none;border-radius:9px;padding:9px 12px;cursor:pointer}
 #go:disabled{opacity:.6;cursor:progress}
 #results{list-style:none;margin:0;padding:4px 6px 6px;border-top:1px solid var(--rule)}
@@ -1238,7 +1249,7 @@ dl.facts dd{margin:0;font-weight:500;min-width:0}
     <div id="layers"></div>
     <div class="pf">
       <div class="pfb"><button type="button" id="reset" title="Back to the starting view">Reset</button><button type="button" id="allOff">Hide all</button><button type="button" id="shareView" title="Copy a link to this view">Share</button><button type="button" id="saveImg" aria-haspopup="true" aria-expanded="false" title="Save the map as a 4K image">Image</button></div>
-      <div class="imgmenu" id="imgMenu" hidden><b>Save the map as a 4K image</b><span>Just the map, without the panels. 3840 × 2160 PNG.</span><div><button type="button" data-img="labels">With labels</button><button type="button" data-img="plain">Without labels</button></div></div>
+      <div class="imgmenu" id="imgMenu" hidden><b>Save the map as an image</b><div class="shape" role="radiogroup" aria-label="Image shape"><button type="button" role="radio" data-shape="wide"><i class="sh-wide"></i>Wide</button><button type="button" role="radio" data-shape="square"><i class="sh-square"></i>Square</button><button type="button" role="radio" data-shape="portrait"><i class="sh-portrait"></i>Portrait</button><button type="button" role="radio" data-shape="story"><i class="sh-story"></i>Story</button></div><span id="imgSize">Just the map, without the panels.</span><div><button type="button" data-img="labels">With labels</button><button type="button" data-img="plain">Without labels</button></div></div>
       <div class="seg" role="radiogroup" aria-label="Colour theme">
         <button type="button" role="radio" data-theme-choice="auto" title="Match your device">Auto</button>
         <button type="button" role="radio" data-theme-choice="light">Light</button>
@@ -2212,6 +2223,7 @@ try { if (localStorage.getItem('panelFolded') && wide()){ panel.classList.add('f
 /* ---------- What's here ---------- */
 const here = document.getElementById('here');
 let pin = null;
+var meRing = null;   // accuracy circle around the phone's location
 const money = v => '$' + (v >= 1e6 ? (v / 1e6).toFixed(v % 1e6 ? 1 : 0) + 'M' : Math.round(v / 1e3) + 'K');
 function livingHere(unit){
   const d = unit && data.profiles ? data.profiles[String(unit.properties.code)] : null;
@@ -2375,9 +2387,14 @@ function trustees(hits){
   return rows.join('');
 }
 let pinName = '';
+// pinIsMe: the pin is the phone's own location (drawn blue, never written into links).
+let pinIsMe = false, meNext = false;
 function placePin(latlng, name){
-  pinName = name || ''; queueHash();
+  pinName = name || ''; pinIsMe = meNext; meNext = false; queueHash();
   if (pin) pin.setLatLng(latlng); else pin = L.marker(latlng, {pane:'pin', interactive:false, keyboard:false, icon: L.divIcon({className:'', iconSize:[20, 20], iconAnchor:[10, 10], html:'<span class="pin"></span>'})}).addTo(map);
+  const dot = pin.getElement() && pin.getElement().querySelector('.pin');
+  if (dot) dot.classList.toggle('me', pinIsMe);
+  if (!pinIsMe && meRing){ map.removeLayer(meRing); meRing = null; }
 }
 const colorOf = (id, f) => { const it = LAYERS.find(l => l.id === id); return 'var(' + ((it && it.colors && it.colors[f.properties.name]) || '--ink-3') + ')'; };
 // Outside the city: the nearest named community (a town, village or larger community, not a small
@@ -2500,7 +2517,7 @@ here.addEventListener('scroll', () => {
 if (window.ResizeObserver) new ResizeObserver(() => {
   document.documentElement.style.setProperty('--panel-h', (matchMedia('(max-width:760px)').matches && !panel.hidden ? panel.offsetHeight : 0) + 'px');
 }).observe(panel);
-function closeHere(){ here.hidden = true; if (pin){ map.removeLayer(pin); pin = null; queueHash(); } }
+function closeHere(){ here.hidden = true; if (meRing){ map.removeLayer(meRing); meRing = null; } if (pin){ map.removeLayer(pin); pin = null; pinIsMe = false; queueHash(); } }
 
 /* ---------- Theme: Auto (device setting), Light or Dark; remembered in this browser ---------- */
 function applyTheme(choice){
@@ -3016,7 +3033,7 @@ function queueHash(){ if (linkReady){ clearTimeout(hashTimer); hashTimer = setTi
 function linkState(){
   const c = map.getCenter(), z = map.getZoom();
   const parts = [['map', (Math.round(z * 4) / 4) + '/' + c.lat.toFixed(5) + '/' + c.lng.toFixed(5)]];
-  if (pin){ const p = pin.getLatLng(); parts.push(['pin', p.lat.toFixed(5) + ',' + p.lng.toFixed(5)]); if (pinName) parts.push(['name', pinName]); }
+  if (pin && !pinIsMe){ const p = pin.getLatLng(); parts.push(['pin', p.lat.toFixed(5) + ',' + p.lng.toFixed(5)]); if (pinName) parts.push(['name', pinName]); }
   if (scope === 'outer') parts.push(['view', 'region']);
   if (focusKey) parts.push(['focus', focusKey]);
   if (placeF) parts.push(['focus', placeF.id + ':' + placeF.name]);
@@ -3116,11 +3133,52 @@ map.on('moveend', queueHash);
 window.addEventListener('hashchange', () => { if (location.hash !== lastHash){ linkReady = false; applyHash(location.hash); linkReady = true; } });
 
 
-/* ---------- Save the map as a 4K image (all in the browser) ----------
+/* ---------- Use my location (phones) ----------
+   A button in the search bar asks the phone for its position once, then pins it and opens the card there, as a
+   tap on the map would. Every lookup runs in the browser: the position never leaves the phone, and it's
+   kept out of shared links. A spot beyond the map's area gets a note instead. For demos and testing from
+   elsewhere, ?at=lat,lng in the address pretends the phone is there (and shows the button on any device). */
+const FAKE_AT = (() => { const m = /[?&]at=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/.exec(location.search); return m ? [+m[1], +m[2]] : null; })();
+// The button sits in the search bar, beside Find, so it never covers the map or the card.
+if ((navigator.geolocation && matchMedia('(pointer:coarse)').matches) || FAKE_AT){
+  const b = document.createElement('button');
+  b.type = 'button'; b.id = 'locate'; b.title = 'Use my location'; b.setAttribute('aria-label', 'Use my location');
+  b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.6" fill="currentColor"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  b.addEventListener('click', locateMe);
+  document.getElementById('go').before(b);
+}
+function locateMe(){
+  const b = document.getElementById('locate');
+  if (!b || b.classList.contains('busy')) return;
+  b.classList.add('busy');
+  const done = () => b.classList.remove('busy');
+  const got = (lat, lng, acc) => {
+    done();
+    const at = L.latLng(lat, lng);
+    const inCity = data.footprint && hit(data.footprint, lng, lat), inRegion = inCity || (data.outer && hit(data.outer, lng, lat));
+    if (!inRegion){ flash(CITY.locateOutside || 'You’re outside this map’s area. Search an address instead.'); return; }
+    if (placeF && !inPlace(lng, lat)) setPlaceFocus(null, null, false);
+    if (!wide()) panel.classList.add('collapsed');
+    meNext = true;
+    goTo(at, '', false, 15);
+    if (meRing){ map.removeLayer(meRing); meRing = null; }
+    if (acc > 25) meRing = L.circle(at, {radius: acc, pane: 'pin', interactive: false, className: 'me-ring'}).addTo(map);
+    if (acc > 1000) flash('Your location is approximate (within about ' + dist(acc) + ')');
+  };
+  if (FAKE_AT){ setTimeout(() => got(FAKE_AT[0], FAKE_AT[1], 15), 300); return; }
+  navigator.geolocation.getCurrentPosition(p => got(p.coords.latitude, p.coords.longitude, p.coords.accuracy || 0), err => {
+    done();
+    flash(err.code === 1 ? 'Location is off for this site. Allow it in your browser settings to use this.' : 'Couldn’t find your location. Try again, or search an address.');
+  }, {enableHighAccuracy: true, timeout: 15000, maximumAge: 30000});
+}
+
+
+/* ---------- Save the map as an image (all in the browser) ----------
    The map is drawn from the site's own shapes, with no tiles from other sites, so html-to-image (loaded
-   only when first used) can turn it into a picture. The map is briefly redrawn in a 16:9 frame that
-   covers what's on screen, rendered at 3840 x 2160, and stamped with the data credits the licences
-   ask for. The panels, the pin and the controls are left out; "Without labels" also drops every name. */
+   only when first used) can turn it into a picture. The map is briefly redrawn in a frame of the chosen
+   shape (wide 4K, or square, portrait or story for Instagram) that covers what's on screen, and stamped
+   with the data credits the licences ask for. Focused on a place, the frame fits the place and its name
+   goes top left as a title. The panels, the pin and the controls are left out; "Without labels" also drops every name. */
 const IMG_LIB = 'https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.js';
 let imgLib = null;
 const loadImgLib = () => imgLib || (imgLib = new Promise((res, rej) => {
@@ -3133,6 +3191,19 @@ const imgBtn = document.getElementById('saveImg'), imgMenu = document.getElement
 function imgMenuOpen(on){ imgMenu.hidden = !on; imgBtn.setAttribute('aria-expanded', String(on)); if (on) loadImgLib().catch(() => {}); }
 imgBtn.addEventListener('click', e => { e.stopPropagation(); imgMenuOpen(imgMenu.hidden); });
 imgMenu.querySelectorAll('[data-img]').forEach(b => b.addEventListener('click', () => saveImage(b.dataset.img === 'labels')));
+/* Shapes: wide for screens and slides; square, portrait (4:5) and story (9:16) for Instagram, which shows
+   1080 px wide, so those are made at twice that. The choice is remembered in this browser. */
+const SHAPES = {wide: [3840, 2160, ''], square: [2160, 2160, '-square'], portrait: [2160, 2700, '-portrait'], story: [2160, 3840, '-story']};
+let imgShape = (() => { try { const v = localStorage.getItem('imgShape'); if (SHAPES[v]) return v; } catch (e) {} return matchMedia('(pointer:coarse)').matches ? 'portrait' : 'wide'; })();
+function setShape(k){
+  imgShape = k;
+  try { localStorage.setItem('imgShape', k); } catch (e) {}
+  imgMenu.querySelectorAll('[data-shape]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.shape === k)));
+  const [w, h] = SHAPES[k];
+  document.getElementById('imgSize').textContent = 'Just the map, without the panels. ' + w + ' × ' + h + ' PNG' + (k === 'wide' ? ' (4K).' : ', sized for Instagram.');
+}
+imgMenu.querySelectorAll('[data-shape]').forEach(b => b.addEventListener('click', () => setShape(b.dataset.shape)));
+setShape(imgShape);
 document.addEventListener('click', e => { if (!imgMenu.hidden && !imgMenu.contains(e.target)) imgMenuOpen(false); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !imgMenu.hidden){ imgMenuOpen(false); imgBtn.focus(); } });
 // html-to-image copies each SVG whole without the page's stylesheet, and the map's shapes take their
@@ -3153,16 +3224,23 @@ let saving = false;
 async function saveImage(labels){
   if (saving) return; saving = true;
   imgMenuOpen(false);
-  const W = 3840, H = 2160, el = map.getContainer(), busy = document.getElementById('busy');
+  const [W, H, suffix] = SHAPES[imgShape], el = map.getContainer(), busy = document.getElementById('busy');
   const center = map.getCenter(), zoom = map.getZoom(), before = el.getAttribute('style') || '';
-  // A 16:9 frame at least as big as the screen's map, so the picture shows what's on screen (and a bit more on the short side).
-  const cw = Math.round(Math.max(el.clientWidth, el.clientHeight * 16 / 9)), ch = Math.round(cw * 9 / 16);
+  // Wide: a 16:9 frame at least as big as the screen's map, so the picture shows what's on screen (and a bit more
+  // on the short side). Instagram shapes: a 1080-px-wide frame drawn at twice the size, so names stay readable
+  // when the post is seen on a phone.
+  const cw = imgShape === 'wide' ? Math.round(Math.max(el.clientWidth, el.clientHeight * W / H)) : W / 2, ch = Math.round(cw * H / W);
+  const k = cw / W;   // frame pixels per image pixel
   busy.firstElementChild.textContent = 'Making your image…'; busy.hidden = false;
   let canvas = null, restoreSvg = null;
   try {
     const lib = await loadImgLib();
     el.style.right = 'auto'; el.style.bottom = 'auto'; el.style.width = cw + 'px'; el.style.height = ch + 'px';
-    map.invalidateSize({pan: false}); map.setView(center, zoom, {animate: false, reset: true});   // reset: redraw every shape for the new frame
+    map.invalidateSize({pan: false});
+    // Focused on a place: fit it in the frame, clear of the title (top left) and the credits (bottom right).
+    if (placeF) map.fitBounds(L.geoJSON(placeF.f).getBounds(), {animate: false, reset: true, maxZoom: 16,
+      paddingTopLeft: [70 * k, (titleH(W) + 90) * k], paddingBottomRight: [70 * k, 220 * k]});
+    else map.setView(center, zoom, {animate: false, reset: true});   // reset: redraw every shape for the new frame
     await new Promise(r => setTimeout(r, 400)); declutter(); await frames(2);
     const has = (n, c) => n.classList && n.classList.contains(c);
     const skip = n => has(n, 'leaflet-control-container') || has(n, 'leaflet-pin-pane') || has(n, 'hover-tip') ||
@@ -3171,6 +3249,7 @@ async function saveImage(labels){
     restoreSvg = inlineSvgStyles(el);
     canvas = await lib.toCanvas(el, {width: cw, height: ch, canvasWidth: W, canvasHeight: H, pixelRatio: 1,
       backgroundColor: getComputedStyle(el).backgroundColor, filter: n => !skip(n)});
+    if (placeF) stampTitle(canvas, placeF.name, pfNoun(placeF.it) + ' · ' + document.title);
     stampCredits(canvas);
   } catch (err){
     console.error(err);
@@ -3183,7 +3262,8 @@ async function saveImage(labels){
   if (!canvas){ flash('The image couldn’t be made. Check your connection and try again.'); return; }
   canvas.toBlob(async blob => {
     if (!blob){ flash('The image couldn’t be made.'); return; }
-    const name = slug(document.title) + (pin && pinName ? '-' + slug(pinName) : '') + (labels ? '' : '-no-labels') + '.png';
+    const what = placeF ? placeF.name : pin && pinName ? pinName : '';
+    const name = slug(document.title) + (what ? '-' + slug(what) : '') + suffix + (labels ? '' : '-no-labels') + '.png';
     const file = new File([blob], name, {type: 'image/png'});
     if (matchMedia('(pointer:coarse)').matches && navigator.canShare && navigator.canShare({files: [file]})){
       try { await navigator.share({files: [file], title: document.title}); return; } catch (e){ if (e && e.name === 'AbortError') return; }
@@ -3194,24 +3274,48 @@ async function saveImage(labels){
     flash('Image saved');
   }, 'image/png');
 }
-// Bottom-right: the map's name and address, then the data credits (the licences ask for them wherever the map goes).
+// Bottom-right: the map's name and address, then the data credits (the licences ask for them wherever the map
+// goes), wrapped to fit the narrower Instagram shapes.
 function stampCredits(canvas){
   const ctx = canvas.getContext('2d'), cs = getComputedStyle(document.documentElement);
   const ink = cs.getPropertyValue('--ink').trim() || '#23262B', bg = cs.getPropertyValue('--panel').trim() || '#fff';
   const font = cs.getPropertyValue('--font').trim() || 'sans-serif';
   const credit = (() => { const d = document.createElement('div'); d.innerHTML = CITY.attribution; return d.textContent.replace(/\s+/g, ' ').trim(); })();
   const title = document.title + ' · ' + location.host + location.pathname.replace(/\/$/, '');
-  const pad = 22, x = canvas.width - 36, y = canvas.height - 36, maxW = canvas.width - 200;
-  ctx.font = '400 24px ' + font; const w2 = Math.min(ctx.measureText(credit).width, maxW);
+  const pad = 22, x = canvas.width - 36, y = canvas.height - 36, maxW = Math.min(canvas.width - 200, 2600);
+  ctx.font = '400 24px ' + font;
+  const lines = [];
+  credit.split(' ').forEach(w => { const l = lines.length ? lines[lines.length - 1] + ' ' + w : w;
+    if (lines.length && ctx.measureText(l).width <= maxW) lines[lines.length - 1] = l; else lines.push(w); });
+  const w2 = Math.max(...lines.map(l => ctx.measureText(l).width));
   ctx.font = '700 30px ' + font; const w1 = ctx.measureText(title).width;
-  const bw = Math.max(w1, w2) + pad * 2, bh = 30 + 24 + 14 + pad * 2;
+  const bw = Math.max(w1, w2) + pad * 2, bh = 30 + lines.length * 31 + 11 + pad * 2;
   ctx.globalAlpha = .88; ctx.fillStyle = bg;
   ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x - bw, y - bh, bw, bh, 14); else ctx.rect(x - bw, y - bh, bw, bh); ctx.fill();
   ctx.globalAlpha = 1; ctx.fillStyle = ink; ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic';
   ctx.fillText(title, x - pad, y - bh + pad + 28);
   ctx.font = '400 24px ' + font; ctx.globalAlpha = .75;
-  ctx.fillText(credit, x - pad, y - pad, maxW);
+  lines.forEach((l, i) => ctx.fillText(l, x - pad, y - pad - (lines.length - 1 - i) * 31));
   ctx.globalAlpha = 1;
+}
+// Top-left, when focused on a place: its name, big, and what it is, for a poster or a post.
+const titleH = W => Math.round(W / 2160 * 210);
+function stampTitle(canvas, name, sub){
+  const ctx = canvas.getContext('2d'), cs = getComputedStyle(document.documentElement);
+  const ink = cs.getPropertyValue('--ink').trim() || '#23262B', ink2 = cs.getPropertyValue('--ink-2').trim() || '#5D6168', bg = cs.getPropertyValue('--panel').trim() || '#fff';
+  const font = cs.getPropertyValue('--font').trim() || 'sans-serif';
+  const s = canvas.width / 2160, pad = 34 * s, x = 48 * s, y = 48 * s, maxW = canvas.width - 2 * x - 2 * pad;
+  let big = 84 * s;
+  ctx.font = '800 ' + big + 'px ' + font;
+  while (ctx.measureText(name).width > maxW && big > 40 * s){ big -= 4 * s; ctx.font = '800 ' + big + 'px ' + font; }
+  const w1 = Math.min(ctx.measureText(name).width, maxW);
+  const small = 34 * s; ctx.font = '500 ' + small + 'px ' + font; const w2 = Math.min(ctx.measureText(sub).width, maxW);
+  const bw = Math.max(w1, w2) + pad * 2, bh = big + small + 22 * s + pad * 2;
+  ctx.globalAlpha = .92; ctx.fillStyle = bg;
+  ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, bw, bh, 22 * s); else ctx.rect(x, y, bw, bh); ctx.fill();
+  ctx.globalAlpha = 1; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = ink; ctx.font = '800 ' + big + 'px ' + font; ctx.fillText(name, x + pad, y + pad + big * .82, maxW);
+  ctx.fillStyle = ink2; ctx.font = '500 ' + small + 'px ' + font; ctx.fillText(sub, x + pad, y + pad + big + 14 * s + small * .82, maxW);
 }
 
 /* ---------- load ---------- */

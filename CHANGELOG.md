@@ -3,6 +3,15 @@
 ## Since 1.1
 
 ### Both cities
+- **Use my location** (October 11): on phones, a button in the search bar finds the phone, pins it (in blue,
+  with an accuracy ring when it's rough) and opens the What's here card there. All lookups run in the
+  browser; the position never leaves the phone and is left out of shared links. Outside the map's area it
+  says so. `?at=lat,lng` in the address pretends to be there (for demos), and shows the button on any device.
+- **Image shapes for Instagram** (October 11): the Image menu now offers Wide (3840 × 2160, as before),
+  Square (2160 × 2160), Portrait 4:5 (2160 × 2700) and Story 9:16 (2160 × 3840). The Instagram shapes are
+  drawn at twice a 1080-px frame so names stay readable on a phone; phones default to Portrait, and the
+  choice is remembered. When focused on a place, the image fits the place and puts its name top left as a
+  title. Credits wrap to fit. Engine only.
 - **Focus on a place** (October 10): tap a neighbourhood's, area's or former city's name on the map (in
   Chicago a community area or side), or a "Focus on" chip on the What's here card. Everything outside it
   dims; trains, subway/'L' lines and routes that pass through stay full inside and half-faded outside, so

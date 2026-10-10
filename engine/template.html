@@ -114,6 +114,11 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font
 .imgmenu b{color:var(--ink);font-size:12.5px}
 .imgmenu div{display:flex;gap:6px;margin-top:6px}
 .pf .imgmenu button{flex:1;padding:6px 8px;font-weight:600;color:var(--ink)}
+.imgmenu .shape{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px}
+.pf .imgmenu .shape button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 2px 6px;font-size:11px;font-weight:500;color:var(--ink-2)}
+.pf .imgmenu .shape button[aria-checked="true"]{background:var(--pill-bg);color:var(--ink);font-weight:700;border-color:var(--ink-3)}
+.shape i{display:block;border:1.6px solid currentColor;border-radius:2px;height:20px}
+.shape .sh-wide{width:30px;height:17px;margin:1.5px 0}.shape .sh-square{width:20px}.shape .sh-portrait{width:16px}.shape .sh-story{width:11px}
 /* Desktop: the layer panel folds away to a small "Layers" button, leaving the whole map. */
 .ph{position:relative}
 .fold{position:absolute;top:12px;right:12px;width:28px;height:28px;display:grid;place-items:center;border:none;border-radius:7px;background:none;color:var(--ink-3);cursor:pointer}
@@ -450,6 +455,12 @@ circle.cl{stroke-width:3;fill:var(--city)}
 #q{flex:1;min-width:0;font:500 14px/1.2 var(--font);color:var(--ink);background:none;border:none;outline:none;padding:8px 0}
 #q::placeholder{color:var(--ink-3)}
 #search:focus-within{box-shadow:var(--shadow),0 0 0 2px var(--focus)}
+#locate{flex:none;display:grid;place-items:center;width:34px;height:32px;border:1px solid var(--rule);border-radius:9px;background:none;color:var(--accent);cursor:pointer;padding:0}
+#search #locate svg{width:18px;height:18px;color:var(--accent)}
+#locate.busy svg{animation:locpulse 1s ease-in-out infinite}
+@keyframes locpulse{50%{opacity:.3}}
+.pin.me{background:#2F7FD8;box-shadow:0 0 0 7px rgba(47,127,216,.28),0 2px 8px rgba(0,0,0,.4)}
+.me-ring{fill:#2F7FD8;fill-opacity:.1;stroke:#2F7FD8;stroke-opacity:.5;stroke-width:1.5}
 #go{flex:none;font:600 12.5px/1 var(--font);color:#fff;background:var(--accent);border:none;border-radius:9px;padding:9px 12px;cursor:pointer}
 #go:disabled{opacity:.6;cursor:progress}
 #results{list-style:none;margin:0;padding:4px 6px 6px;border-top:1px solid var(--rule)}
@@ -543,7 +554,7 @@ dl.facts dd{margin:0;font-weight:500;min-width:0}
     <div id="layers"></div>
     <div class="pf">
       <div class="pfb"><button type="button" id="reset" title="Back to the starting view">Reset</button><button type="button" id="allOff">Hide all</button><button type="button" id="shareView" title="Copy a link to this view">Share</button><button type="button" id="saveImg" aria-haspopup="true" aria-expanded="false" title="Save the map as a 4K image">Image</button></div>
-      <div class="imgmenu" id="imgMenu" hidden><b>Save the map as a 4K image</b><span>Just the map, without the panels. 3840 × 2160 PNG.</span><div><button type="button" data-img="labels">With labels</button><button type="button" data-img="plain">Without labels</button></div></div>
+      <div class="imgmenu" id="imgMenu" hidden><b>Save the map as an image</b><div class="shape" role="radiogroup" aria-label="Image shape"><button type="button" role="radio" data-shape="wide"><i class="sh-wide"></i>Wide</button><button type="button" role="radio" data-shape="square"><i class="sh-square"></i>Square</button><button type="button" role="radio" data-shape="portrait"><i class="sh-portrait"></i>Portrait</button><button type="button" role="radio" data-shape="story"><i class="sh-story"></i>Story</button></div><span id="imgSize">Just the map, without the panels.</span><div><button type="button" data-img="labels">With labels</button><button type="button" data-img="plain">Without labels</button></div></div>
       <div class="seg" role="radiogroup" aria-label="Colour theme">
         <button type="button" role="radio" data-theme-choice="auto" title="Match your device">Auto</button>
         <button type="button" role="radio" data-theme-choice="light">Light</button>
