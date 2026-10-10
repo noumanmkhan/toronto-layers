@@ -1,0 +1,42 @@
+  got https://assets.metrolinx.com/raw/upload/Documents/Metrolinx/Open%20Data/GO-GTFS.zip 17628051 bytes
+routes kept: 37
+feed 2026-10-05 - 2026-11-27 · week from 2026-10-12 · days {'wk': '2026-10-14', 'sat': '2026-10-17', 'sun': '2026-10-18'}
+trips in the week: 9348
+routes written: 37 · trams 0 · stops 816
+  go   GO 11 Brock University                   shapes 2  midday/5h   3  1-5am 0
+  go   GO 12 Niagara Falls / Burlington         shapes 4  midday/5h  10  1-5am 2
+  go   GO 15 Brantford / Aldershot              shapes 4  midday/5h   4  1-5am 0
+  go   GO 16 Hamilton / Toronto Express         shapes 2  midday/5h   4  1-5am 0
+  go   GO 17 Waterloo / Hamilton                shapes 2  midday/5h   5  1-5am 0
+  go   GO 18 Lakeshore West                     shapes 9  midday/5h   0  1-5am 4
+  go   GO 19 Mississauga / North York           shapes 3  midday/5h   6  1-5am 0
+  go   GO 21 Milton                             shapes 8  midday/5h  22  1-5am 5
+  go   GO 22 Milton / Oakville                  shapes 2  midday/5h   2  1-5am 0
+  go   GO 25 Waterloo / Mississauga             shapes 8  midday/5h   6  1-5am 0
+  go   GO 27 Milton / North York                shapes 6  midday/5h   6  1-5am 0
+  go   GO 29 Guelph / Mississauga               shapes 4  midday/5h   6  1-5am 0
+  go   GO 30 Kitchener / Vaughan                shapes 5  midday/5h   7  1-5am 1
+  go   GO 31 Guelph / Toronto                   shapes 11  midday/5h   1  1-5am 4
+  go   GO 32 Brampton Trinity Common / North Yo shapes 3  midday/5h   5  1-5am 0
+  go   GO 33 Guelph / North York                shapes 6  midday/5h   8  1-5am 1
+  go   GO 36 Brampton / North York Express      shapes 2  midday/5h   5  1-5am 0
+  go   GO 37 Orangeville / Brampton             shapes 6  midday/5h   1  1-5am 1
+  go   GO 38 Bolton / Malton                    shapes 2  midday/5h   0  1-5am 0
+  go   GO 40 Hamilton / Richmond Hill           shapes 5  midday/5h  13  1-5am 6
+  go   GO 41 Hamilton / Pickering               shapes 7  midday/5h  27  1-5am 1
+  go   GO 43 Mount Pleasant / McMaster          shapes 2  midday/5h   2  1-5am 0
+  go   GO 47 Hamilton / Hwy 407 Terminal        shapes 6  midday/5h  14  1-5am 2
+  go   GO 48 Guelph / Hwy 407 Terminal          shapes 2  midday/5h   5  1-5am 1
+  go   GO 52 Oshawa / Hwy 407 Terminal          shapes 4  midday/5h   0  1-5am 0
+  go   GO 56 Oshawa / Oakville                  shapes 4  midday/5h  12  1-5am 2
+  go   GO 61 Richmond Hill                      shapes 2  midday/5h   4  1-5am 1
+  go   GO 65 Newmarket / Toronto                shapes 10  midday/5h   0  1-5am 4
+  go   GO 67 Keswick / North York               shapes 4  midday/5h   0  1-5am 0
+  go   GO 68 Barrie / Newmarket                 shapes 8  midday/5h   3  1-5am 1
+  go   GO 70 Uxbridge / Mount Joy               shapes 5  midday/5h   3  1-5am 0
+  go   GO 71 Stouffville                        shapes 8  midday/5h   0  1-5am 4
+  go   GO 88 Peterborough / Oshawa              shapes 5  midday/5h   3  1-5am 2
+  go   GO 90 Lakeshore East                     shapes 2  midday/5h   0  1-5am 2
+  go   GO 92 Oshawa / Yorkdale                  shapes 3  midday/5h   5  1-5am 3
+  go   GO 94 Pickering / Square One             shapes 2  midday/5h   5  1-5am 4
+  go   GO 96 Oshawa / Finch Express             shapes 2  midday/5h   3  1-5am 0
