@@ -320,6 +320,13 @@ Living here footer the profile's. The live page,
 `https://maps.noumankhan.ca/toronto/#pin=43.66810,-79.36690`, shows the same card; if they ever
 disagree, the live page is right.
 
+**Compare two places** (website, since 1.1): the same card for two spots, merged row by row. Each
+section's rows are lined up by label (the first place's order, then any the second place alone has);
+the label sits above the two values, A then B, with "—" where a place has no row. Caveats and
+footer notes show once per section. Spots outside the city contribute Municipality and region rows
+(Boundaries) and the drive-time row (Living here). Nothing is ranked or highlighted. Links:
+`pin`/`name` for A, `pin2`/`name2` for B.
+
 ## 6. Drive time (outside the city only)
 
 `drive_grid.json`: `{hub, date, spacing_km, points: [[lon, lat, minutes], …]}`. Take the nearest

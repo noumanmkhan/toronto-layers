@@ -2,6 +2,16 @@
 
 ## Since 1.1
 
+### Both cities
+- **Compare two places** (October 11): *Compare with another place* on the What's here card, then tap the
+  map or search for a second spot. The card widens (on desktop) into one table: each of the card's rows,
+  its label above the two places' values (A left, B right), section by section, with a dash where one
+  place has no value; shared caveats and notes appear once per section. Pins are lettered A (purple) and
+  B (orange). A second place outside the city switches to the regional view. Tapping elsewhere replaces B;
+  × drops a place and goes back to the other's card. No highlighting of differences: describe, don't rank.
+  Links add `pin2=lat,lng` and `name2=`. Engine only: no data files change; the iOS app can build the
+  same view from the rows it already has (contract section 5).
+
 ### Toronto
 - **GO buses** (October 11): a new toggle under GO Transit trains draws GO's regional bus routes, in a
   dark GO green, numbered "GO 41" so they never mix with TTC route 41. The regional view shows the whole

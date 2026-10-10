@@ -19,7 +19,7 @@
   --nbhd:#3D4148; --nbhd-fill:#3D4148; --ward:#7A3EC8; --prov:#B0306A; --fed:#1F6FB8; --bia:#E0791A; --hd:#7B5B3A; --sbw:#0E7F6E; --cult:#23262B; --cult-enclave:#B0306A;
   /* transport */
   --st:#FFFFFF; --st-case:#BDB9AE; --hwy:#F7C548; --hwy-case:#3B3F45; --hwy-city:#B6B9BF; --shield:#F7C548; --shield-ink:#1E2126; --shield-city:#2E6B3A;
-  --station:#FFFFFF; --cl-closed:#D3263A; --cl-narrow:#E08A00; --tram:#D7261E; --bus:#2F5FC4;
+  --station:#FFFFFF; --cl-closed:#D3263A; --cl-narrow:#E08A00; --tram:#D7261E; --cmp-b:#D9731A; --bus:#2F5FC4;
   --pill-bg:#F1EFE8;
   --cost-1:#F3E3B3; --cost-2:#E2A64B; --cost-3:#A85A1E; --hty-1:#E6EEF4; --hty-2:#A9C6DE; --hty-3:#5B90BE; --hty-4:#24588A; --mix-1:#C9D9E8; --mix-2:#8AB0D2; --mix-3:#4F82B4; --mix-4:#24588A;
   --com-1:#2E9C8F; --com-2:#C9CDD3; --com-3:#D9894A;
@@ -33,7 +33,7 @@
   --shadow:0 1px 2px rgba(20,22,26,.08),0 8px 24px rgba(20,22,26,.10);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --tram:#F0574D; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
+  --tram:#F0574D; --cmp-b:#F29A4A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
   --water:#13283A; --land-out:#24272D; --land-out-line:#3E434B; --land-far:#1A1C20; --city:#2A2D33; --city-line:#C9CCD2; --muni-label:#7E838B;
   --nbhd:#D7DADF; --nbhd-fill:#D7DADF; --ward:#B892F0; --prov:#F07AAE; --fed:#6CB2FF; --bia:#F39A45; --hd:#D2A877; --sbw:#4CC4AE; --in-university:#5FA8F5; --in-college:#E0A040; --in-hospital:#F06262; --cult:#ECEDEF; --cult-enclave:#F07AAE;
   --tw-res:#3CC2B0; --tw-com:#86A3EE; --tw-mix:#C08BE6; --tw-sup:#E8C547;
@@ -43,7 +43,7 @@
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --tram:#F0574D; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
+  --tram:#F0574D; --cmp-b:#F29A4A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
   --water:#13283A; --land-out:#24272D; --land-out-line:#3E434B; --land-far:#1A1C20; --city:#2A2D33; --city-line:#C9CCD2; --muni-label:#7E838B;
   --nbhd:#D7DADF; --nbhd-fill:#D7DADF; --ward:#B892F0; --prov:#F07AAE; --fed:#6CB2FF; --bia:#F39A45; --hd:#D2A877; --sbw:#4CC4AE; --in-university:#5FA8F5; --in-college:#E0A040; --in-hospital:#F06262; --cult:#ECEDEF; --cult-enclave:#F07AAE;
   --tw-res:#3CC2B0; --tw-com:#86A3EE; --tw-mix:#C08BE6; --tw-sup:#E8C547;
@@ -532,6 +532,42 @@ dl.facts dd{margin:0;font-weight:500;min-width:0}
   .sec dl.facts,.live{padding-left:12px;padding-right:12px}
   .leaflet-top.leaflet-left{display:none}
 }
+/* ---------- Compare two places ---------- */
+.cmp-go{display:block;margin:0 16px 12px;font:inherit;font-size:12px;font-weight:600;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;background:none;color:var(--accent);cursor:pointer}
+.cmp-go:hover{border-color:var(--accent)}
+.cmp-wait{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px 12px;padding:8px 10px;border-radius:8px;background:color-mix(in srgb,var(--accent) 12%,transparent);font-size:12px;line-height:1.4}
+.cmp-wait button{flex:none;font:inherit;font-size:12px;font-weight:600;border:none;border-radius:6px;padding:4px 8px;background:var(--pill-bg);color:var(--ink);cursor:pointer}
+.cmp-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 12px}
+.cmp-c{min-width:0}
+.cmp-top{display:flex;align-items:flex-start;gap:6px}
+.cmp-top strong{flex:1;min-width:0;font-size:13.5px;line-height:1.3;overflow-wrap:anywhere}
+.cmp-k{flex:none;display:grid;place-items:center;width:18px;height:18px;margin-top:1px;border-radius:50%;background:var(--accent);color:#fff;font-size:10.5px;font-weight:700}
+.cmp-c:nth-child(2) .cmp-k{background:var(--cmp-b)}
+.cmp-x{flex:none;border:none;background:none;color:var(--ink-3);font:inherit;font-size:16px;line-height:1;padding:0 2px;cursor:pointer}
+.cmp-x:hover{color:var(--ink)}
+.cmp-c .pills{padding:6px 0 0;gap:4px}
+.cmp-c .pill{font-size:11px;padding:3px 8px 3px 6px}
+.cmp-rows{padding:0 16px 12px;font-size:12.5px}
+.cmp-rows.top{padding-top:2px}
+.cmp-r{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;padding:6px 0;border-top:1px solid var(--rule)}
+.cmp-r:first-child{border-top:none;padding-top:0}
+.cmp-l{grid-column:1/-1;color:var(--ink-3);font-size:11px;margin-bottom:2px}
+.cmp-v{font-weight:500;min-width:0;overflow-wrap:anywhere}
+.cmp-v span{display:block;font-weight:400;color:var(--ink-2);font-size:11.5px}
+.cmp-v span.caveat{color:var(--ink-3);font-size:10.5px;font-style:italic;margin-top:2px;line-height:1.35}
+.cmp-v span.tier{display:inline-flex;align-items:center;gap:6px;font-weight:500;color:var(--ink);font-size:12.5px}
+.cmp-v .tier i{width:9px;height:9px;border-radius:50%}
+.cmp-v span.mix{display:flex;height:7px;border-radius:4px;overflow:hidden;margin:3px 0;background:var(--rule)}
+.cmp-v span.mix i{display:block;height:100%}
+.cmp-v b.dot{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:4px;vertical-align:1px}
+.cmp-v span.standout{display:flex;gap:6px;padding:0;color:var(--ink);font-weight:500;font-size:12px}
+.cmp-v span.standout span{display:inline;color:inherit;font-size:inherit;font-weight:inherit}
+.cmp-v span.cmp-n{color:var(--ink-3)}
+.cmp-rows p{margin:8px 0 0;font-size:10.5px;color:var(--ink-3)}
+.pin.lettered{display:grid;place-items:center;font:700 10px/1 var(--font);color:#fff}
+.pin.b{background:var(--cmp-b);box-shadow:0 0 0 7px color-mix(in srgb,var(--cmp-b) 28%,transparent),0 2px 8px rgba(0,0,0,.4)}
+@media (min-width:761px){#side.cmp{width:min(540px,calc(100vw - 364px))}}
+@media (max-width:760px){.cmp-cols,.cmp-rows{padding-left:12px;padding-right:12px} .cmp-go,.cmp-wait{margin-left:12px;margin-right:12px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <style>

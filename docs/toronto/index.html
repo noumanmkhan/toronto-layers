@@ -684,7 +684,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   --nbhd:#3D4148; --nbhd-fill:#3D4148; --ward:#7A3EC8; --prov:#B0306A; --fed:#1F6FB8; --bia:#E0791A; --hd:#7B5B3A; --sbw:#0E7F6E; --cult:#23262B; --cult-enclave:#B0306A;
   /* transport */
   --st:#FFFFFF; --st-case:#BDB9AE; --hwy:#F7C548; --hwy-case:#3B3F45; --hwy-city:#B6B9BF; --shield:#F7C548; --shield-ink:#1E2126; --shield-city:#2E6B3A;
-  --station:#FFFFFF; --cl-closed:#D3263A; --cl-narrow:#E08A00; --tram:#D7261E; --bus:#2F5FC4;
+  --station:#FFFFFF; --cl-closed:#D3263A; --cl-narrow:#E08A00; --tram:#D7261E; --cmp-b:#D9731A; --bus:#2F5FC4;
   --pill-bg:#F1EFE8;
   --cost-1:#F3E3B3; --cost-2:#E2A64B; --cost-3:#A85A1E; --hty-1:#E6EEF4; --hty-2:#A9C6DE; --hty-3:#5B90BE; --hty-4:#24588A; --mix-1:#C9D9E8; --mix-2:#8AB0D2; --mix-3:#4F82B4; --mix-4:#24588A;
   --com-1:#2E9C8F; --com-2:#C9CDD3; --com-3:#D9894A;
@@ -698,7 +698,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   --shadow:0 1px 2px rgba(20,22,26,.08),0 8px 24px rgba(20,22,26,.10);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --tram:#F0574D; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
+  --tram:#F0574D; --cmp-b:#F29A4A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
   --water:#13283A; --land-out:#24272D; --land-out-line:#3E434B; --land-far:#1A1C20; --city:#2A2D33; --city-line:#C9CCD2; --muni-label:#7E838B;
   --nbhd:#D7DADF; --nbhd-fill:#D7DADF; --ward:#B892F0; --prov:#F07AAE; --fed:#6CB2FF; --bia:#F39A45; --hd:#D2A877; --sbw:#4CC4AE; --in-university:#5FA8F5; --in-college:#E0A040; --in-hospital:#F06262; --cult:#ECEDEF; --cult-enclave:#F07AAE;
   --tw-res:#3CC2B0; --tw-com:#86A3EE; --tw-mix:#C08BE6; --tw-sup:#E8C547;
@@ -708,7 +708,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --tram:#F0574D; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
+  --tram:#F0574D; --cmp-b:#F29A4A; --bus:#6F94EC; --bg:#15171B; --panel:#1E2126; --ink:#ECEDEF; --ink-2:#AEB2B9; --ink-3:#7E838B; --rule:#30343B; --accent:#B892F0; --focus:#6CB2FF; --scroll-thumb:rgba(236,237,239,.3);
   --water:#13283A; --land-out:#24272D; --land-out-line:#3E434B; --land-far:#1A1C20; --city:#2A2D33; --city-line:#C9CCD2; --muni-label:#7E838B;
   --nbhd:#D7DADF; --nbhd-fill:#D7DADF; --ward:#B892F0; --prov:#F07AAE; --fed:#6CB2FF; --bia:#F39A45; --hd:#D2A877; --sbw:#4CC4AE; --in-university:#5FA8F5; --in-college:#E0A040; --in-hospital:#F06262; --cult:#ECEDEF; --cult-enclave:#F07AAE;
   --tw-res:#3CC2B0; --tw-com:#86A3EE; --tw-mix:#C08BE6; --tw-sup:#E8C547;
@@ -1197,6 +1197,42 @@ dl.facts dd{margin:0;font-weight:500;min-width:0}
   .sec dl.facts,.live{padding-left:12px;padding-right:12px}
   .leaflet-top.leaflet-left{display:none}
 }
+/* ---------- Compare two places ---------- */
+.cmp-go{display:block;margin:0 16px 12px;font:inherit;font-size:12px;font-weight:600;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;background:none;color:var(--accent);cursor:pointer}
+.cmp-go:hover{border-color:var(--accent)}
+.cmp-wait{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px 12px;padding:8px 10px;border-radius:8px;background:color-mix(in srgb,var(--accent) 12%,transparent);font-size:12px;line-height:1.4}
+.cmp-wait button{flex:none;font:inherit;font-size:12px;font-weight:600;border:none;border-radius:6px;padding:4px 8px;background:var(--pill-bg);color:var(--ink);cursor:pointer}
+.cmp-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 12px}
+.cmp-c{min-width:0}
+.cmp-top{display:flex;align-items:flex-start;gap:6px}
+.cmp-top strong{flex:1;min-width:0;font-size:13.5px;line-height:1.3;overflow-wrap:anywhere}
+.cmp-k{flex:none;display:grid;place-items:center;width:18px;height:18px;margin-top:1px;border-radius:50%;background:var(--accent);color:#fff;font-size:10.5px;font-weight:700}
+.cmp-c:nth-child(2) .cmp-k{background:var(--cmp-b)}
+.cmp-x{flex:none;border:none;background:none;color:var(--ink-3);font:inherit;font-size:16px;line-height:1;padding:0 2px;cursor:pointer}
+.cmp-x:hover{color:var(--ink)}
+.cmp-c .pills{padding:6px 0 0;gap:4px}
+.cmp-c .pill{font-size:11px;padding:3px 8px 3px 6px}
+.cmp-rows{padding:0 16px 12px;font-size:12.5px}
+.cmp-rows.top{padding-top:2px}
+.cmp-r{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;padding:6px 0;border-top:1px solid var(--rule)}
+.cmp-r:first-child{border-top:none;padding-top:0}
+.cmp-l{grid-column:1/-1;color:var(--ink-3);font-size:11px;margin-bottom:2px}
+.cmp-v{font-weight:500;min-width:0;overflow-wrap:anywhere}
+.cmp-v span{display:block;font-weight:400;color:var(--ink-2);font-size:11.5px}
+.cmp-v span.caveat{color:var(--ink-3);font-size:10.5px;font-style:italic;margin-top:2px;line-height:1.35}
+.cmp-v span.tier{display:inline-flex;align-items:center;gap:6px;font-weight:500;color:var(--ink);font-size:12.5px}
+.cmp-v .tier i{width:9px;height:9px;border-radius:50%}
+.cmp-v span.mix{display:flex;height:7px;border-radius:4px;overflow:hidden;margin:3px 0;background:var(--rule)}
+.cmp-v span.mix i{display:block;height:100%}
+.cmp-v b.dot{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:4px;vertical-align:1px}
+.cmp-v span.standout{display:flex;gap:6px;padding:0;color:var(--ink);font-weight:500;font-size:12px}
+.cmp-v span.standout span{display:inline;color:inherit;font-size:inherit;font-weight:inherit}
+.cmp-v span.cmp-n{color:var(--ink-3)}
+.cmp-rows p{margin:8px 0 0;font-size:10.5px;color:var(--ink-3)}
+.pin.lettered{display:grid;place-items:center;font:700 10px/1 var(--font);color:#fff}
+.pin.b{background:var(--cmp-b);box-shadow:0 0 0 7px color-mix(in srgb,var(--cmp-b) 28%,transparent),0 2px 8px rgba(0,0,0,.4)}
+@media (min-width:761px){#side.cmp{width:min(540px,calc(100vw - 364px))}}
+@media (max-width:760px){.cmp-cols,.cmp-rows{padding-left:12px;padding-right:12px} .cmp-go,.cmp-wait{margin-left:12px;margin-right:12px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <style>
@@ -2456,31 +2492,23 @@ function nearCommunity(x, y, title){
   return '<span class="pill"><i style="background:var(--cult-enclave)"></i>Near ' + esc(c[0].name) + '</span>';
 }
 let lastInspect = null;
-function inspect(latlng, title, muniName){
-  if (swallowTap) return;
-  // A new spot starts the card at the top; a redraw of the same spot (data arriving) keeps the scroll.
-  if (!lastInspect || !lastInspect[0].equals(latlng)) here.scrollTop = 0;
-  lastInspect = [latlng, title, muniName];
+/* A spot's card, built once into parts so it can be shown alone or beside another spot (Compare).
+   null: the spot is beyond the region. Builds HTML only; placing pins is the renderer's job. */
+function cardOf(latlng, title, muniName){
   const x = latlng.lng, y = latlng.lat;
   if (!hit(data.footprint, x, y)){
     // A named community already knows its municipality: the map's shapes are trimmed to a coarse
     // shoreline, so a lakeside place can otherwise land just outside them.
     const muni = hit(data.outer, x, y) || (muniName && data.outer.features.find(f => f.properties.name === muniName));
-    if (!muni){ here.hidden = false; renderEmpty(CITY.outside.beyond); return; }
-    placePin(latlng, title);
-    const m = muni.properties;
-    here.hidden = false;
-    here.innerHTML = '<div class="hh"><div><small>What’s here</small><strong>' + esc(title || m.name) + '</strong></div><div class="hb"><button type="button" class="share" aria-label="Share this spot" title="Share a link to this spot">' + SHARE_ICON + '</button><button type="button" aria-label="Close" id="hereX">×</button></div></div>' +
-      '<div class="pills">' + nearCommunity(x, y, title) + '<span class="pill"><i style="background:var(--land-out-line)"></i>' + esc(m.name) + '</span><span class="pill"><i style="background:var(--muni-label)"></i>' + esc(fill(CITY.outside.regionPill, m)) + '</span></div>' +
-      driveHere(x, y, m) +
-      (regionFeature(m.region) && focusKey !== m.region ? '<button type="button" class="focus-go">' + esc(fill(CITY.focus.show, {name: regionName(m.region)})) + '</button>' : '') +
-      '<p class="outside-note">' + esc(CITY.outside.note) + '</p>';
-    document.getElementById('hereX').onclick = closeHere;
-    here.querySelector('.share').onclick = share;
-    const fg = here.querySelector('.focus-go'); if (fg) fg.onclick = () => setFocus(m.region, true);
-    return;
+    if (!muni) return null;
+    const m = muni.properties, rp = fill(CITY.outside.regionPill, m);
+    return {outside: true, x, y, m, heading: title || m.name,
+      pills: nearCommunity(x, y, title) + '<span class="pill"><i style="background:var(--land-out-line)"></i>' + esc(m.name) + '</span><span class="pill"><i style="background:var(--muni-label)"></i>' + esc(rp) + '</span>',
+      drive: driveHere(x, y, m),
+      // For Compare: the same facts as rows, so they line up with a spot inside the city.
+      sections: [['bounds', 'Boundaries', '<dl class="facts"><dt>Municipality</dt><dd>' + esc(m.name) + '</dd><dt>' + esc(CITY.focus.noun || 'Region') + '</dt><dd>' + esc(rp) + '</dd></dl>'],
+                 ['live', 'Living here', driveHere(x, y, m)]]};
   }
-  placePin(latlng, title);
   const hits = {};
   LAYERS.filter(it => AREA_KINDS.includes(it.kind)).forEach(it => { hits[it.id] = hit(data.layers[it.id], x, y); });
   BOARDS.forEach(it => { hits[it.id] = boardHits(it, x, y); });
@@ -2509,23 +2537,136 @@ function inspect(latlng, title, muniName){
   const area = LAYERS.filter(it => it.kind === 'fill').map(it => hits[it.id]).find(Boolean);
   const coords = Math.abs(y).toFixed(4) + '° ' + (y >= 0 ? 'N' : 'S') + ', ' + Math.abs(x).toFixed(4) + '° ' + (x < 0 ? 'W' : 'E');
   const heading = title || (unit && unit.properties.name) || (area && area.properties.name) || coords;
-  here.hidden = false;
-  here.innerHTML = '<div class="hh"><div><small>What’s here</small><strong>' + esc(heading) + '</strong></div><div class="hb"><button type="button" class="share" aria-label="Share this spot" title="Share a link to this spot">' + SHARE_ICON + '</button><button type="button" aria-label="Close" id="hereX">×</button></div></div>' +
-    '<div class="pills">' + pills.map(p => '<span class="pill"><i style="background:' + p[0] + '"></i>' + esc(p[1]) + '</span>').join('') + '</div>' +
-    focusChips(hits) +
-    towerCard(towerAt(x, y, title)) +
-    standout(unit, heading) +
-    section('bounds', 'Boundaries', '<dl class="facts">' + facts.map(f => '<dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd>').join('') + '</dl>') +
-    section('live', 'Living here', livingHere(UNITS && hits[UNITS.id])) +
-    section('schools', (CITY.card.schools && CITY.card.schools.title) || 'Schools', schools(x, y)) +
-    section('transit', (TR && TR.title) || 'Transit', transitHere(x, y)) +
-    section('near', 'Nearby', nearby(x, y)) +
-    section('reps', 'Representatives', representatives(hits));
+  return {outside: false, x, y, hits, heading,
+    pills: pills.map(p => '<span class="pill"><i style="background:' + p[0] + '"></i>' + esc(p[1]) + '</span>').join(''),
+    focus: focusChips(hits), tower: towerCard(towerAt(x, y, title)), standout: standout(unit, heading),
+    sections: [['bounds', 'Boundaries', '<dl class="facts">' + facts.map(f => '<dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd>').join('') + '</dl>'],
+               ['live', 'Living here', livingHere(unit)],
+               ['schools', (CITY.card.schools && CITY.card.schools.title) || 'Schools', schools(x, y)],
+               ['transit', (TR && TR.title) || 'Transit', transitHere(x, y)],
+               ['near', 'Nearby', nearby(x, y)],
+               ['reps', 'Representatives', representatives(hits)]]};
+}
+const cardHead = (small, heading, extra) => '<div class="hh"><div><small>' + esc(small) + '</small><strong>' + esc(heading) + '</strong></div><div class="hb">' + (extra || '') +
+  '<button type="button" class="share" aria-label="Share this spot" title="Share a link to this spot">' + SHARE_ICON + '</button><button type="button" aria-label="Close" id="hereX">×</button></div></div>';
+// What every card's buttons do: close, share, route chips, focus chips, compare, section open/closed.
+function wireCard(){
   document.getElementById('hereX').onclick = closeHere;
-  here.querySelector('.share').onclick = share;
+  const sh = here.querySelector('.share'); if (sh) sh.onclick = share;
   here.querySelectorAll('[data-route]').forEach(b => b.addEventListener('click', () => pickRoute(b.dataset.route, !picked.has(b.dataset.route))));
   here.querySelectorAll('[data-pf]').forEach(b => b.addEventListener('click', () => { const [id, ...n] = b.dataset.pf.split(':'); setPlaceFocus(id, n.join(':'), true); }));
   here.querySelectorAll('details.sec').forEach(d => d.addEventListener('toggle', () => { secOpen[d.dataset.sec] = d.open; try { localStorage.setItem('cardSections', JSON.stringify(secOpen)); } catch (e) {} }));
+  const cg = here.querySelector('.cmp-go'); if (cg) cg.onclick = startCompare;
+  const cc = here.querySelector('.cmp-cancel'); if (cc) cc.onclick = () => endCompare(0);
+  here.querySelectorAll('[data-drop]').forEach(b => b.addEventListener('click', () => endCompare(+b.dataset.drop)));
+}
+function inspect(latlng, title, muniName){
+  if (swallowTap) return;
+  // Comparing: a new spot becomes the second place (B); tapping place A again does nothing.
+  if (cmp && !(cmp.a[0].equals(latlng) && !cmp.b)){
+    if (cmp.a[0].equals(latlng)) return;
+    meNext = false;   // B is never drawn as the phone's own location
+    if (!cardOf(latlng, title, muniName)){ renderEmpty(CITY.outside.beyond); here.hidden = false; return; }
+    cmp.b = [latlng, title, muniName];
+    // A second place beyond the city limits: show the region, so its pin isn't under the mask.
+    if (scope === 'inner' && data.footprint && !hit(data.footprint, latlng.lng, latlng.lat)) setScope('outer', false);
+    renderCompare(); return;
+  }
+  // A new spot starts the card at the top; a redraw of the same spot (data arriving) keeps the scroll.
+  if (!lastInspect || !lastInspect[0].equals(latlng)) here.scrollTop = 0;
+  lastInspect = [latlng, title, muniName];
+  const c = cardOf(latlng, title, muniName);
+  if (!c){ here.hidden = false; renderEmpty(CITY.outside.beyond); return; }
+  placePin(latlng, title);
+  here.hidden = false;
+  // Waiting for the second place: a note with Cancel stands where the Compare button was.
+  const cmpRow = cmp ? '<div class="cmp-wait"><span>' + esc(fill(CMP.wait, {name: c.heading})) + '</span><button type="button" class="cmp-cancel">' + esc(CMP.cancel) + '</button></div>'
+    : '<button type="button" class="cmp-go">' + esc(CMP.start) + '</button>';
+  if (c.outside){
+    const m = c.m;
+    here.innerHTML = cardHead('What’s here', c.heading) +
+      '<div class="pills">' + c.pills + '</div>' + c.drive +
+      (regionFeature(m.region) && focusKey !== m.region ? '<button type="button" class="focus-go">' + esc(fill(CITY.focus.show, {name: regionName(m.region)})) + '</button>' : '') +
+      cmpRow + '<p class="outside-note">' + esc(CITY.outside.note) + '</p>';
+    wireCard();
+    const fg = here.querySelector('.focus-go'); if (fg) fg.onclick = () => setFocus(m.region, true);
+    return;
+  }
+  here.innerHTML = cardHead('What’s here', c.heading) + '<div class="pills">' + c.pills + '</div>' + c.focus + c.tower + c.standout + cmpRow +
+    c.sections.map(([id, t, body]) => section(id, t, body)).join('');
+  wireCard();
+}
+/* ---------- Compare two places ----------
+   "Compare with another place" on the card, then tap the map or search: the card widens into one table,
+   each row's label above the two places' values (A on the left, B on the right), section by section, the
+   same rows the card has. Nothing is marked as better or worse. Tapping elsewhere replaces B; removing a
+   place goes back to the other one's card. Links keep both (pin2=, name2=). */
+const CMP = Object.assign({start: 'Compare with another place', wait: 'Now tap the map or search for a place to compare with {name}.', cancel: 'Cancel',
+  title: 'Comparing', remove: 'Remove', stands: 'Stands out', none: '—'}, CITY.card.compare || {});
+let cmp = null, pinB = null;
+function startCompare(){
+  if (!lastInspect) return;
+  cmp = {a: lastInspect.slice(), b: null};
+  inspect(...lastInspect); queueHash();
+}
+// Leave Compare keeping one place: drop = 0 removes A (B's card stays), 1 removes B.
+function endCompare(drop){
+  const keep = cmp && (drop === 0 && cmp.b ? cmp.b : cmp.a);
+  cmp = null;
+  if (pinB){ map.removeLayer(pinB); pinB = null; }
+  document.getElementById('side').classList.remove('cmp');
+  pinLabel('');
+  if (keep){ lastInspect = null; inspect(...keep); }
+  queueHash();
+}
+function pinLabel(k){ const d = pin && pin.getElement() && pin.getElement().querySelector('.pin'); if (d){ d.textContent = k; d.classList.toggle('lettered', !!k); } }
+// The rows of a card section, as [{key, label, html}] (a label seen twice gets a numbered key), and its notes.
+function rowsOf(body){
+  const t = document.createElement('template'); t.innerHTML = body || '';
+  const seen = {}, rows = [], caveats = [];
+  // Caveats ("Representative 2021 Census figures…") say the same thing for both places: once, under the section.
+  t.content.querySelectorAll('dd span.caveat').forEach(c => { caveats.push(c.innerHTML); c.remove(); });
+  t.content.querySelectorAll('dt').forEach(dt => {
+    const label = dt.textContent.trim(), dd = dt.nextElementSibling;
+    seen[label] = (seen[label] || 0) + 1;
+    rows.push({key: label + '#' + seen[label], label: dt.innerHTML, html: dd && dd.tagName === 'DD' ? dd.innerHTML : ''});
+  });
+  const notes = caveats.concat([...t.content.querySelectorAll('p')].filter(p => !p.closest('dd')).map(p => p.innerHTML));
+  return {rows, notes};
+}
+function renderCompare(){
+  const A = cardOf(...cmp.a), B = cardOf(...cmp.b);
+  if (!A || !B){ endCompare(A ? 1 : 0); return; }
+  placePin(cmp.a[0], cmp.a[1]); pinLabel('A');
+  if (pinB) pinB.setLatLng(cmp.b[0]);
+  else pinB = L.marker(cmp.b[0], {pane:'pin', interactive:false, keyboard:false, icon: L.divIcon({className:'', iconSize:[20, 20], iconAnchor:[10, 10], html:'<span class="pin b lettered">B</span>'})}).addTo(map);
+  document.getElementById('side').classList.add('cmp');
+  here.hidden = false;
+  const both = (label, a, b) => '<div class="cmp-r"><div class="cmp-l">' + label + '</div><div class="cmp-v">' + (a || '<span class="cmp-n">' + CMP.none + '</span>') + '</div><div class="cmp-v">' + (b || '<span class="cmp-n">' + CMP.none + '</span>') + '</div></div>';
+  const cols = [A, B].map((c, i) => '<div class="cmp-c"><div class="cmp-top"><span class="cmp-k">' + 'AB'[i] + '</span><strong>' + esc(c.heading) + '</strong>' +
+    '<button type="button" class="cmp-x" data-drop="' + i + '" aria-label="' + esc(CMP.remove + ' ' + c.heading) + '" title="' + esc(CMP.remove) + '">×</button></div><div class="pills">' + c.pills + '</div></div>').join('');
+  const strip = h => h ? h.replace(/^<p class="standout">/, '<span class="standout">').replace(/<\/p>$/, '</span>') : '';
+  let html = (A.standout || B.standout) ? '<div class="cmp-rows top">' + both(esc(CMP.stands), strip(A.standout), strip(B.standout)) + '</div>' : '';
+  // Sections in the card's order; a section only one place has still shows, with dashes for the other.
+  const ids = [], byId = [{}, {}];
+  [A, B].forEach((c, i) => c.sections.forEach(([id, t, body]) => { if (!body) return; byId[i][id] = [t, body]; if (!ids.includes(id)) ids.push(id); }));
+  ids.forEach(id => {
+    const ra = rowsOf((byId[0][id] || [])[1]), rb = rowsOf((byId[1][id] || [])[1]);
+    const keys = ra.rows.map(r => r.key).concat(rb.rows.map(r => r.key).filter(k => !ra.rows.some(r => r.key === k)));
+    const get = (rs, k) => rs.rows.find(r => r.key === k);
+    const rows = keys.map(k => { const a = get(ra, k), b = get(rb, k); return both((a || b).label, a && a.html, b && b.html); }).join('');
+    const notes = [...new Set(ra.notes.concat(rb.notes))].map(n => '<p>' + n + '</p>').join('');
+    html += section(id, (byId[0][id] || byId[1][id])[0], '<div class="cmp-rows">' + rows + notes + '</div>');
+  });
+  here.innerHTML = cardHead('What’s here', CMP.title) + '<div class="cmp-cols">' + cols + '</div>' + html;
+  wireCard();
+  queueHash();
+}
+// Redraw whatever the card shows (data arrived, focus changed).
+function redrawCard(){
+  if (here.hidden) return;
+  if (cmp && cmp.b) renderCompare();
+  else if (lastInspect) inspect(...lastInspect);
 }
 // What makes the unit stand out among its peers (engine/facts.py, built ahead of time): the strongest fact.
 function standout(unit, heading){
@@ -2566,7 +2707,12 @@ here.addEventListener('scroll', () => {
 if (window.ResizeObserver) new ResizeObserver(() => {
   document.documentElement.style.setProperty('--panel-h', (matchMedia('(max-width:760px)').matches && !panel.hidden ? panel.offsetHeight : 0) + 'px');
 }).observe(panel);
-function closeHere(){ here.hidden = true; if (meRing){ map.removeLayer(meRing); meRing = null; } if (pin){ map.removeLayer(pin); pin = null; pinIsMe = false; queueHash(); } }
+function closeHere(){
+  here.hidden = true; if (meRing){ map.removeLayer(meRing); meRing = null; }
+  if (cmp){ cmp = null; document.getElementById('side').classList.remove('cmp'); }
+  if (pinB){ map.removeLayer(pinB); pinB = null; }
+  if (pin){ map.removeLayer(pin); pin = null; pinIsMe = false; queueHash(); }
+}
 
 /* ---------- Theme: Auto (device setting), Light or Dark; remembered in this browser ---------- */
 function applyTheme(choice){
@@ -2971,7 +3117,7 @@ function setPlaceFocus(id, name, move){
   if (!f || (same && move)){
     map.getContainer().classList.remove('pfocus');
     drawPlaceBox();
-    if (lastInspect && !here.hidden) inspect(...lastInspect);
+    redrawCard();
     queueDeclutter(); queueHash(); return;
   }
   if (scope !== 'inner') setScope('inner', false);
@@ -2993,7 +3139,7 @@ function setPlaceFocus(id, name, move){
     // On a phone, clear the way to the map; the panel keeps a one-line reminder with Exit.
     if (!wide()){ panel.classList.add('collapsed'); closeHere(); }
   }
-  if (lastInspect && !here.hidden) inspect(...lastInspect);
+  redrawCard();
   queueDeclutter(); queueHash();
 }
 // The card's "Focus on" chips: the unit, then the areas it sits in.
@@ -3084,6 +3230,7 @@ function linkState(){
   const c = map.getCenter(), z = map.getZoom();
   const parts = [['map', (Math.round(z * 4) / 4) + '/' + c.lat.toFixed(5) + '/' + c.lng.toFixed(5)]];
   if (pin && !pinIsMe){ const p = pin.getLatLng(); parts.push(['pin', p.lat.toFixed(5) + ',' + p.lng.toFixed(5)]); if (pinName) parts.push(['name', pinName]); }
+  if (cmp && cmp.b){ const p = cmp.b[0]; parts.push(['pin2', p.lat.toFixed(5) + ',' + p.lng.toFixed(5)]); if (cmp.b[1]) parts.push(['name2', cmp.b[1]]); }
   if (scope === 'outer') parts.push(['view', 'region']);
   if (focusKey) parts.push(['focus', focusKey]);
   if (placeF) parts.push(['focus', placeF.id + ':' + placeF.name]);
@@ -3150,10 +3297,18 @@ function applyHash(h){
   const m = o.map ? num(o.map) : null, ok = a => a && a.every(Number.isFinite);
   const p = o.pin ? num(o.pin) : null;
   if (ok(m) && m.length === 3) map.setView([m[1], m[2]], m[0], {animate: false});
+  const p2 = o.pin2 ? num(o.pin2) : null;
+  if (cmp || pinB) endCompare(1);
   if (ok(p) && p.length === 2){
     const at = L.latLng(p[0], p[1]);
     if (ok(m)) inspect(at, o.name || undefined);
     else goTo(at, o.name || '', false);
+    // A shared comparison: the second place, and a view that holds both when the link gives none.
+    if (ok(p2) && p2.length === 2 && lastInspect){
+      cmp = {a: lastInspect.slice(), b: null};
+      inspect(L.latLng(p2[0], p2[1]), o.name2 || undefined);
+      if (!ok(m)) frame(L.latLngBounds([at, L.latLng(p2[0], p2[1])]).pad(.3));
+    }
   } else closeHere();
   if (!ok(m) && !(ok(p) && p.length === 2)) frame(placeF ? L.geoJSON(placeF.f).getBounds() : scope === 'inner' ? CITY_BOUNDS : focusKey ? L.geoJSON(regionFeature(focusKey)).getBounds() : REGION_VIEW);
   return true;
@@ -3415,12 +3570,12 @@ Promise.all(files.map(f => get(f).catch(e => { if (OPTIONAL.has(f)) return {type
   if (TR) get(TR.file).then(d => {
     data.transit = d;
     drawStops(); drawBusBox(); if (placeF) drawPlaceBox();
-    if (!here.hidden && lastInspect && hit(data.footprint, lastInspect[0].lng, lastInspect[0].lat)) inspect(...lastInspect);
+    redrawCard();
   }).catch(() => { data.transit = null; });
   // Attendance areas are big: fetched after the map is up, then the open card is redrawn with them.
   if (CITY.card.schools) get(CITY.card.schools.file).then(d => {
     data.schools = d;
-    if (!here.hidden && lastInspect && hit(data.footprint, lastInspect[0].lng, lastInspect[0].lat)) inspect(...lastInspect);
+    redrawCard();
   }).catch(() => { data.schools = null; });
 }).catch(err => { renderEmpty('The map data didn’t load (' + err.message + '). Reload the page to try again.'); });
 })();
