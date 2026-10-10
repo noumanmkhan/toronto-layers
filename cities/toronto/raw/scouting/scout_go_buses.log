@@ -1,0 +1,59 @@
+files: ['agency.txt', 'routes.txt', 'stops.txt', 'stop_times.txt', 'trips.txt', 'feed_info.txt', 'calendar_dates.txt', 'shapes.txt', 'fare_rules.txt', 'fare_attributes.txt', 'transfers.txt', 'stop_amenities.txt']
+route types {'2': 7, '3': 37} · bus routes 37
+feed 2026-10-05 - 2026-11-27 · weekday 2026-10-14 · saturday 2026-10-17
+bus trips on those days 2674
+{
+ "source": "https://assets.metrolinx.com/raw/upload/Documents/Metrolinx/Open%20Data/GO-GTFS.zip",
+ "fetched": "2026-10-10",
+ "feed": [
+  "2026-10-05",
+  "2026-11-27"
+ ],
+ "weekday": "2026-10-14",
+ "saturday": "2026-10-17",
+ "route_types": {
+  "2": 7,
+  "3": 37
+ },
+ "bus_routes": 37,
+ "bus_routes_running": 37,
+ "bus_routes_touching_toronto": 21,
+ "bus_stops_in_toronto": 44
+}
+   11 Brock University                             wk   16 sat    0 mid 100 stops  22 TO   0 km   80.9 inTO   0.0 pickOnly 0 dropOnly 0 06:12:00-20:05:00
+   12 Niagara Falls / Burlington                   wk   58 sat   67 mid 30 stops  12 TO   0 km   92.6 inTO   0.0 pickOnly 0 dropOnly 0 04:22:00-23:46:00
+   15 Brantford / Aldershot                        wk   31 sat   24 mid 75 stops  28 TO   0 km   49.7 inTO   0.0 pickOnly 0 dropOnly 0 05:15:00-24:08:00
+   16 Hamilton / Toronto Express                   wk   25 sat   58 mid 75 stops  16 TO   1 km   62.5 inTO  16.8 pickOnly 0 dropOnly 0 05:15:00-24:30:00
+   17 Waterloo / Hamilton                          wk   28 sat    0 mid 60 stops  49 TO   0 km   91.9 inTO   0.0 pickOnly 0 dropOnly 0 05:05:00-21:00:00
+   18 Lakeshore West                               wk   14 sat  227 mid None stops  28 TO   1 km   79.1 inTO  16.8 pickOnly 0 dropOnly 0 04:15:00-26:30:00
+   19 Mississauga / North York                     wk   71 sat   45 mid 50 stops  30 TO  23 km   32.6 inTO  23.1 pickOnly 0 dropOnly 0 05:15:00-24:20:00
+   21 Milton                                       wk   89 sat   94 mid 14 stops  95 TO   1 km   53.3 inTO  22.3 pickOnly 0 dropOnly 0 03:45:00-26:20:00
+   22 Milton / Oakville                            wk   16 sat    0 mid 150 stops  43 TO   0 km   27.3 inTO   0.0 pickOnly 0 dropOnly 0 06:54:00-21:10:00
+   25 Waterloo / Mississauga                       wk   51 sat   78 mid 50 stops  19 TO   0 km   95.2 inTO   0.0 pickOnly 0 dropOnly 0 05:25:00-23:45:00
+   27 Milton / North York                          wk   56 sat   33 mid 50 stops  83 TO  22 km   63.8 inTO  18.8 pickOnly 0 dropOnly 0 05:05:00-24:15:00
+   29 Guelph / Mississauga                         wk   41 sat   32 mid 50 stops  31 TO   1 km   82.4 inTO   7.5 pickOnly 0 dropOnly 0 05:20:00-23:55:00
+   30 Kitchener / Vaughan                          wk   50 sat   63 mid 43 stops  19 TO   0 km  106.6 inTO   0.0 pickOnly 0 dropOnly 0 04:23:00-24:08:00
+   31 Guelph / Toronto                             wk   20 sat   17 mid 300 stops 106 TO   1 km   61.8 inTO  25.4 pickOnly 0 dropOnly 0 04:00:00-26:31:00
+   32 Brampton Trinity Common / North York         wk   40 sat    0 mid 60 stops  28 TO   3 km   43.3 inTO   1.5 pickOnly 0 dropOnly 0 05:25:00-19:35:00
+   33 Guelph / North York                          wk   68 sat   23 mid 38 stops 111 TO   5 km   44.8 inTO  19.4 pickOnly 0 dropOnly 0 04:55:00-24:30:00
+   36 Brampton / North York Express                wk   32 sat   46 mid 60 stops  15 TO   5 km   36.5 inTO  23.2 pickOnly 0 dropOnly 0 05:00:00-24:55:00
+   37 Orangeville / Brampton                       wk   14 sat    0 mid 300 stops  55 TO   0 km   43.1 inTO   0.0 pickOnly 0 dropOnly 0 04:40:00-22:26:00
+   38 Bolton / Malton                              wk    4 sat    0 mid None stops  36 TO   0 km   23.9 inTO   2.2 pickOnly 0 dropOnly 0 05:09:00-18:45:00
+   40 Hamilton / Richmond Hill                     wk  101 sat   78 mid 23 stops  35 TO   3 km   86.6 inTO   7.6 pickOnly 0 dropOnly 0 03:15:00-25:50:00
+   41 Hamilton / Pickering                         wk  144 sat    0 mid 11 stops  50 TO  11 km  141.4 inTO  26.3 pickOnly 0 dropOnly 0 04:40:00-22:10:00
+   43 Mount Pleasant / McMaster                    wk   20 sat    0 mid 150 stops  44 TO   0 km   60.1 inTO   0.0 pickOnly 0 dropOnly 0 06:35:00-19:35:00
+   47 Hamilton / Hwy 407 Terminal                  wk   87 sat   70 mid 21 stops  28 TO   0 km   75.5 inTO   0.0 pickOnly 0 dropOnly 0 04:45:00-25:10:00
+   48 Guelph / Hwy 407 Terminal                    wk   33 sat    0 mid 60 stops  58 TO   0 km   85.5 inTO   0.0 pickOnly 0 dropOnly 0 04:45:00-24:45:00
+   52 Oshawa / Hwy 407 Terminal                    wk    6 sat   26 mid None stops  25 TO   0 km   78.8 inTO   0.0 pickOnly 0 dropOnly 0 06:20:00-17:05:00
+   56 Oshawa / Oakville                            wk   80 sat    0 mid 25 stops  50 TO   0 km  136.5 inTO   0.0 pickOnly 0 dropOnly 0 03:40:00-22:50:00
+   61 Richmond Hill                                wk   16 sat    0 mid 75 stops  35 TO   1 km   48.7 inTO  20.3 pickOnly 0 dropOnly 0 05:00:00-25:40:00
+   65 Newmarket / Toronto                          wk   19 sat   34 mid None stops  41 TO   1 km   75.9 inTO  32.9 pickOnly 0 dropOnly 0 04:20:00-26:12:00
+   67 Keswick / North York                         wk    7 sat    0 mid None stops  27 TO  19 km   60.2 inTO  13.6 pickOnly 0 dropOnly 0 05:55:00-18:15:00
+   68 Barrie / Newmarket                           wk   20 sat   25 mid 100 stops  89 TO   1 km   49.9 inTO   0.0 pickOnly 0 dropOnly 0 04:10:00-23:07:00
+   70 Uxbridge / Mount Joy                         wk   15 sat    1 mid 100 stops  64 TO   0 km   29.5 inTO   0.0 pickOnly 0 dropOnly 0 06:30:00-23:51:00
+   71 Stouffville                                  wk   19 sat   65 mid None stops  75 TO   1 km   48.7 inTO  20.3 pickOnly 0 dropOnly 0 04:20:00-26:45:00
+   88 Peterborough / Oshawa                        wk   23 sat   22 mid 100 stops  43 TO   0 km   91.7 inTO   0.0 pickOnly 0 dropOnly 0 04:33:00-25:04:00
+   90 Lakeshore East                               wk    5 sat   12 mid None stops   7 TO   1 km   62.7 inTO  33.8 pickOnly 0 dropOnly 0 04:00:00-26:20:00
+   92 Oshawa / Yorkdale                            wk   45 sat   35 mid 60 stops  49 TO   6 km   60.9 inTO  30.9 pickOnly 0 dropOnly 0 04:00:00-24:50:00
+   94 Pickering / Square One                       wk   42 sat   41 mid 60 stops  23 TO   7 km   68.0 inTO  48.0 pickOnly 0 dropOnly 0 03:20:00-26:30:00
+   96 Oshawa / Finch Express                       wk   30 sat   22 mid 100 stops  25 TO  20 km   52.8 inTO  27.9 pickOnly 0 dropOnly 0 05:00:00-21:05:00

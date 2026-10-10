@@ -1,0 +1,1126 @@
+{
+ "source": "https://assets.metrolinx.com/raw/upload/Documents/Metrolinx/Open%20Data/GO-GTFS.zip",
+ "fetched": "2026-10-10",
+ "feed": [
+  "2026-10-05",
+  "2026-11-27"
+ ],
+ "weekday": "2026-10-14",
+ "saturday": "2026-10-17",
+ "files": [
+  "agency.txt",
+  "routes.txt",
+  "stops.txt",
+  "stop_times.txt",
+  "trips.txt",
+  "feed_info.txt",
+  "calendar_dates.txt",
+  "shapes.txt",
+  "fare_rules.txt",
+  "fare_attributes.txt",
+  "transfers.txt",
+  "stop_amenities.txt"
+ ],
+ "agencies": [
+  {
+   "agency_id": "GO",
+   "agency_name": "GO Transit",
+   "agency_url": "https://www.gotransit.com",
+   "agency_timezone": "America/Toronto",
+   "agency_lang": "en",
+   "agency_phone": "1.888.438.6646",
+   "agency_fare_url": "https://tickets.gotransit.com"
+  }
+ ],
+ "route_types": {
+  "2": 7,
+  "3": 37
+ },
+ "bus_routes": 37,
+ "bus_routes_running": 37,
+ "bus_routes_touching_toronto": 21,
+ "bus_stops_in_toronto": 44,
+ "routes": [
+  {
+   "id": "09261126-11",
+   "short": "11",
+   "long": "Brock University",
+   "type": "3",
+   "color": "98002e",
+   "agency": "GO",
+   "weekday_trips": 16,
+   "saturday_trips": 0,
+   "midday_wait_min": 100,
+   "first_dep": "06:12:00",
+   "last_dep": "20:05:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "11 - Aldershot GO": 8,
+    "11 - Brock University": 8
+   },
+   "stops": 22,
+   "toronto_stops": 0,
+   "km_dir0": 80.9,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-12",
+   "short": "12",
+   "long": "Niagara Falls / Burlington",
+   "type": "3",
+   "color": "98002e",
+   "agency": "GO",
+   "weekday_trips": 58,
+   "saturday_trips": 67,
+   "midday_wait_min": 30,
+   "first_dep": "04:22:00",
+   "last_dep": "23:46:00",
+   "shapes_used_weekday": {
+    "0": 3,
+    "1": 3
+   },
+   "headsigns": {
+    "12 - Niagara Falls": 35,
+    "12 - Burlington Carpool": 35,
+    "12B - Burlington GO": 24,
+    "12B - Niagara Falls": 21,
+    "12D - Burlington GO": 5,
+    "12D - Niagara Falls": 4
+   },
+   "stops": 12,
+   "toronto_stops": 0,
+   "km_dir0": 92.6,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-15",
+   "short": "15",
+   "long": "Brantford / Aldershot",
+   "type": "3",
+   "color": "98002e",
+   "agency": "GO",
+   "weekday_trips": 31,
+   "saturday_trips": 24,
+   "midday_wait_min": 75,
+   "first_dep": "05:15:00",
+   "last_dep": "24:08:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 3
+   },
+   "headsigns": {
+    "15 - Aldershot GO": 22,
+    "15 - Brantford Term": 19,
+    "15B - SNGR/MCFN": 6,
+    "15B - Aldershot GO": 6,
+    "15A - McMaster U": 2
+   },
+   "stops": 28,
+   "toronto_stops": 0,
+   "km_dir0": 49.7,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-16",
+   "short": "16",
+   "long": "Hamilton / Toronto Express",
+   "type": "3",
+   "color": "98002e",
+   "agency": "GO",
+   "weekday_trips": 25,
+   "saturday_trips": 58,
+   "midday_wait_min": 75,
+   "first_dep": "05:15:00",
+   "last_dep": "24:30:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "16 - Union Station": 43,
+    "16 - Hamilton GO": 40
+   },
+   "stops": 16,
+   "toronto_stops": 1,
+   "km_dir0": 62.5,
+   "km_in_toronto_dir0": 16.8,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-17",
+   "short": "17",
+   "long": "Waterloo / Hamilton",
+   "type": "3",
+   "color": "f78025",
+   "agency": "GO",
+   "weekday_trips": 28,
+   "saturday_trips": 0,
+   "midday_wait_min": 60,
+   "first_dep": "05:05:00",
+   "last_dep": "21:00:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "17 - U of Waterloo": 14,
+    "17 - Hamilton GO": 14
+   },
+   "stops": 49,
+   "toronto_stops": 0,
+   "km_dir0": 91.9,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-18",
+   "short": "18",
+   "long": "Lakeshore West",
+   "type": "3",
+   "color": "98002e",
+   "agency": "GO",
+   "weekday_trips": 14,
+   "saturday_trips": 227,
+   "midday_wait_min": null,
+   "first_dep": "04:15:00",
+   "last_dep": "26:30:00",
+   "shapes_used_weekday": {
+    "0": 3,
+    "1": 5
+   },
+   "headsigns": {
+    "18Y - Oakville GO": 31,
+    "18Y - Burlington GO": 30,
+    "18P - Aldershot GO": 30,
+    "18Z - Oakville GO": 24,
+    "18P - Oakville GO": 23,
+    "18Z - Aldershot GO": 21
+   },
+   "stops": 28,
+   "toronto_stops": 1,
+   "km_dir0": 79.1,
+   "km_in_toronto_dir0": 16.8,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-19",
+   "short": "19",
+   "long": "Mississauga / North York",
+   "type": "3",
+   "color": "f57f25",
+   "agency": "GO",
+   "weekday_trips": 71,
+   "saturday_trips": 45,
+   "midday_wait_min": 50,
+   "first_dep": "05:15:00",
+   "last_dep": "24:20:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 1
+   },
+   "headsigns": {
+    "19 - Square One": 58,
+    "19 - Finch Terminal": 58
+   },
+   "stops": 30,
+   "toronto_stops": 23,
+   "km_dir0": 32.6,
+   "km_in_toronto_dir0": 23.1,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-21",
+   "short": "21",
+   "long": "Milton",
+   "type": "3",
+   "color": "f57f25",
+   "agency": "GO",
+   "weekday_trips": 89,
+   "saturday_trips": 94,
+   "midday_wait_min": 14,
+   "first_dep": "03:45:00",
+   "last_dep": "26:20:00",
+   "shapes_used_weekday": {
+    "0": 5,
+    "1": 5
+   },
+   "headsigns": {
+    "21A - Milton GO": 27,
+    "21A - Union Station": 26,
+    "21C - Square One": 26,
+    "21C - Union Station": 26,
+    "21D - Meadowvale GO": 13,
+    "21 - Union Station": 12
+   },
+   "stops": 95,
+   "toronto_stops": 1,
+   "km_dir0": 53.3,
+   "km_in_toronto_dir0": 22.3,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-22",
+   "short": "22",
+   "long": "Milton / Oakville",
+   "type": "3",
+   "color": "f78025",
+   "agency": "GO",
+   "weekday_trips": 16,
+   "saturday_trips": 0,
+   "midday_wait_min": 150,
+   "first_dep": "06:54:00",
+   "last_dep": "21:10:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "22 - Milton Carpool": 8,
+    "22 - Oakville GO": 8
+   },
+   "stops": 43,
+   "toronto_stops": 0,
+   "km_dir0": 27.3,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-25",
+   "short": "25",
+   "long": "Waterloo / Mississauga",
+   "type": "3",
+   "color": "f57f25",
+   "agency": "GO",
+   "weekday_trips": 51,
+   "saturday_trips": 78,
+   "midday_wait_min": 50,
+   "first_dep": "05:25:00",
+   "last_dep": "23:45:00",
+   "shapes_used_weekday": {
+    "0": 3,
+    "1": 3
+   },
+   "headsigns": {
+    "25 - U of Waterloo": 27,
+    "25 - Square One": 25,
+    "25C - Square One": 22,
+    "25C - U of Waterloo": 21,
+    "25L - Square One": 12,
+    "25L - U of Waterloo": 12
+   },
+   "stops": 19,
+   "toronto_stops": 0,
+   "km_dir0": 95.2,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-27",
+   "short": "27",
+   "long": "Milton / North York",
+   "type": "3",
+   "color": "f57f25",
+   "agency": "GO",
+   "weekday_trips": 56,
+   "saturday_trips": 33,
+   "midday_wait_min": 50,
+   "first_dep": "05:05:00",
+   "last_dep": "24:15:00",
+   "shapes_used_weekday": {
+    "0": 4,
+    "1": 4
+   },
+   "headsigns": {
+    "27B - Meadowvale GO": 24,
+    "27B - Finch Terminal": 22,
+    "27F - Milton GO": 12,
+    "27F - Finch Terminal": 12,
+    "27A - Finch Terminal": 7,
+    "27A - Milton GO": 5
+   },
+   "stops": 83,
+   "toronto_stops": 22,
+   "km_dir0": 63.8,
+   "km_in_toronto_dir0": 18.8,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-29",
+   "short": "29",
+   "long": "Guelph / Mississauga",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 41,
+   "saturday_trips": 32,
+   "midday_wait_min": 50,
+   "first_dep": "05:20:00",
+   "last_dep": "23:55:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 2
+   },
+   "headsigns": {
+    "29 - Guelph Central GO": 32,
+    "29 - Kipling Bus Terminal": 31,
+    "29A - U of Guelph": 6,
+    "29A - Square One": 4
+   },
+   "stops": 31,
+   "toronto_stops": 1,
+   "km_dir0": 82.4,
+   "km_in_toronto_dir0": 7.5,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-30",
+   "short": "30",
+   "long": "Kitchener / Vaughan",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 50,
+   "saturday_trips": 63,
+   "midday_wait_min": 43,
+   "first_dep": "04:23:00",
+   "last_dep": "24:08:00",
+   "shapes_used_weekday": {
+    "0": 5,
+    "1": 2
+   },
+   "headsigns": {
+    "30 - U of Waterloo": 34,
+    "30 - Hwy. 407 Bus Term": 33,
+    "30A - U of Waterloo": 19,
+    "30A - Bramalea GO": 12,
+    "30E - Bramalea GO": 7,
+    "30B - U of Waterloo": 3
+   },
+   "stops": 19,
+   "toronto_stops": 0,
+   "km_dir0": 106.6,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-31",
+   "short": "31",
+   "long": "Guelph / Toronto",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 20,
+   "saturday_trips": 17,
+   "midday_wait_min": 300,
+   "first_dep": "04:00:00",
+   "last_dep": "26:31:00",
+   "shapes_used_weekday": {
+    "0": 4,
+    "1": 7
+   },
+   "headsigns": {
+    "31E - Union Station": 6,
+    "31E - Georgetown GO": 5,
+    "31L - Bramalea GO": 4,
+    "31B - Bramalea GO": 3,
+    "31M - U of Guelph": 3,
+    "31K - Union Station": 3
+   },
+   "stops": 106,
+   "toronto_stops": 1,
+   "km_dir0": 61.8,
+   "km_in_toronto_dir0": 25.4,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-32",
+   "short": "32",
+   "long": "Brampton Trinity Common / North York",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 40,
+   "saturday_trips": 0,
+   "midday_wait_min": 60,
+   "first_dep": "05:25:00",
+   "last_dep": "19:35:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 2
+   },
+   "headsigns": {
+    "32 - Finch Terminal": 20,
+    "32 - Trinity Common": 16,
+    "32B - Finch Terminal": 2,
+    "32B - Bramalea Term": 2
+   },
+   "stops": 28,
+   "toronto_stops": 3,
+   "km_dir0": 43.3,
+   "km_in_toronto_dir0": 1.5,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-33",
+   "short": "33",
+   "long": "Guelph / North York",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 68,
+   "saturday_trips": 23,
+   "midday_wait_min": 38,
+   "first_dep": "04:55:00",
+   "last_dep": "24:30:00",
+   "shapes_used_weekday": {
+    "0": 6,
+    "1": 4
+   },
+   "headsigns": {
+    "33 - U of Guelph": 20,
+    "33B - York Mills Term": 18,
+    "33 - York Mills Term": 12,
+    "33B - Mount Pleasant GO": 11,
+    "33F - Mount Pleasant GO": 8,
+    "33E - Georgetown GO": 6
+   },
+   "stops": 111,
+   "toronto_stops": 5,
+   "km_dir0": 44.8,
+   "km_in_toronto_dir0": 19.4,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-36",
+   "short": "36",
+   "long": "Brampton / North York Express",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 32,
+   "saturday_trips": 46,
+   "midday_wait_min": 60,
+   "first_dep": "05:00:00",
+   "last_dep": "24:55:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "36B - York Mills Term": 40,
+    "36B - Bramalea Term": 38
+   },
+   "stops": 15,
+   "toronto_stops": 5,
+   "km_dir0": 36.5,
+   "km_in_toronto_dir0": 23.2,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-37",
+   "short": "37",
+   "long": "Orangeville / Brampton",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 14,
+   "saturday_trips": 0,
+   "midday_wait_min": 300,
+   "first_dep": "04:40:00",
+   "last_dep": "22:26:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 4
+   },
+   "headsigns": {
+    "37 - Orangeville": 5,
+    "37 - Brampton Term": 3,
+    "37A - Orangeville Mall": 2,
+    "37B - Brampton Term": 2,
+    "37D - Bramalea GO": 1,
+    "37C - Bramalea GO": 1
+   },
+   "stops": 55,
+   "toronto_stops": 0,
+   "km_dir0": 43.1,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-38",
+   "short": "38",
+   "long": "Bolton / Malton",
+   "type": "3",
+   "color": "00853e",
+   "agency": "GO",
+   "weekday_trips": 4,
+   "saturday_trips": 0,
+   "midday_wait_min": null,
+   "first_dep": "05:09:00",
+   "last_dep": "18:45:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "38 - Malton GO": 2,
+    "38 - Bolton": 2
+   },
+   "stops": 36,
+   "toronto_stops": 0,
+   "km_dir0": 23.9,
+   "km_in_toronto_dir0": 2.2,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-40",
+   "short": "40",
+   "long": "Hamilton / Richmond Hill",
+   "type": "3",
+   "color": "a11984",
+   "agency": "GO",
+   "weekday_trips": 101,
+   "saturday_trips": 78,
+   "midday_wait_min": 23,
+   "first_dep": "03:15:00",
+   "last_dep": "25:50:00",
+   "shapes_used_weekday": {
+    "0": 4,
+    "1": 4
+   },
+   "headsigns": {
+    "40 - Hamilton GO": 54,
+    "40 - Richmond Hill Ctr": 51,
+    "40C - Unionville GO": 28,
+    "40C - Hamilton GO": 26,
+    "40M - Unionville GO": 8,
+    "40M - Hamilton GO": 7
+   },
+   "stops": 35,
+   "toronto_stops": 3,
+   "km_dir0": 86.6,
+   "km_in_toronto_dir0": 7.6,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-41",
+   "short": "41",
+   "long": "Hamilton / Pickering",
+   "type": "3",
+   "color": "a21984",
+   "agency": "GO",
+   "weekday_trips": 144,
+   "saturday_trips": 0,
+   "midday_wait_min": 11,
+   "first_dep": "04:40:00",
+   "last_dep": "22:10:00",
+   "shapes_used_weekday": {
+    "0": 6,
+    "1": 6
+   },
+   "headsigns": {
+    "41 - Hamilton GO": 29,
+    "41 - Pickering GO": 29,
+    "41A - Square One": 20,
+    "41A - Pickering GO": 15,
+    "41B - Centennial College": 14,
+    "41C - Centennial College": 12
+   },
+   "stops": 50,
+   "toronto_stops": 11,
+   "km_dir0": 141.4,
+   "km_in_toronto_dir0": 26.3,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-43",
+   "short": "43",
+   "long": "Mount Pleasant / McMaster",
+   "type": "3",
+   "color": "a21884",
+   "agency": "GO",
+   "weekday_trips": 20,
+   "saturday_trips": 0,
+   "midday_wait_min": 150,
+   "first_dep": "06:35:00",
+   "last_dep": "19:35:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "43 - Mount Pleasant GO": 10,
+    "43 - McMaster U": 10
+   },
+   "stops": 44,
+   "toronto_stops": 0,
+   "km_dir0": 60.1,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-47",
+   "short": "47",
+   "long": "Hamilton / Hwy 407 Terminal",
+   "type": "3",
+   "color": "a21984",
+   "agency": "GO",
+   "weekday_trips": 87,
+   "saturday_trips": 70,
+   "midday_wait_min": 21,
+   "first_dep": "04:45:00",
+   "last_dep": "25:10:00",
+   "shapes_used_weekday": {
+    "0": 5,
+    "1": 5
+   },
+   "headsigns": {
+    "47 - Hwy. 407 Bus Term": 40,
+    "47 - Hamilton GO": 39,
+    "47G - McMaster U": 21,
+    "47D - Hwy. 407 Bus Term": 17,
+    "47D - McMaster U": 17,
+    "47G - Erin Mills": 16
+   },
+   "stops": 28,
+   "toronto_stops": 0,
+   "km_dir0": 75.5,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-48",
+   "short": "48",
+   "long": "Guelph / Hwy 407 Terminal",
+   "type": "3",
+   "color": "a21884",
+   "agency": "GO",
+   "weekday_trips": 33,
+   "saturday_trips": 0,
+   "midday_wait_min": 60,
+   "first_dep": "04:45:00",
+   "last_dep": "24:45:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "48 - Hwy. 407 Bus Term": 17,
+    "48 - U of Guelph": 16
+   },
+   "stops": 58,
+   "toronto_stops": 0,
+   "km_dir0": 85.5,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-52",
+   "short": "52",
+   "long": "Oshawa / Hwy 407 Terminal",
+   "type": "3",
+   "color": "6f298d",
+   "agency": "GO",
+   "weekday_trips": 6,
+   "saturday_trips": 26,
+   "midday_wait_min": null,
+   "first_dep": "06:20:00",
+   "last_dep": "17:05:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "52 - DC Oshawa GO": 13,
+    "52 - Hwy. 407 Bus Term": 13,
+    "52A - DC Oshawa GO": 3,
+    "52A - Hwy. 407 Bus Term": 3
+   },
+   "stops": 25,
+   "toronto_stops": 0,
+   "km_dir0": 78.8,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-56",
+   "short": "56",
+   "long": "Oshawa / Oakville",
+   "type": "3",
+   "color": "6f298d",
+   "agency": "GO",
+   "weekday_trips": 80,
+   "saturday_trips": 0,
+   "midday_wait_min": 25,
+   "first_dep": "03:40:00",
+   "last_dep": "22:50:00",
+   "shapes_used_weekday": {
+    "0": 4,
+    "1": 3
+   },
+   "headsigns": {
+    "56 - Oakville GO": 33,
+    "56 - DC Oshawa GO": 33,
+    "56A - DC Oshawa GO": 4,
+    "56B - Oakville GO": 4,
+    "56A - Square One": 3,
+    "56C - Unionville GO": 2
+   },
+   "stops": 50,
+   "toronto_stops": 0,
+   "km_dir0": 136.5,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-61",
+   "short": "61",
+   "long": "Richmond Hill",
+   "type": "3",
+   "color": "0099c7",
+   "agency": "GO",
+   "weekday_trips": 16,
+   "saturday_trips": 0,
+   "midday_wait_min": 75,
+   "first_dep": "05:00:00",
+   "last_dep": "25:40:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "61 - Bloomington GO": 10,
+    "61 - Union Station": 6
+   },
+   "stops": 35,
+   "toronto_stops": 1,
+   "km_dir0": 48.7,
+   "km_in_toronto_dir0": 20.3,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-65",
+   "short": "65",
+   "long": "Newmarket / Toronto",
+   "type": "3",
+   "color": "003767",
+   "agency": "GO",
+   "weekday_trips": 19,
+   "saturday_trips": 34,
+   "midday_wait_min": null,
+   "first_dep": "04:20:00",
+   "last_dep": "26:12:00",
+   "shapes_used_weekday": {
+    "0": 5,
+    "1": 3
+   },
+   "headsigns": {
+    "65E - East Gwillimbury GO": 7,
+    "65 - Union Station": 7,
+    "65G - Hwy. 407 Bus Term": 5,
+    "65H - Hwy. 407 Bus Term": 5,
+    "65G - Aurora GO": 5,
+    "65H - Aurora GO": 5
+   },
+   "stops": 41,
+   "toronto_stops": 1,
+   "km_dir0": 75.9,
+   "km_in_toronto_dir0": 32.9,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-67",
+   "short": "67",
+   "long": "Keswick / North York",
+   "type": "3",
+   "color": "003767",
+   "agency": "GO",
+   "weekday_trips": 7,
+   "saturday_trips": 0,
+   "midday_wait_min": null,
+   "first_dep": "05:55:00",
+   "last_dep": "18:15:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "67 - Finch Terminal": 4,
+    "67 - Woodbine/404": 3
+   },
+   "stops": 27,
+   "toronto_stops": 19,
+   "km_dir0": 60.2,
+   "km_in_toronto_dir0": 13.6,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-68",
+   "short": "68",
+   "long": "Barrie / Newmarket",
+   "type": "3",
+   "color": "003767",
+   "agency": "GO",
+   "weekday_trips": 20,
+   "saturday_trips": 25,
+   "midday_wait_min": 100,
+   "first_dep": "04:10:00",
+   "last_dep": "23:07:00",
+   "shapes_used_weekday": {
+    "0": 4,
+    "1": 2
+   },
+   "headsigns": {
+    "68 - Allandale Waterfront GO": 11,
+    "68 - Aurora GO": 7,
+    "68B - East Gwillimbury GO": 6,
+    "68G - Hwy. 407 Bus Term": 5,
+    "68B - Allandale Waterfront GO": 4,
+    "68F - Hwy. 407 Bus Term": 4
+   },
+   "stops": 89,
+   "toronto_stops": 1,
+   "km_dir0": 49.9,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-70",
+   "short": "70",
+   "long": "Uxbridge / Mount Joy",
+   "type": "3",
+   "color": "794500",
+   "agency": "GO",
+   "weekday_trips": 15,
+   "saturday_trips": 1,
+   "midday_wait_min": 100,
+   "first_dep": "06:30:00",
+   "last_dep": "23:51:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 3
+   },
+   "headsigns": {
+    "70D - Uxbridge": 5,
+    "70D - Mount Joy GO": 5,
+    "70B - Uxbridge": 3,
+    "70B - Old Elm GO": 2,
+    "70 - Unionville GO": 1
+   },
+   "stops": 64,
+   "toronto_stops": 0,
+   "km_dir0": 29.5,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-71",
+   "short": "71",
+   "long": "Stouffville",
+   "type": "3",
+   "color": "794500",
+   "agency": "GO",
+   "weekday_trips": 19,
+   "saturday_trips": 65,
+   "midday_wait_min": null,
+   "first_dep": "04:20:00",
+   "last_dep": "26:45:00",
+   "shapes_used_weekday": {
+    "0": 5,
+    "1": 3
+   },
+   "headsigns": {
+    "71D - Mount Joy GO": 17,
+    "71E - Mount Joy GO": 17,
+    "71E - Union Station": 14,
+    "71 - Union Station": 12,
+    "71 - Uxbridge": 11,
+    "71C - Old Elm GO": 7
+   },
+   "stops": 75,
+   "toronto_stops": 1,
+   "km_dir0": 48.7,
+   "km_in_toronto_dir0": 20.3,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-88",
+   "short": "88",
+   "long": "Peterborough / Oshawa",
+   "type": "3",
+   "color": "ff0d00",
+   "agency": "GO",
+   "weekday_trips": 23,
+   "saturday_trips": 22,
+   "midday_wait_min": 100,
+   "first_dep": "04:33:00",
+   "last_dep": "25:04:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 2
+   },
+   "headsigns": {
+    "88 - Trent U": 18,
+    "88 - DC Oshawa GO": 17,
+    "88C - Trent U": 3,
+    "88C - DC Oshawa GO": 3,
+    "88B - Trent U": 2,
+    "88B - DC Oshawa GO": 2
+   },
+   "stops": 43,
+   "toronto_stops": 0,
+   "km_dir0": 91.7,
+   "km_in_toronto_dir0": 0.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-90",
+   "short": "90",
+   "long": "Lakeshore East",
+   "type": "3",
+   "color": "ff0d00",
+   "agency": "GO",
+   "weekday_trips": 5,
+   "saturday_trips": 12,
+   "midday_wait_min": null,
+   "first_dep": "04:00:00",
+   "last_dep": "26:20:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "90B - DC Oshawa GO": 10,
+    "90B - Union Station": 7
+   },
+   "stops": 7,
+   "toronto_stops": 1,
+   "km_dir0": 62.7,
+   "km_in_toronto_dir0": 33.8,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-92",
+   "short": "92",
+   "long": "Oshawa / Yorkdale",
+   "type": "3",
+   "color": "ff0d00",
+   "agency": "GO",
+   "weekday_trips": 45,
+   "saturday_trips": 35,
+   "midday_wait_min": 60,
+   "first_dep": "04:00:00",
+   "last_dep": "24:50:00",
+   "shapes_used_weekday": {
+    "0": 2,
+    "1": 2
+   },
+   "headsigns": {
+    "92 - DC Oshawa GO": 37,
+    "92 - Yorkdale Term": 36,
+    "92A - Dundas/Hwy 412 P+R": 4,
+    "92A - Yorkdale Term": 3
+   },
+   "stops": 49,
+   "toronto_stops": 6,
+   "km_dir0": 60.9,
+   "km_in_toronto_dir0": 30.9,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-94",
+   "short": "94",
+   "long": "Pickering / Square One",
+   "type": "3",
+   "color": "a21884",
+   "agency": "GO",
+   "weekday_trips": 42,
+   "saturday_trips": 41,
+   "midday_wait_min": 60,
+   "first_dep": "03:20:00",
+   "last_dep": "26:30:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "94 - Square One": 42,
+    "94 - Pickering GO": 41
+   },
+   "stops": 23,
+   "toronto_stops": 7,
+   "km_dir0": 68.0,
+   "km_in_toronto_dir0": 48.0,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  },
+  {
+   "id": "09261126-96",
+   "short": "96",
+   "long": "Oshawa / Finch Express",
+   "type": "3",
+   "color": "ff0d00",
+   "agency": "GO",
+   "weekday_trips": 30,
+   "saturday_trips": 22,
+   "midday_wait_min": 100,
+   "first_dep": "05:00:00",
+   "last_dep": "21:05:00",
+   "shapes_used_weekday": {
+    "0": 1,
+    "1": 1
+   },
+   "headsigns": {
+    "96B - DC Oshawa GO": 27,
+    "96B - Finch Terminal": 25
+   },
+   "stops": 25,
+   "toronto_stops": 20,
+   "km_dir0": 52.8,
+   "km_in_toronto_dir0": 27.9,
+   "toronto_pickup_only": 0,
+   "toronto_dropoff_only": 0
+  }
+ ]
+}
