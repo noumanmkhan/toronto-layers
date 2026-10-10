@@ -92,12 +92,13 @@ const wide = () => !matchMedia('(max-width:760px)').matches;
 map.fitBounds(CITY_BOUNDS, wide() ? {paddingTopLeft:[330,20], paddingBottomRight:[350,20]} : {paddingTopLeft:[0,150], paddingBottomRight:[0,90]});
 map.setMaxBounds(L.latLngBounds(CITY.view.max));  // the region plus a margin
 
-const panes = [['base',200],['fill',350],['lines',420],['streets',400],['civic',430],['hwy',450],['rail',460],['mask',465],['focus',468],['transit',470],['stlbl',475],['pts',480],['pin',620]];
+const panes = [['base',200],['fill',350],['lines',420],['streets',400],['civic',430],['hwy',450],['pfdim',455],['rail',460],['mask',465],['focus',468],['transit',470],['pfdim2',472],['pfline',473],['stlbl',475],['pts',480],['pin',620]];
 panes.forEach(([n,z]) => { map.createPane(n); map.getPane(n).style.zIndex = z; });
 map.getPane('base').style.pointerEvents = 'none';
 map.getPane('stlbl').style.pointerEvents = 'none';
 map.getPane('mask').style.pointerEvents = 'none';
 map.getPane('focus').style.pointerEvents = 'none';
+['pfdim', 'pfdim2', 'pfline'].forEach(n => { map.getPane(n).style.pointerEvents = 'none'; });
 
 const layers = {}; const data = {layers: {}};
 const get = f => fetch(DATA + (f.includes('.') ? f : f + '.geojson')).then(r => { if (!r.ok) throw new Error(f); return r.json(); });
@@ -117,15 +118,17 @@ function declutter(){
   const box = map.getContainer().getBoundingClientRect(), kept = [], seen = new Set();
   const el = map.getContainer();
   el.querySelectorAll('.clash').forEach(n => n.classList.remove('clash'));
-  LABEL_PRIORITY.forEach(sel => el.querySelectorAll(sel).forEach(n => {
-    if (seen.has(n)) return;  // e.g. a line-end label matches both '.lbl-stn.end' and '.lbl-stn'
+  // Focused on a place: every label inside it is placed before any outside it.
+  const passes = el.classList.contains('pfocus') ? [n => !n.closest('.fz-out'), n => !!n.closest('.fz-out')] : [() => true];
+  passes.forEach(pass => LABEL_PRIORITY.forEach(sel => el.querySelectorAll(sel).forEach(n => {
+    if (seen.has(n) || !pass(n)) return;  // e.g. a line-end label matches both '.lbl-stn.end' and '.lbl-stn'
     seen.add(n);
     const r = n.getBoundingClientRect();
     if (!r.width || r.right < box.left || r.left > box.right || r.bottom < box.top || r.top > box.bottom) return;
     const pad = 2;
     if (kept.some(k => r.left < k.right + pad && r.right > k.left - pad && r.top < k.bottom + pad && r.bottom > k.top - pad)) n.classList.add('clash');
     else kept.push(r);
-  }));
+  })));
 }
 function queueDeclutter(){ if (!declutterQueued){ declutterQueued = true; requestAnimationFrame(() => requestAnimationFrame(declutter)); } }
 map.on('zoomend moveend layeradd layerremove', queueDeclutter);
@@ -139,9 +142,12 @@ function hoverTip(layer, text){ layer.bindTooltip(text, {sticky:true, className:
 function polyLayer(fc, opts){
   const g = L.layerGroup();
   const geo = L.geoJSON(fc, {pane: opts.pane || 'fill', style: f => ({className: opts.cls(f), weight: 1}),
-    onEachFeature: (f, lyr) => { if (opts.hover) hoverTip(lyr, opts.hover(f)); lyr.on('click', e => inspect(e.latlng)); }});
+    onEachFeature: (f, lyr) => { if (opts.hover) hoverTip(lyr, opts.hover(f)); lyr.on('click', tapMap); }});
   g.addLayer(geo);
-  if (opts.label) fc.features.forEach(f => { const t = opts.label(f); if (t) g.addLayer(label(t, opts.lcls(f), ll(f.properties.lp))); });
+  if (opts.label) fc.features.forEach(f => { const t = opts.label(f); if (!t) return;
+    const lb = label(t, opts.lcls(f), ll(f.properties.lp));
+    if (opts.focusId) tapToFocus(lb, opts.focusId, f);
+    g.addLayer(lb); });
   return g;
 }
 
@@ -159,7 +165,7 @@ function buildBase(fc, regions){
   fc.features.filter(f => f.properties.kind === 'neighbour').forEach(f => label(f.properties.name, 'lbl-muni', ll(f.properties.lp)).addTo(map));
   regions.features.forEach(f => label(f.properties.name, 'lbl-region', ll(f.geometry.coordinates)).addTo(map));
   (CITY.water || []).forEach(w => label(w.name, 'lbl-lake ' + w.cls, w.at).addTo(map));
-  map.on('click', e => inspect(e.latlng));
+  map.on('click', tapMap);
 }
 
 const GLYPH = {
@@ -193,9 +199,9 @@ const SUBURBS = LAYERS.find(it => it.kind === 'suburbs');
 const KINDS = {
   fill: (it, fc) => {
     const major = it.size === 'major';
-    return polyLayer(fc, {cls: f => (major ? 'fill-major ' : 'fill-minor ') + slug(f.properties.name), label: f => f.properties.name, lcls: () => major ? 'lbl-boro' : 'lbl-area', hover: f => f.properties.name});
+    return polyLayer(fc, {cls: f => (major ? 'fill-major ' : 'fill-minor ') + slug(f.properties.name), label: f => f.properties.name, lcls: () => major ? 'lbl-boro' : 'lbl-area', hover: f => f.properties.name, focusId: it.id});
   },
-  units: (it, fc) => polyLayer(fc, {pane:'lines', cls: () => 'nbhd', label: f => f.properties.name, lcls: () => 'lbl-nbhd', hover: f => fill(it.hover || '{name}', f.properties)}),
+  units: (it, fc) => polyLayer(fc, {pane:'lines', cls: () => 'nbhd', label: f => f.properties.name, lcls: () => 'lbl-nbhd', hover: f => fill(it.hover || '{name}', f.properties), focusId: it.id}),
   outline: (it, fc) => {
     const c = OUTLINE[it.level];
     return polyLayer(fc, {pane:'civic', cls: () => c, label: f => fill(it.label, f.properties), lcls: () => 'lbl-' + c, hover: f => fill(it.hover, f.properties)});
@@ -237,7 +243,7 @@ const KINDS = {
     [[lines, full], [linesInner, inner]].forEach(([fc, grp]) => fc.features.forEach(f => {
       const parts = f.geometry.type === 'LineString' ? [f.geometry.coordinates] : f.geometry.coordinates;
       parts.forEach(part => {
-        const pl = L.polyline(part.map(ll), {pane:'rail', className:'go-line', color: f.properties.color, weight: w(), offset: f.properties.offset * gap()});
+        const pl = L.polyline(part.map(ll), {pane:'rail', className:'go-line', color: f.properties.color, weight: w(), offset: f.properties.offset * gap(), feat: f});
         hoverTip(pl, fill((it.lineHover || {})[f.properties.line] || it.hover, f.properties));
         pl.on('click', e => inspect(e.latlng));
         grp.addLayer(pl); segs.push([pl, f]);
@@ -574,8 +580,8 @@ function routeLines(feats, pick, extra){
     const p = f.properties, parts = f.geometry.type === 'LineString' ? [f.geometry.coordinates] : f.geometry.coordinates;
     const x = ' ' + p.m + (pick ? ' pick' : '') + (extra ? extra(p) : '');
     parts.forEach(c => {
-      cases.addLayer(L.polyline(c.map(ll), {pane:'transit', className:'rt-case' + x, interactive:false}));
-      const pl = L.polyline(c.map(ll), {pane:'transit', className:'rt' + x, bubblingMouseEvents:false});
+      cases.addLayer(L.polyline(c.map(ll), {pane:'transit', className:'rt-case' + x, interactive:false, feat: f}));
+      const pl = L.polyline(c.map(ll), {pane:'transit', className:'rt' + x, bubblingMouseEvents:false, feat: f});
       hoverTip(pl, routeTip(p));
       pl.on('click', () => focusRoute(p.r));
       lines.addLayer(pl);
@@ -583,7 +589,7 @@ function routeLines(feats, pick, extra){
     // Number badges: tapping one shows that route alone too.
     const long = parts.reduce((a, b) => span(b) > span(a) ? b : a);
     (pick ? [0, .5, 1] : [.25, .75]).forEach(t => {
-      const m = L.marker(ll(along(long, t)), {pane:'pts', keyboard:false, title: routeName(p),
+      const m = L.marker(ll(along(long, t)), {pane:'pts', keyboard:false, title: routeName(p), feat: f,
         icon: L.divIcon({className:'', iconSize:[0, 0], html:'<span class="rt-b' + x + '">' + esc(p.r) + '</span>'})});
       m.on('click', () => focusRoute(p.r));
       g.addLayer(m);
@@ -606,7 +612,10 @@ function unfocus(){ if (focusR) focusRoute(focusR); }
 // 'preclick' before any layer's click; inspect() skips the tap that's being swallowed.
 let swallowTap = false;
 map.on('preclick', () => { if (focusR){ swallowTap = true; unfocus(); setTimeout(() => { swallowTap = false; }); } });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') unfocus(); });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape' || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+  if (focusR) unfocus(); else if (placeF) setPlaceFocus(null, null, false);
+});
 function drawPicks(){
   pickLayer.clearLayers();
   if (routeGeo && picked.size) pickLayer.addLayer(routeLines(routeGeo.features.filter(f => picked.has(f.properties.r) && f.properties.r !== focusR), true));
@@ -641,7 +650,7 @@ function drawStops(){
     if (focusR && !(pk && s[3].some(i => pk.has(i)))) return;   // showing one route: only its stops
     const rs = s[3].map(i => T.routes[i]), isTram = rs.some(r => r.m === 'tram' && r.day), onPick = pk && s[3].some(i => pk.has(i));
     if (!(onPick || (tram && isTram) || (bus && rs.some(busShows)))) return;
-    const m = L.circleMarker([s[1], s[0]], {pane:'pts', radius: z >= 16 ? 4 : 3, className:'stop ' + (onPick ? 'pick' : isTram ? 'tram' : 'bus'), bubblingMouseEvents:false});
+    const m = L.circleMarker([s[1], s[0]], {pane:'pts', radius: z >= 16 ? 4 : 3, className:'stop ' + (onPick ? 'pick' : isTram ? 'tram' : 'bus'), bubblingMouseEvents:false, stopOf: s[3]});
     hoverTip(m, esc(s[2]) + ' · ' + esc(rs.map(r => r.r).join(', ')));
     m.on('click', () => inspect(L.latLng(s[1], s[0]), s[2]));
     stopLayer.addLayer(m);
@@ -896,6 +905,7 @@ document.getElementById('reset').addEventListener('click', () => {
   BOARDS.forEach(it => setBoard(it.id, it.boards[0][0]));
   if (BUSES) setBusFams(BUS_DEFAULT);
   if (picked.size){ picked.clear(); drawPicks(); }
+  if (placeF) setPlaceFocus(null, null, false);
   setLens(FIRST_LENS);
   setScope('inner', true);
   closeHere();
@@ -1165,6 +1175,7 @@ function inspect(latlng, title, muniName){
   here.hidden = false;
   here.innerHTML = '<div class="hh"><div><small>What’s here</small><strong>' + esc(heading) + '</strong></div><div class="hb"><button type="button" class="share" aria-label="Share this spot" title="Share a link to this spot">' + SHARE_ICON + '</button><button type="button" aria-label="Close" id="hereX">×</button></div></div>' +
     '<div class="pills">' + pills.map(p => '<span class="pill"><i style="background:' + p[0] + '"></i>' + esc(p[1]) + '</span>').join('') + '</div>' +
+    focusChips(hits) +
     towerCard(towerAt(x, y, title)) +
     standout(unit, heading) +
     section('bounds', 'Boundaries', '<dl class="facts">' + facts.map(f => '<dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd>').join('') + '</dl>') +
@@ -1176,6 +1187,7 @@ function inspect(latlng, title, muniName){
   document.getElementById('hereX').onclick = closeHere;
   here.querySelector('.share').onclick = share;
   here.querySelectorAll('[data-route]').forEach(b => b.addEventListener('click', () => pickRoute(b.dataset.route, !picked.has(b.dataset.route))));
+  here.querySelectorAll('[data-pf]').forEach(b => b.addEventListener('click', () => { const [id, ...n] = b.dataset.pf.split(':'); setPlaceFocus(id, n.join(':'), true); }));
   here.querySelectorAll('details.sec').forEach(d => d.addEventListener('toggle', () => { secOpen[d.dataset.sec] = d.open; try { localStorage.setItem('cardSections', JSON.stringify(secOpen)); } catch (e) {} }));
 }
 // What makes the unit stand out among its peers (engine/facts.py, built ahead of time): the strongest fact.
@@ -1450,6 +1462,7 @@ function setScope(s, move){
   const fb = document.getElementById('focusBox');
   if (fb) fb.hidden = s === 'inner';
   if (s === 'inner' && focusKey) setFocus(null, false);
+  if (s === 'outer' && placeF) setPlaceFocus(null, null, false);
   if (move) frame(s === 'inner' ? CITY_BOUNDS : REGION_VIEW);
   queueDeclutter();
   queueHash();
@@ -1523,6 +1536,193 @@ function setFocus(key, move){
 }
 document.querySelectorAll('[data-scope]').forEach(b => b.addEventListener('click', () => { if (b.dataset.scope !== scope) setScope(b.dataset.scope, true); }));
 
+/* ---------- Focus on one place (city view) ----------
+   Tap a neighbourhood's or area's name on the map, or "Focus on" on the card, and everything outside the
+   place dims. Two sheets with the place cut out do it: a strong one under the trains and routes (fills, streets,
+   boundaries), a lighter one over them, so a line that passes through stays full inside and half-faded outside,
+   and you can follow it to where it ends. Lines that don't pass through fade right out; points and labels
+   outside fade (names of places and stations less, so you can read where a route goes). The panel lists the
+   lines, main streets and landmarks in or through the place. Tap outside it, press Escape or Exit to leave.
+   Kept in links as focus=<layer id>:<name>. */
+var placeF = null, pfLayer = null, pfBox = null, pfMemo = new WeakMap();
+const PF_KINDS = ['units', 'fill'];
+const pfLayers = () => LAYERS.filter(it => PF_KINDS.includes(it.kind)).sort((a, b) => (a.kind === 'units' ? 0 : a.size === 'major' ? 2 : 1) - (b.kind === 'units' ? 0 : b.size === 'major' ? 2 : 1));
+const pfFeature = (id, name) => { const fc = data.layers[id]; return fc ? fc.features.find(f => f.properties.name === name) : null; };
+function placeFromLink(v){
+  if (!v || !v.includes(':')) return null;
+  const i = v.indexOf(':'), id = v.slice(0, i), name = v.slice(i + 1);
+  return pfLayers().some(it => it.id === id) && pfFeature(id, name) ? [id, name] : null;
+}
+// What a place's layer calls one of its own (Neighbourhood, Former city, Side of the city).
+const pfNoun = it => it.kind === 'units' ? CITY.units.singular : (it.place || it.name);
+function tapToFocus(lb, id, f){
+  lb.on('add', () => {
+    const el = lb.getElement(); if (!el || el._pf) return;
+    el._pf = true; el.classList.add('lbl-tap'); el.title = 'Focus on ' + f.properties.name;
+    L.DomEvent.on(el, 'click', ev => {
+      L.DomEvent.stop(ev);
+      if (map.dragging && map.dragging.moved()) return;
+      setPlaceFocus(id, f.properties.name, true);
+    });
+  });
+}
+// A tap on the map: outside the focused place it only leaves focus (no card); otherwise the card as usual.
+function tapMap(e){
+  if (placeF && !inPlace(e.latlng.lng, e.latlng.lat)){
+    if (!swallowTap){ swallowTap = true; setPlaceFocus(null, null, false); setTimeout(() => { swallowTap = false; }); }
+    return;
+  }
+  inspect(e.latlng);
+}
+function inPlace(x, y){
+  const b = placeF.bb;
+  return x >= b[0] && x <= b[2] && y >= b[1] && y <= b[3] && contains(placeF.f.geometry, x, y);
+}
+// Does a line (any coordinates: LineString or MultiLineString) pass through the place? A vertex inside, or a
+// segment crossing its edge, counts; so does running along it, as a boundary street does.
+function crosses(a, b, c, d){
+  const o = (p, q, r) => Math.sign((q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]));
+  return o(a, b, c) !== o(a, b, d) && o(c, d, a) !== o(c, d, b);
+}
+function lineMeets(geom){
+  const b = placeF.bb, parts = geom.type === 'LineString' ? [geom.coordinates] : geom.type === 'MultiLineString' ? geom.coordinates : [];
+  for (const c of parts) for (let i = 0; i < c.length; i++){
+    const p = c[i];
+    if (p[0] >= b[0] && p[0] <= b[2] && p[1] >= b[1] && p[1] <= b[3] && contains(placeF.f.geometry, p[0], p[1])) return true;
+    if (!i) continue;
+    const q = c[i - 1];
+    if (Math.max(p[0], q[0]) < b[0] || Math.min(p[0], q[0]) > b[2] || Math.max(p[1], q[1]) < b[1] || Math.min(p[1], q[1]) > b[3]) continue;
+    for (const r of placeF.rings) for (let k = 1; k < r.length; k++) if (crosses(q, p, r[k - 1], r[k])) return true;
+  }
+  return false;
+}
+// The routes (indices into transit.json) with a stop inside the place.
+function placeRoutes(){
+  if (!placeF.ri && data.transit){ placeF.ri = new Set(); data.transit.stops.forEach(s => { if (inPlace(s[0], s[1])) s[3].forEach(i => placeF.ri.add(i)); }); }
+  return placeF.ri || new Set();
+}
+const featMeets = f => { if (!pfMemo.has(f)) pfMemo.set(f, lineMeets(f.geometry)); return pfMemo.get(f); };
+// Sort one map layer into in / out as it joins the map.
+const PF_LINE_PANES = ['rail', 'transit'], PF_PT_PANES = ['pts', 'stlbl', 'tooltipPane'];
+function pfSort(l){
+  if (!placeF || l === pfLayer || !l.options) return;
+  const pane = l.options.pane || (l instanceof L.Tooltip ? 'tooltipPane' : l instanceof L.Marker ? 'markerPane' : 'overlayPane');
+  const el = l._path || l._icon || (l.getElement && l.getElement());
+  if (!el || /hover-tip/.test(l.options.className || '')) return;
+  let cls = null;
+  const f = l.feature || l.options.feat, picked_ = / (pick|focus)\b/.test(l.options.className || '') || (l._icon && l._icon.querySelector('.pick, .focus'));
+  if (l instanceof L.Polyline && !(l instanceof L.Polygon)){
+    if (!PF_LINE_PANES.includes(pane)) return;
+    if (!picked_ && !(f ? featMeets(f) : lineMeets({type: 'LineString', coordinates: l.getLatLngs().flat(Infinity).map(p => [p.lng, p.lat])}))) cls = 'fz-off';
+  } else if (l.getLatLng && PF_PT_PANES.includes(pane)){
+    const p = l.getLatLng(); if (!p) return;
+    if (f && !picked_ && !featMeets(f)) cls = 'fz-off';         // a route's number badge: hidden if the route doesn't pass through
+    else if (l.options.stopOf && !picked_ && !inPlace(p.lng, p.lat) && !l.options.stopOf.some(i => placeRoutes().has(i))) cls = 'fz-off';   // a stop no route through the place serves
+    else if (!inPlace(p.lng, p.lat)) cls = 'fz-out';
+  } else return;
+  el.classList.remove('fz-off', 'fz-out');
+  if (cls) el.classList.add(cls);
+}
+map.on('layeradd', e => { if (placeF) pfSort(e.layer); });
+function setPlaceFocus(id, name, move){
+  const f = id ? pfFeature(id, name) : null;
+  const same = f && placeF && placeF.id === id && placeF.name === name;
+  if (pfLayer){ map.removeLayer(pfLayer); pfLayer = null; }
+  map.getContainer().querySelectorAll('.fz-off, .fz-out').forEach(n => n.classList.remove('fz-off', 'fz-out'));
+  placeF = null; pfMemo = new WeakMap();
+  if (!f || (same && move)){
+    map.getContainer().classList.remove('pfocus');
+    drawPlaceBox();
+    if (lastInspect && !here.hidden) inspect(...lastInspect);
+    queueDeclutter(); queueHash(); return;
+  }
+  if (scope !== 'inner') setScope('inner', false);
+  const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+  const rings = polys.flat(), xs = rings.flat().map(p => p[0]), ys = rings.flat().map(p => p[1]);
+  placeF = {id, name, f, rings, bb: [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)], it: LAYERS.find(it => it.id === id)};
+  map.getContainer().classList.add('pfocus');
+  pfLayer = L.layerGroup();
+  const v = CITY.view.max, sheet = [[v[0][0] - 5, v[0][1] - 5], [v[0][0] - 5, v[1][1] + 5], [v[1][0] + 5, v[1][1] + 5], [v[1][0] + 5, v[0][1] - 5]];
+  const holes = polys.map(p => p[0].map(ll));
+  pfLayer.addLayer(L.polygon([sheet].concat(holes), {pane: 'pfdim', interactive: false, className: 'pf-dim'}));
+  pfLayer.addLayer(L.polygon([sheet].concat(holes), {pane: 'pfdim2', interactive: false, className: 'pf-dim2'}));
+  pfLayer.addLayer(L.geoJSON(f, {pane: 'pfline', interactive: false, style: () => ({className: 'pf-line'})}));
+  pfLayer.addTo(map);
+  map.eachLayer(pfSort);
+  drawPlaceBox();
+  if (move){
+    frame(L.geoJSON(f).getBounds());
+    // On a phone, clear the way to the map; the panel keeps a one-line reminder with Exit.
+    if (!wide()){ panel.classList.add('collapsed'); closeHere(); }
+  }
+  if (lastInspect && !here.hidden) inspect(...lastInspect);
+  queueDeclutter(); queueHash();
+}
+// The card's "Focus on" chips: the unit, then the areas it sits in.
+function focusChips(hits){
+  const ls = pfLayers().filter(it => hits[it.id]);
+  if (!ls.length) return '';
+  return '<div class="pfgo"><small>Focus on</small>' + ls.map(it => {
+    const n = hits[it.id].properties.name, on = placeF && placeF.id === it.id && placeF.name === n;
+    return '<button type="button" data-pf="' + esc(it.id + ':' + n) + '" aria-pressed="' + !!on + '" title="' + esc(pfNoun(it)) + '">' + esc(n) + (on ? ' ×' : '') + '</button>';
+  }).join('') + '</div>';
+}
+/* The panel box: what's in or passes through the place, from the data (whichever layers are on).
+   Rapid transit and trains by line; streetcars and buses with a stop inside, as chips that draw the route;
+   main streets in or along it; landmarks and institutions inside. */
+function drawPlaceBox(){
+  if (!pfBox){
+    pfBox = document.createElement('div'); pfBox.className = 'pfbox'; pfBox.id = 'pfBox'; pfBox.hidden = true;
+    document.querySelector('.scope').after(pfBox);
+  }
+  if (!placeF){ pfBox.hidden = true; pfBox.innerHTML = ''; return; }
+  const rows = [], names = a => [...new Set(a)];
+  const lineRow = (it, fc, cls) => {
+    if (!fc) return;
+    const hitL = fc.features.filter(f => /Line/.test(f.geometry.type) && featMeets(f));
+    if (hitL.length) rows.push([it.name, '<span class="pf-lines">' + names(hitL.map(f => f.properties.name)).map(n => '<span' + (cls ? ' class="' + cls + '"' : '') + '>' + esc(n) + '</span>').join('') + '</span>']);
+  };
+  LAYERS.filter(it => it.kind === 'metro').forEach(it => lineRow(it, loaded[[].concat(it.files)[0]]));
+  LAYERS.filter(it => it.kind === 'rail').forEach(it => lineRow(it, loaded[[].concat(it.files)[0]]));
+  const T = data.transit;
+  if (TR && T){
+    const rs = [...placeRoutes()].map(i => T.routes[i]).sort((a, b) => String(a.r).localeCompare(String(b.r), undefined, {numeric: true}));
+    const chip = r => '<button type="button" class="rt-chip ' + r.m + (r.f.includes('freq') ? ' freq' : '') + '" data-route="' + esc(r.r) + '" aria-pressed="' + picked.has(r.r) + '" title="' + routeTip(r) + '">' + esc(r.r) + '</button>';
+    TR.rows.forEach(([mode, label]) => { const x = rs.filter(r => r.m === mode && r.day); if (x.length) rows.push([label, '<span class="rt-chips">' + x.map(chip).join('') + '</span>']); });
+    const night = rs.filter(r => r.f.includes('night'));
+    if (night.length) rows.push([TR.night, '<span class="rt-chips">' + night.map(chip).join('') + '</span>']);
+  }
+  LAYERS.filter(it => it.kind === 'construction').forEach(it => lineRow(it, loaded[it.file], 'uc'));
+  LAYERS.filter(it => it.kind === 'streets' && !it.under).forEach(it => {
+    const fc = loaded[it.file]; if (!fc) return;
+    const st = fc.features.filter(featMeets).sort((a, b) => a.properties.name.localeCompare(b.properties.name));
+    const nm = names(st.map(f => f.properties.name)), cap = 14;
+    if (nm.length) rows.push([it.name, esc(nm.slice(0, cap).join(', ')) + (nm.length > cap ? ' <span class="more">and ' + (nm.length - cap) + ' more</span>' : '')]);
+  });
+  // Points inside: landmarks, then each institution layer, then skyscrapers (counted, tallest named).
+  const ptsIn = fc => fc ? fc.features.filter(f => f.geometry.type === 'Point' && inPlace(f.geometry.coordinates[0], f.geometry.coordinates[1])) : [];
+  const btn = f => '<button type="button" data-pt="' + f.geometry.coordinates.join(',') + '" data-name="' + esc(f.properties.name) + '">' + esc(f.properties.name) + (f.properties.sub ? ' <small>' + esc(f.properties.sub) + '</small>' : '') + '</button>';
+  LAYERS.filter(it => it.kind === 'landmarks').forEach(it => { const p = ptsIn(loaded[it.file]); if (p.length) rows.push([it.name, '<span class="flist">' + p.map(btn).join('') + '</span>']); });
+  LAYERS.filter(it => it.kind === 'places').forEach(it => { const p = ptsIn(loaded[it.file]).filter(f => !it.cat || f.properties.cat === it.cat); if (p.length) rows.push([it.name, '<span class="flist">' + p.map(btn).join('') + '</span>']); });
+  LAYERS.filter(it => it.kind === 'towers').forEach(it => {
+    const p = ptsIn(loaded[it.file]).sort((a, b) => b.properties.h - a.properties.h);
+    if (p.length) rows.push([it.name, p.length + (p.length > 1 ? ' · tallest ' : ' · ') + btn(p[0]).replace('<button', '<button class="inline"')]);
+  });
+  pfBox.hidden = false;
+  pfBox.innerHTML = '<div class="pf-head"><div><small>Focused on · ' + esc(pfNoun(placeF.it)) + '</small><b>' + esc(placeF.name) + '</b></div>' +
+    '<button type="button" id="pfExit">Exit focus</button></div>' +
+    '<div class="pf-inv">' + (rows.length ? '<dl>' + rows.map(([k, v]) => '<dt>' + esc(k) + '</dt><dd>' + v + '</dd>').join('') + '</dl>' : '') +
+    '<p>' + esc(TR && T ? 'Lines and routes that pass through, and streets in or along it. Routes have a stop inside. Tap a number to draw it.' : 'Lines that pass through, and streets in or along it.') + '</p></div>';
+  pfBox.querySelector('#pfExit').onclick = () => setPlaceFocus(null, null, true);
+  pfBox.querySelectorAll('[data-route]').forEach(b => b.addEventListener('click', () => { pickRoute(b.dataset.route, !picked.has(b.dataset.route)); b.setAttribute('aria-pressed', String(picked.has(b.dataset.route))); }));
+  pfBox.querySelectorAll('[data-pt]').forEach(b => b.addEventListener('click', () => {
+    const [x, y] = b.dataset.pt.split(',').map(Number);
+    if (!wide()) panel.classList.add('collapsed');
+    goTo(L.latLng(y, x), b.dataset.name, false);
+  }));
+}
+
+
 
 /* ---------- Shareable links: the view lives in the address bar's #fragment ----------
    #map=zoom/lat/lng&pin=lat,lng&name=…&view=region&layers=a,b&lens=commute&fit=cost:lower+middle,union:30
@@ -1548,6 +1748,7 @@ function linkState(){
   if (pin){ const p = pin.getLatLng(); parts.push(['pin', p.lat.toFixed(5) + ',' + p.lng.toFixed(5)]); if (pinName) parts.push(['name', pinName]); }
   if (scope === 'outer') parts.push(['view', 'region']);
   if (focusKey) parts.push(['focus', focusKey]);
+  if (placeF) parts.push(['focus', placeF.id + ':' + placeF.name]);
   const on = LAYERS.filter(it => state[it.id]).map(it => it.id)
     .concat(SUBS.filter(s => document.getElementById(s.id).checked).map(s => s.id));
   const dflt = LAYERS.filter(it => it.on).map(it => it.id).concat(SUBS.filter(s => s.on).map(s => s.id));
@@ -1577,8 +1778,11 @@ function applyHash(h){
   const o = readHash(h);
   if (!['map', 'pin', 'view', 'layers', 'lens', 'fit', 'focus', 'board', 'bus', 'routes'].some(k => k in o)) return false;
   const num = s => s.split(/[,/]/).map(Number);
-  setScope(o.view === 'region' || regionFeature(o.focus) ? 'outer' : 'inner', false);
+  // focus= is a county or region (regional view), or "layer:name" for one place in the city.
+  const pfo = placeFromLink(o.focus);
+  setScope(!pfo && (o.view === 'region' || regionFeature(o.focus)) ? 'outer' : 'inner', false);
   setFocus(regionFeature(o.focus) ? o.focus : null, false);
+  setPlaceFocus(pfo ? pfo[0] : null, pfo ? pfo[1] : null, false);
   if (o.layers){
     const want = new Set(o.layers === 'none' ? [] : o.layers.split(','));
     // Area fills first, then the lens: switching the lens on turns fills off, so it must come last to win.
@@ -1613,7 +1817,7 @@ function applyHash(h){
     if (ok(m)) inspect(at, o.name || undefined);
     else goTo(at, o.name || '', false);
   } else closeHere();
-  if (!ok(m) && !(ok(p) && p.length === 2)) frame(scope === 'inner' ? CITY_BOUNDS : focusKey ? L.geoJSON(regionFeature(focusKey)).getBounds() : REGION_VIEW);
+  if (!ok(m) && !(ok(p) && p.length === 2)) frame(placeF ? L.geoJSON(placeF.f).getBounds() : scope === 'inner' ? CITY_BOUNDS : focusKey ? L.geoJSON(regionFeature(focusKey)).getBounds() : REGION_VIEW);
   return true;
 }
 // Share: the phone's share sheet where there is one, otherwise copy the link.
@@ -1785,7 +1989,7 @@ Promise.all(files.map(f => get(f).catch(e => { if (OPTIONAL.has(f)) return {type
   // Stops and the route list: fetched after the map is up, then stops are drawn and the open card redrawn.
   if (TR) get(TR.file).then(d => {
     data.transit = d;
-    drawStops(); drawBusBox();
+    drawStops(); drawBusBox(); if (placeF) drawPlaceBox();
     if (!here.hidden && lastInspect && hit(data.footprint, lastInspect[0].lng, lastInspect[0].lat)) inspect(...lastInspect);
   }).catch(() => { data.transit = null; });
   // Attendance areas are big: fetched after the map is up, then the open card is redrawn with them.

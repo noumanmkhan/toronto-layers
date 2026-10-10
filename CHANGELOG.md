@@ -3,6 +3,14 @@
 ## Since 1.1
 
 ### Both cities
+- **Focus on a place** (October 10): tap a neighbourhood's, area's or former city's name on the map (in
+  Chicago a community area or side), or a "Focus on" chip on the What's here card. Everything outside it
+  dims; trains, subway/'L' lines and routes that pass through stay full inside and half-faded outside, so
+  you can follow them to where they end, and the rest fade out. The panel lists the lines and routes
+  through it (route chips draw the route), main streets in or along it, and landmarks, institutions and
+  skyscrapers inside. Tap outside, press Escape or Exit focus to leave. Links keep it as
+  `focus=<layer id>:<name>` (e.g. `focus=nbhd:Cabbagetown-South St.James Town`). Engine only: no data
+  files change, so nothing for the iOS app to port.
 - **Every bus route** (October 10): the Bus routes chips are now *All*, *Frequent*, *Express* and
   *Regular* (every other daytime route: 119 TTC, 80 CTA) in any mix, with *Overnight* on a row of its
   own as before; the layer starts on All. All draws every daytime bus route (183 in Toronto, 123 in Chicago). Route shapes were

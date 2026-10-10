@@ -331,6 +331,40 @@ circle.cl{stroke-width:3;fill:var(--city)}
 #map.focused .lbl-muni,#map.focused .lbl-region{display:none}
 .focus-go{display:block;margin:0 16px 10px;font:inherit;font-size:12px;font-weight:600;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;background:none;color:var(--accent);cursor:pointer}
 .focus-go:hover{border-color:var(--accent)}
+.pf-dim{fill:var(--land-out);fill-opacity:.66;stroke:none}
+.pf-dim2{fill:var(--land-out);fill-opacity:.5;stroke:none}
+.pf-line{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linejoin:round}
+#map.pfocus .fz-off{opacity:.1}
+#map.pfocus :is(.sub-line,.go-line,.cx-line,.cx-case).fz-off{opacity:.3}
+#map.pfocus .leaflet-marker-icon.fz-off,#map.pfocus .leaflet-tooltip.fz-off{display:none}
+#map.pfocus .fz-out{opacity:.3}
+#map.pfocus .leaflet-tooltip.fz-out:is(.lbl-nbhd,.lbl-area,.lbl-boro,.lbl-stn,.lbl-go,.lbl-cult),#map.pfocus path.fz-out:is(.stn,.go-stn,.cx-stn){opacity:.7}
+#map.pfocus .leaflet-marker-icon.fz-out:has(.rt-b){opacity:.75}
+.leaflet-tooltip.lbl-tap{pointer-events:auto;cursor:pointer}
+.leaflet-tooltip.lbl-tap:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.pfgo{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:0 16px 10px}
+.pfgo small{font-size:11px;color:var(--ink-3);margin-right:2px}
+.pfgo button{font:inherit;font-size:11.5px;font-weight:600;border:1px solid var(--rule);border-radius:999px;padding:3px 9px;background:none;color:var(--accent);cursor:pointer}
+.pfgo button:hover{border-color:var(--accent)}
+.pfgo button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.pfbox{margin:10px 16px 2px;border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.pfbox[hidden]{display:none}
+.pf-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;background:var(--pill-bg)}
+.pf-head small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.pf-head b{display:block;font-size:14px;font-weight:700;line-height:1.25}
+.pf-head button{font:inherit;font-size:12px;font-weight:600;border:1px solid var(--rule);border-radius:8px;padding:5px 9px;background:var(--panel);color:var(--accent);cursor:pointer;flex:none}
+.pf-head button:hover{border-color:var(--accent)}
+.pf-inv{padding:6px 10px 8px;max-height:240px;overflow:auto;font-size:12px}
+.pf-inv dl{margin:0;display:grid;gap:6px}
+.pf-inv dt{font-size:10.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-3)}
+.pf-inv dd{margin:1px 0 0;color:var(--ink);line-height:1.4}
+.pf-inv .flist{max-height:none}
+.pf-lines{display:flex;flex-wrap:wrap;gap:4px}
+.pf-lines span{padding:2px 7px;border-radius:6px;background:var(--pill-bg);font-size:11.5px}
+.pf-lines span.uc{border:1px dashed var(--ink-3);background:none}
+.pf-inv .more,.pf-inv .flist small{color:var(--ink-3)}
+.pf-inv button.inline{font:inherit;border:none;background:none;padding:0;color:var(--accent);cursor:pointer}
+.pf-inv p{margin:8px 0 0;font-size:11px;color:var(--ink-3);line-height:1.35}
 .scope button:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
 .mask{fill:var(--land-out);fill-opacity:.94;stroke:var(--land-out-line);stroke-width:1}
 .mode-inner .shield.outer,.mode-inner .go-out,.mode-inner path.outer,.mode-inner .lbl-region{display:none}
@@ -469,6 +503,8 @@ dl.facts dd{margin:0;font-weight:500;min-width:0}
   #panel{top:auto;left:0;right:0;bottom:0;width:auto;max-height:46%;border-radius:16px 16px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
   #panel.collapsed #layers,#panel.collapsed .pf{display:none}
   #panel.collapsed .focus-list,#panel.collapsed .focus-res{display:none}
+  #panel.collapsed .pf-inv{display:none}
+  .pf-inv{max-height:180px}
   .ph{padding:8px 16px 10px;cursor:pointer}
   .ph .grab{display:block;width:36px;height:4px;border-radius:2px;background:var(--rule);margin:0 auto 8px}
   .ph h1{font-size:17px}
