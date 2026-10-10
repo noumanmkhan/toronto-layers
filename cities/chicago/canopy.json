@@ -1,0 +1,7 @@
+{
+  "_about": "Tree canopy per community area (engine/fetch_canopy.py, fetch-canopy.yml), from ESA WorldCover 2021 (10 m, CC BY 4.0).",
+  "units": "community_areas",
+  "sources": [
+    {"type": "worldcover"}
+  ]
+}
